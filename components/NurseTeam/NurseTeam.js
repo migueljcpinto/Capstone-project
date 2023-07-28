@@ -1,42 +1,32 @@
-import { useEffect, useState } from "react";
 import useSWR from "swr";
 import {
-  StyledListContainer,
   StyledHeading,
   StyledList,
+  StyledListContainer,
   StyledListItem,
 } from "./NurseTeam.styled";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function NurseTeam() {
-  const { data, error } = useSWR("/api/nurses", fetcher);
-  const [nurses, setNurses] = useState([]);
+  const { data, isLoading } = useSWR("/api/nurses", fetcher);
 
-  useEffect(() => {
-    if (data) {
-      setNurses(data);
-    }
-  }, [data]);
-
-  if (error) {
-    return <h1>You have no Team! 😩</h1>;
+  if (isLoading) {
+    return <h1>Loading...</h1>;
   }
 
   if (!data) {
-    return <h1>Loading...</h1>;
+    return <h1>You have no Team! 😩</h1>;
   }
 
   return (
     <>
-      <StyledHeading>Nurse Team</StyledHeading>
+      <StyledHeading>Available Nurses</StyledHeading>
       <StyledListContainer>
         <StyledList>
-          {nurses.map((nurse) => (
-            <StyledListItem key={nurse._id}>
-              {nurse.name}
-              <br />
-              {nurse.role}
+          {data.map((nurse) => (
+            <StyledListItem key={nurse}>
+              {nurse.name} <br /> {nurse.role}
             </StyledListItem>
           ))}
         </StyledList>
