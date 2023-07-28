@@ -5,12 +5,18 @@ export const StyledHeading = styled.h2`
   color: var(--color-nemo);
 `;
 
+export const StyledListContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const StyledList = styled.ul`
   list-style-type: none;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  justify-items: center;
+  justify-content: center;
   padding: 0;
   margin-bottom: 2rem;
 `;

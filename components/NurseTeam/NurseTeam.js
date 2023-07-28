@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { StyledHeading, StyledList, StyledListItem } from "./NurseTeam.styled";
+import {
+  StyledListContainer,
+  StyledHeading,
+  StyledList,
+  StyledListItem,
+} from "./NurseTeam.styled";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -24,16 +29,18 @@ export default function NurseTeam() {
 
   return (
     <>
-      <StyledHeading>Available Nurses</StyledHeading>
-      <StyledList>
-        {nurses.map((nurse) => (
-          <StyledListItem key={nurse._id}>
-            {nurse.firstName} {nurse.lastName}
-            <br />
-            {nurse.role}
-          </StyledListItem>
-        ))}
-      </StyledList>
+      <StyledHeading>Nurse Team</StyledHeading>
+      <StyledListContainer>
+        <StyledList>
+          {nurses.map((nurse) => (
+            <StyledListItem key={nurse._id}>
+              {nurse.name}
+              <br />
+              {nurse.role}
+            </StyledListItem>
+          ))}
+        </StyledList>
+      </StyledListContainer>
     </>
   );
 }
