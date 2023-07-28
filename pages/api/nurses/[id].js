@@ -1,5 +1,5 @@
 import dbConnect from "@/db/connect";
-import Nurse from "@/db/model/nurse";
+import Nurse from "@/db/models/Nurse";
 
 export default async function handler(request, response) {
   await dbConnect();
