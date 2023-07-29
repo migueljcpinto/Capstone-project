@@ -10,7 +10,7 @@ export default function FormAddNurse() {
     const nurseData = Object.fromEntries(formData); //reading the nurse data
 
     //calling API
-    const response = await fetch("/api/nurses", {
+    const response = await fetch(`/api/nurses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set the content type to JSON

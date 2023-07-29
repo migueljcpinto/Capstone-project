@@ -12,7 +12,7 @@ export default async function handler(request, response) {
       const nurseData = request.body;
       await Nurse.create(nurseData);
 
-      response.status(201).json({ message: "Nurse added" });
+      response.status(201).json({ message: "Nurse created" });
     } catch (error) {
       response.status(400).json({ message: error.message });
     }

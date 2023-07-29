@@ -5,6 +5,7 @@ import {
   StyledListContainer,
   StyledListItem,
 } from "./NurseTeam.styled";
+import Link from "next/link";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -25,9 +26,11 @@ export default function NurseTeam() {
       <StyledListContainer>
         <StyledList>
           {data.map((nurse) => (
-            <StyledListItem key={nurse}>
+            <StyledListItem key={nurse._id}>
               <img src={nurse.image} alt="Random Nurse Photo" />
-              {nurse.name} <br /> {nurse.role}
+              <Link href={`/${nurse._id}`}>
+                {nurse.name} <br /> {nurse.role}
+              </Link>
             </StyledListItem>
           ))}
         </StyledList>
