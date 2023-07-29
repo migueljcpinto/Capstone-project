@@ -5,7 +5,6 @@ import {
   StyledListContainer,
   StyledListItem,
 } from "./NurseTeam.styled";
-import Image from "next/image";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -27,7 +26,7 @@ export default function NurseTeam() {
         <StyledList>
           {data.map((nurse) => (
             <StyledListItem key={nurse}>
-              <img src={nurse.image} alt="Your Image" />
+              <img src={nurse.image} alt="Random Nurse Photo" />
               {nurse.name} <br /> {nurse.role}
             </StyledListItem>
           ))}

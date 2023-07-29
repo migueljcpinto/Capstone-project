@@ -9,6 +9,7 @@ const nurseSchema = new Schema({
   role: { type: String, required: true },
   hoursPerWeek: { type: Number, required: true },
   specialist: { type: Boolean, required: true },
+  image: { type: String },
 });
 
 const Nurse =
