@@ -6,11 +6,10 @@ import {
   StyledListItem,
 } from "./NurseTeam.styled";
 import Link from "next/link";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import Button from "../Button/Button";
 
 export default function NurseTeam() {
-  const { data, isLoading } = useSWR("/api/nurses", fetcher);
+  const { data, isLoading } = useSWR("/api/nurses");
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -23,6 +22,7 @@ export default function NurseTeam() {
   return (
     <>
       <StyledHeading>Available Nurses</StyledHeading>
+      <Button />
       <StyledListContainer>
         <StyledList>
           {data.map((nurse) => (
