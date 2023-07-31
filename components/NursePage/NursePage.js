@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NursePage() {
   const router = useRouter();
@@ -18,7 +19,12 @@ export default function NursePage() {
 
   return (
     <>
-      <img src={data.image} alt={`${data.name} Nurse Photo`} />
+      <Image
+        width={76.8}
+        height={76.8}
+        src={data.image}
+        alt={`${data.name} Nurse Photo`}
+      />
       <h1>{data.name} </h1>
       <Link href="/">Back to all</Link>
     </>

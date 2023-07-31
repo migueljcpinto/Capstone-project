@@ -6,6 +6,10 @@ import FormAddNurse from "@/components/FormAddNurse/FormAddNurse";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const Heading = styled.h1`
+  text-align: center;
+`;
+
 export default function Home() {
   return (
     <>
@@ -17,13 +21,8 @@ export default function Home() {
       </Head>
       <main className={inter.className}>
         <Heading>Team 👨🏻‍⚕️ Master</Heading>
-        <FormAddNurse />
         <NurseTeam />
       </main>
     </>
   );
 }
-
-const Heading = styled.h1`
-  text-align: center;
-`;

@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const StyledHeading = styled.h2`
+  display: grid;
+  position: relative;
   text-align: center;
-  color: var(--color-nemo);
+  color: black;
 `;
 
 export const StyledListContainer = styled.div`

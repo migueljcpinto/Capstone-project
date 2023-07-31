@@ -2,16 +2,24 @@ import GlobalStyle from "@/styles";
 import Head from "next/head";
 import { SWRConfig } from "swr";
 
-const fetcher = (url) => fetch(url).then((response) => response.json());
-
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <GlobalStyle />
-      <Head>
-        <title>Team Master</title>
-      </Head>
-      <SWRConfig value={{ fetcher }}>
+      <SWRConfig
+        value={{
+          fetcher: async (...args) => {
+            const response = await fetch(...args);
+            if (!response.ok) {
+              throw new Error(`Request with ${JSON.stringify(args)} failed.`);
+            }
+            return await response.json();
+          },
+        }}
+      >
+        <GlobalStyle />
+        <Head>
+          <title>Team Master</title>
+        </Head>
         <Component {...pageProps} />
       </SWRConfig>
     </>
