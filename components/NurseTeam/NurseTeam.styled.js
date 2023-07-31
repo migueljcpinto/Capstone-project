@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export const StyledHeading = styled.h2`
   display: grid;
@@ -41,4 +42,33 @@ export const StyledListItem = styled.li`
     border-radius: 50%;
     width: 100%;
   }
+`;
+
+export const ButtonStyled = styled.button`
+
+background-color: #FFE6BE;
+color: #000;
+padding: 0.8rem 1.2rem;
+margin: 0% 90%;
+width: 100px;
+border: none;
+border-radius: 10%;
+font-weight: bold;
+cursor: pointer;
+transition: 0.3s;
+align-items: center;
+justify-content:center;
+  &:hover {
+    background-color: #E37820;
+  }
+}
+`;
+
+export const AddLinkStyled = styled(Link)`
+  position: fixed;
+  top: 10%;
+  right: 30%;
+  left: -40%;
+
+  z-index: 999;
 `;

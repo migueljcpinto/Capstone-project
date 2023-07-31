@@ -11,7 +11,6 @@ import {
   AddButtonStyled,
   HeaderStyled,
 } from "./FormAddNurse.styled";
-import Image from "next/image";
 
 export default function FormAddNurse() {
   const { mutate } = useSWR("/api/nurses"); //check if db has new data - re-validation!
@@ -39,25 +38,29 @@ export default function FormAddNurse() {
     }; //reading the nurse data
 
     //calling API
-    const response = await fetch(`/api/nurses`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" }, // Set the content type to JSON
-      body: JSON.stringify(nurseData), //Adding in body the new nurse
-    });
+    try {
+      const response = await fetch(`/api/nurses`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }, // Set the content type to JSON
+        body: JSON.stringify(nurseData), //Adding in body the new nurse
+      });
 
-    if (response.ok) {
-      mutate();
-      setSelectedImage(getRandomImageURL());
-      router.back(); //later I will write this with push, to navigate back to a specific page, like NurseTeam
-    } else {
-      const responseData = await response.json();
-      console.error("Error adding nurse:", responseData.message);
+      if (response.ok) {
+        mutate();
+        setSelectedImage(getRandomImageURL());
+        router.back(); //later I will write this with push, to navigate back to a specific page, like NurseTeam
+      } else {
+        const responseData = await response.json();
+        console.error("Error adding nurse:", responseData.message);
+      }
+    } catch (error) {
+      console.error("Something wrong with adding that!:", error.message);
     }
-
     event.target.reset();
     event.target.elements[0].focus();
   }
-  function handleCancel() {
+
+  function handleCancelClick() {
     router.back(); //The same...need future update
   }
 
@@ -116,17 +119,9 @@ export default function FormAddNurse() {
             <option value="false">No</option>
             <option value="true">Yes</option>
           </Select>
-
-          {/* <Image
-            width={76.9}
-            height={76.9}
-            src={selectedImage}
-            alt="Random Nurse Photo"
-            style={{ display: "none" }}
-          /> */}
           <AddButtonStyled type="submit">New Nurse</AddButtonStyled>
-          <CancelButtonStyled type="button" onClick={handleCancel}>
-            Cancel
+          <CancelButtonStyled type="button" onClick={handleCancelClick}>
+            Cancel and Return
           </CancelButtonStyled>
         </InputGroup>
       </FormContainer>

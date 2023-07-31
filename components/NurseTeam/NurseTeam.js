@@ -4,39 +4,12 @@ import {
   StyledList,
   StyledListContainer,
   StyledListItem,
+  ButtonStyled,
+  AddLinkStyled,
 } from "./NurseTeam.styled";
 import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
-
-const ButtonStyled = styled.button`
-
-background-color: #FFE6BE;
-color: #000;
-padding: 0.8rem 1.2rem;
-margin: 0% 90%;
-width: 100px;
-border: none;
-border-radius: 10%;
-font-weight: bold;
-cursor: pointer;
-transition: 0.3s;
-align-items: center;
-justify-content:center;
-  &:hover {
-    background-color: #E37820;
-  }
-}
-`;
-
-const AddLinkStyled = styled(Link)`
-  position: fixed;
-  top: 10%;
-  right: 30%;
-  left: -40%;
-
-  z-index: 999;
-`;
 
 export default function NurseTeam() {
   const { data, isLoading } = useSWR("/api/nurses");
@@ -65,7 +38,10 @@ export default function NurseTeam() {
                 src={nurse.image}
                 alt="Random Nurse Photo"
               />
-              <Link href={`/${nurse._id}`}>
+              <Link
+                style={{ color: "black", textDecoration: "none" }}
+                href={`/${nurse._id}`}
+              >
                 {nurse.name} <br /> {nurse.role}
               </Link>
             </StyledListItem>

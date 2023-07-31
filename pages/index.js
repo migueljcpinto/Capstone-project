@@ -2,7 +2,6 @@ import Head from "next/head";
 import styled from "styled-components";
 import { Inter } from "next/font/google";
 import NurseTeam from "@/components/NurseTeam/NurseTeam";
-import FormAddNurse from "@/components/FormAddNurse/FormAddNurse";
 
 const inter = Inter({ subsets: ["latin"] });
 
