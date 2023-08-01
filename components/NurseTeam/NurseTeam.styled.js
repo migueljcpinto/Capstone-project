@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export const StyledHeading = styled.h2`
+  display: grid;
+  position: relative;
   text-align: center;
-  color: var(--color-nemo);
+  color: black;
 `;
 
 export const StyledListContainer = styled.div`
@@ -17,19 +20,55 @@ export const StyledList = styled.ul`
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
-  padding: 0;
+  padding: 0.4rem;
   margin-bottom: 2rem;
 `;
 
 export const StyledListItem = styled.li`
-  width: 400px;
-  height: 80px;
-  flex-shrink: 0;
-  border-radius: 50px;
-  border: 1px solid #000;
-  opacity: 0.6;
-  background: rgba(17, 179, 207, 0.1);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 20px;
-  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 4.8rem 1fr auto;
+  align-items: center;
+  column-gap: 1.6rem;
+  padding: 1.2rem;
+  border-radius: 7px;
+  background-color: #fafafc;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: #fff4e6;
+  }
+
+  img {
+    border-radius: 50%;
+    width: 100%;
+  }
+`;
+
+export const ButtonStyled = styled.button`
+
+background-color: #FFE6BE;
+color: #000;
+padding: 0.8rem 1.2rem;
+margin: 0% 90%;
+width: 100px;
+border: none;
+border-radius: 10%;
+font-weight: bold;
+cursor: pointer;
+transition: 0.3s;
+align-items: center;
+justify-content:center;
+  &:hover {
+    background-color: #E37820;
+  }
+}
+`;
+
+export const AddLinkStyled = styled(Link)`
+  position: fixed;
+  top: 10%;
+  right: 30%;
+  left: -40%;
+
+  z-index: 999;
 `;

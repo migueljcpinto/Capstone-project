@@ -5,6 +5,10 @@ import NurseTeam from "@/components/NurseTeam/NurseTeam";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const Heading = styled.h1`
+  text-align: center;
+`;
+
 export default function Home() {
   return (
     <>
@@ -21,7 +25,3 @@ export default function Home() {
     </>
   );
 }
-
-const Heading = styled.h1`
-  text-align: center;
-`;
