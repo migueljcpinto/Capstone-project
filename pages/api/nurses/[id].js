@@ -6,22 +6,34 @@ export default async function handler(request, response) {
   const { id } = request.query;
 
   if (request.method === "GET") {
-    const nurse = await Nurse.findById(id);
+    try {
+      const nurse = await Nurse.findById(id);
 
-    if (!nurse) {
-      return response.status(404).json({ status: "Team not Found 🫣" });
+      if (!nurse) {
+        return response.status(404).json({ status: "Nurse not Found 🫣" });
+      }
+
+      response.status(200).json(nurse);
+    } catch (error) {
+      response.status(500).json({ status: "Error fetching nurse data." });
     }
-
-    response.status(200).json(nurse);
   }
 
   if (request.method === "PUT") {
-    await Nurse.findByIdAndUpdate(id, {
-      $set: request.body,
-    });
+    try {
+      const updatedNurse = await Nurse.findByIdAndUpdate(
+        id,
+        { $set: request.body },
+        { new: true }
+      );
 
-    response
-      .status(200)
-      .json({ status: "Yes!!! Nurse updated successfully! 🍻" });
+      if (!updatedNurse) {
+        return response.status(404).json({ status: "Nurse not Found 🫣" });
+      }
+
+      response.status(200).json(updatedNurse);
+    } catch (error) {
+      response.status(500).json({ status: "Error updating nurse." });
+    }
   }
 }
