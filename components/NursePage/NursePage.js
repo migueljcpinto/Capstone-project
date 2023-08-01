@@ -10,11 +10,11 @@ export default function NursePage() {
   const { data, isLoading } = useSWR(`/api/nurses/${id}`);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <div>Loading...</div>;
   }
 
   if (!data) {
-    return <h1>Maybe he resigned without warning! 🤬</h1>;
+    return <div>Maybe he resigned without warning! 🤬</div>;
   }
 
   return (

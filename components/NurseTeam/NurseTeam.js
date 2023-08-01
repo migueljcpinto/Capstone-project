@@ -9,7 +9,6 @@ import {
 } from "./NurseTeam.styled";
 import Link from "next/link";
 import Image from "next/image";
-import styled from "styled-components";
 
 export default function NurseTeam() {
   const { data, isLoading } = useSWR("/api/nurses");

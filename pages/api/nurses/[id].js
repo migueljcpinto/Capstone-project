@@ -20,6 +20,8 @@ export default async function handler(request, response) {
       $set: request.body,
     });
 
-    response.status(200).json({ message: "Yes!!! a New Nurse in Team! 🍻" });
+    response
+      .status(200)
+      .json({ status: "Yes!!! Nurse updated successfully! 🍻" });
   }
 }
