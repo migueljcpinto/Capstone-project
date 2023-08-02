@@ -50,7 +50,7 @@ export default function NurseTeam() {
                 />
                 <Link
                   style={{ color: "black", textDecoration: "none" }}
-                  href={`/${nurse._id}`}
+                  href={`/NursePage?id=${nurse._id}`}
                 >
                   {nurse.name} <br /> {nurse.role}
                 </Link>
