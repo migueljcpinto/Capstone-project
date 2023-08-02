@@ -9,9 +9,12 @@ import {
 } from "./NurseTeam.styled";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import SearchInput from "../SearchInput/SearchInput";
 
 export default function NurseTeam() {
   const { data, isLoading } = useSWR("/api/nurses");
+  const [search, setSearch] = useState("");
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -27,24 +30,32 @@ export default function NurseTeam() {
       <AddLinkStyled href={"/addNurse"}>
         <ButtonStyled>Add Nurse</ButtonStyled>
       </AddLinkStyled>
+      {/* passing the callback */}
+      <SearchInput onSearchChange={setSearch} />
       <StyledListContainer>
         <StyledList>
-          {data.map((nurse) => (
-            <StyledListItem key={nurse._id}>
-              <Image
-                width={76.8}
-                height={76.8}
-                src={nurse.image}
-                alt="Random Nurse Photo"
-              />
-              <Link
-                style={{ color: "black", textDecoration: "none" }}
-                href={`/${nurse._id}`}
-              >
-                {nurse.name} <br /> {nurse.role}
-              </Link>
-            </StyledListItem>
-          ))}
+          {data
+            .filter((nurse) => {
+              return search.toLowerCase() === ""
+                ? nurse
+                : nurse.name.toLowerCase().includes(search); //Converting again to compare
+            })
+            .map((nurse) => (
+              <StyledListItem key={nurse._id}>
+                <Image
+                  width={76.8}
+                  height={76.8}
+                  src={nurse.image}
+                  alt="Random Nurse Photo"
+                />
+                <Link
+                  style={{ color: "black", textDecoration: "none" }}
+                  href={`/${nurse._id}`}
+                >
+                  {nurse.name} <br /> {nurse.role}
+                </Link>
+              </StyledListItem>
+            ))}
         </StyledList>
       </StyledListContainer>
     </>
