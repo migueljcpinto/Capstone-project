@@ -1,7 +1,12 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import Image from "next/image";
+import {
+  DeleteButtonStyled,
+  GoBackLinkStyled,
+  StyledNurseProfil,
+  UpdateButtonStyled,
+} from "./NurseProfil.styled";
 
 export default function NurseProfil() {
   const router = useRouter();
@@ -19,14 +24,23 @@ export default function NurseProfil() {
 
   return (
     <>
-      <Image
-        width={76.8}
-        height={76.8}
-        src={data.image}
-        alt={`${data.name} Nurse Photo`}
-      />
-      <h1>{data.name} </h1>
-      <Link href="/">Back to all</Link>
+      <StyledNurseProfil>
+        <Image
+          width={76.8}
+          height={76.8}
+          src={data.image}
+          alt={`${data.name} Nurse Photo`}
+        />
+        <h2>{data.name} </h2>
+        <h3>{data.role}</h3>
+      </StyledNurseProfil>
+      <GoBackLinkStyled href="/">Back to all</GoBackLinkStyled>
+      <DeleteButtonStyled href="/" type="button">
+        Delete
+      </DeleteButtonStyled>
+      <UpdateButtonStyled href="/" type="button">
+        Update
+      </UpdateButtonStyled>
     </>
   );
 }
