@@ -66,9 +66,7 @@ justify-content:center;
 
 export const AddLinkStyled = styled(Link)`
   position: fixed;
-  top: 10%;
-  right: 30%;
-  left: -40%;
+  bottom: 1%;
 
   z-index: 999;
 `;
