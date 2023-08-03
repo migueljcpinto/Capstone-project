@@ -1,5 +1,5 @@
-import NurseProfil from "@/components/NurseProfil/NurseProfil";
+import NurseProfile from "@/components/NurseProfile/NurseProfile";
 
 export default function NursePage() {
-  return <NurseProfil />;
+  return <NurseProfile />;
 }
