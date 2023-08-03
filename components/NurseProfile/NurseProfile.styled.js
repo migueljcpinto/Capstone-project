@@ -58,7 +58,7 @@ justify-content:center;
   }
 }`;
 
-export const UpdateButtonStyled = styled(Link)`
+export const UpdateButtonStyled = styled.button`
 background-color: #fafafc;
 color: #000;
 padding: 0.8rem 1.2rem;
@@ -69,6 +69,7 @@ border-radius: 5px;
 cursor: pointer;
 transition: 0.3s;
 text-decoration:none;
+font-size: 16px;
 align-items: center;
 justify-content:center;
   &:hover {

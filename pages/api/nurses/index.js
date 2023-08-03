@@ -10,11 +10,11 @@ export default async function handler(request, response) {
   }
   if (request.method === "POST") {
     try {
-      console.log("Post request to add new nurse:", request.body);
       const nurseData = request.body;
-      await Nurse.create(nurseData);
+      const res = await Nurse.create(nurseData);
+      console.log(res);
 
-      response.status(201).json({ message: "Nurse added!🍻" });
+      response.status(201).json({ message: "Nurse added!🍻", result: res });
     } catch (error) {
       console.log("Error adding new nurse:", error.message);
       response.status(400).json({ message: error.message });
