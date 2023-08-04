@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-export const StyledNurseProfil = styled.div`
+export const StyledNurseProfile = styled.div`
   display: grid;
   grid-template-columns: 4.8rem 1fr auto;
   align-items: center;
@@ -21,7 +21,7 @@ export const StyledNurseProfil = styled.div`
   }
 `;
 
-export const DeleteButtonStyled = styled(Link)`
+export const DeleteButtonStyled = styled.button`
 background-color: #fafafc;
 color: #000;
 padding: 0.8rem 1.2rem;
@@ -31,6 +31,7 @@ border: none;
 border-radius: 5px;
 text-decoration:none;
 cursor: pointer;
+font-size: 16px;
 transition: 0.3s;
 align-items: center;
 justify-content:center;
@@ -40,7 +41,7 @@ justify-content:center;
 }
 `;
 
-export const GoBackLinkStyled = styled(Link)`
+export const GoBackLinkStyled = styled.button`
 background-color: #fafafc;
 color: #000;
 padding: 0.6rem 1.2rem;
@@ -50,6 +51,7 @@ border: none;
 text-decoration:none;
 border-radius: 5px;
 cursor: pointer;
+font-size: 16px;
 transition: 0.3s;
 align-items: center;
 justify-content:center;

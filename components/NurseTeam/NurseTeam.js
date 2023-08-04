@@ -5,7 +5,7 @@ import {
   StyledListContainer,
   StyledListItem,
   ButtonStyled,
-  AddLinkStyled,
+  AddDivStyled,
 } from "./NurseTeam.styled";
 import Link from "next/link";
 import Image from "next/image";
@@ -27,9 +27,9 @@ export default function NurseTeam() {
   return (
     <>
       <StyledHeading>Available Nurses</StyledHeading>
-      <AddLinkStyled href={"/addNurse"}>
-        <ButtonStyled>Add Nurse</ButtonStyled>
-      </AddLinkStyled>
+      <AddDivStyled>
+        <ButtonStyled href={"/addNurse"}>Add Nurse</ButtonStyled>
+      </AddDivStyled>
       {/* passing the callback */}
       <SearchInput onSearchChange={setSearch} />
       <StyledListContainer>

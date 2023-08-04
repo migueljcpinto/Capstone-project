@@ -64,7 +64,7 @@ justify-content:center;
 }
 `;
 
-export const AddLinkStyled = styled(Link)`
+export const AddDivStyled = styled.div`
   position: fixed;
   bottom: 1%;
 

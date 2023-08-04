@@ -19,7 +19,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={inter.className}>
-        <Heading>Team 👨🏻‍⚕️ Master</Heading>
         <NurseTeam />
       </main>
     </>

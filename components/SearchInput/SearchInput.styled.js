@@ -14,18 +14,10 @@ export const SearchInputStyled = styled.input`
     transition: 0.35s ease;
     color: grey;
 
-    &::-webkit-input-placeholder{
-      transition: opacity 0.45s ease; 
-  	  opacity: 0;
-     }
-    &::-moz-placeholder {
-      transition: opacity 0.45s ease; 
-  	  opacity: 0;
-     }
-    &:-ms-placeholder {
-     transition: opacity 0.45s ease; 
-  	 opacity: 0;
-     }    
+    &::placeholder {
+      transition: opacity 0.45s ease;
+      opacity: 0;
+    }
    }
  }
 `;

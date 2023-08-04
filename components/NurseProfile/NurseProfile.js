@@ -1,52 +1,41 @@
-import useSWR from "swr";
-import { useRouter } from "next/router";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import {
   DeleteButtonStyled,
   GoBackLinkStyled,
-  StyledNurseProfil,
+  StyledNurseProfile,
   UpdateButtonStyled,
 } from "./NurseProfile.styled";
 import UpdateNurse from "../UpdateNurse/UpdateNurse";
 
-export default function NurseProfile() {
+export default function NurseProfile({ nurseData, onHandleDelete, onMutate }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const router = useRouter();
-  const { id } = router.query;
-
-  const { data, isLoading, mutate } = useSWR(`/api/nurses/${id}`);
 
   async function handleDelete() {
-    await fetch(`/api/nurses/${id}`, {
-      method: "DELETE",
-    });
-    router.push("/");
+    await onHandleDelete();
   }
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  function handleGoBack() {
+    router.back();
   }
 
-  if (!data) {
-    return <div>Maybe he resigned without warning! 🤬</div>;
-  }
-  mutate();
   return (
     <>
-      <StyledNurseProfil>
+      <StyledNurseProfile>
         <Image
           width={76.8}
           height={76.8}
-          src={data.image}
-          alt={`${data.name} Nurse Photo`}
+          src={nurseData.image}
+          alt={`${nurseData.name} Nurse Photo`}
         />
-        <h2>{data.name} </h2>
-        <h3>{data.role}</h3>
-      </StyledNurseProfil>
+        <h2>{nurseData.name} </h2>
+        <h3>{nurseData.role}</h3>
+      </StyledNurseProfile>
 
-      <GoBackLinkStyled href="/">Back to all</GoBackLinkStyled>
-      <DeleteButtonStyled onClick={handleDelete} href="/" type="button">
+      <GoBackLinkStyled onClick={handleGoBack}>Return</GoBackLinkStyled>
+      <DeleteButtonStyled onClick={handleDelete} type="button">
         Delete
       </DeleteButtonStyled>
       <UpdateButtonStyled
@@ -57,7 +46,7 @@ export default function NurseProfile() {
       >
         {isEditMode ? "Cancel" : "Update"}
       </UpdateButtonStyled>
-      {isEditMode && <UpdateNurse nurseData={data} />}
+      {isEditMode && <UpdateNurse nurseData={nurseData} onMutate={onMutate} />}
     </>
   );
 }
