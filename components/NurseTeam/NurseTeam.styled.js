@@ -55,15 +55,14 @@ cursor: pointer;
 transition: 0.3s;
 align-items: center;
 justify-content:center;
+position: fixed;
+top: 10%;
+right: 40%;
+z-index: 999;
   &:hover {
     background-color: #E37820;
   }
 }
 `;
 
-export const AddDivStyled = styled.div`
-  position: fixed;
-  bottom: 5%;
-
-  z-index: 999;
-`;
+export const AddDivStyled = styled.div``;

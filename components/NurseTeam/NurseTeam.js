@@ -28,10 +28,9 @@ export default function NurseTeam() {
     <>
       <StyledHeading>Available Nurses</StyledHeading>
       <AddDivStyled>
+        <SearchInput onSearchChange={setSearch} />
         <ButtonStyled href={"/addNurse"}>Add</ButtonStyled>
       </AddDivStyled>
-      {/* passing the callback */}
-      <SearchInput onSearchChange={setSearch} />
       <StyledListContainer>
         <StyledList>
           {data
