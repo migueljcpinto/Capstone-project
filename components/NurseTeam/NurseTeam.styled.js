@@ -44,16 +44,13 @@ export const StyledListItem = styled.li`
   }
 `;
 
-export const ButtonStyled = styled.button`
-
+export const ButtonStyled = styled(Link)`
+text-decoration:none;
 background-color: #FFE6BE;
 color: #000;
 padding: 0.8rem 1.2rem;
-margin: 0% 90%;
-width: 100px;
 border: none;
 border-radius: 10%;
-font-weight: bold;
 cursor: pointer;
 transition: 0.3s;
 align-items: center;
@@ -66,7 +63,7 @@ justify-content:center;
 
 export const AddDivStyled = styled.div`
   position: fixed;
-  bottom: 1%;
+  bottom: 5%;
 
   z-index: 999;
 `;

@@ -12,7 +12,6 @@ export default function NursePage() {
     const response = await fetch(`/api/nurses/${id}`, { method: "DELETE" });
 
     if (!response.ok) {
-      console.log(response.status);
       return;
     }
 
