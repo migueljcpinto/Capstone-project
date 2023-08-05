@@ -1,5 +1,3 @@
-import useSWR from "swr";
-import { useRouter } from "next/router";
 import { StyledDiv } from "./UpdateNurse.styled";
 import {
   FormContainer,
@@ -11,40 +9,10 @@ import {
   HeaderStyled,
 } from "@/components/FormAddNurse/FormAddNurse.styled";
 
-export default function UpdateNurse({ nurseData }) {
-  const { mutate } = useSWR("/api/nurses"); //check if db has new data - re-validation!
-  const router = useRouter();
-  const { id } = router.query;
-
-  async function handleEdit(event) {
-    event.preventDefault();
-
-    //Copyed and modified from FormAddNurse
-    const formData = new FormData(event.target);
-    const updatedNurseData = {
-      name: formData.get("name"),
-      age: Number(formData.get("age")),
-      yearsExperience: Number(formData.get("yearsExperience")),
-      role: formData.get("role"),
-      hoursPerWeek: Number(formData.get("hoursPerWeek")),
-      specialist: formData.get("isSpecialist") === "true",
-    };
-
-    const response = await fetch(`/api/nurses/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedNurseData),
-    });
-
-    if (response.ok) {
-      mutate();
-      alert("Updated!");
-    }
-  }
-
+export default function UpdateNurse({ nurseData, onSubmit }) {
   return (
     <StyledDiv>
-      <FormContainer onSubmit={handleEdit}>
+      <FormContainer onSubmit={onSubmit}>
         <HeaderStyled>Update the information about this Nurse</HeaderStyled>
         <InputGroup>
           <Label htmlFor="name">Enter the name</Label>
@@ -84,7 +52,7 @@ export default function UpdateNurse({ nurseData }) {
           />
 
           <Label htmlFor="role">Enter their role</Label>
-          <Select id="role" name="role">
+          <Select id="role" name="role" required>
             <option value="">Choose the role</option>
             <option value="nurse">Nurse</option>
             <option value="chief">Chief</option>

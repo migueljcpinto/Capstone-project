@@ -2,7 +2,11 @@ import dbConnect from "@/db/connect";
 import Nurse from "@/db/models/Nurse";
 
 export default async function handler(request, response) {
-  await dbConnect();
+  const connection = await dbConnect();
+  if (!connection)
+    return response
+      .status(500)
+      .json({ error: "Unable to connect to the database!" });
 
   if (request.method === "GET") {
     const nurses = await Nurse.find();

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 
 export const StyledHeading = styled.h2`
   display: grid;
@@ -44,25 +43,25 @@ export const StyledListItem = styled.li`
   }
 `;
 
-export const ButtonStyled = styled(Link)`
-text-decoration:none;
-background-color: #FFE6BE;
-color: #000;
-padding: 0.8rem 1.2rem;
-border: none;
-border-radius: 10%;
-cursor: pointer;
-transition: 0.3s;
-align-items: center;
-justify-content:center;
-position: fixed;
-top: 10%;
-right: 40%;
-z-index: 999;
+export const ButtonStyled = styled.button`
+  text-decoration: none;
+  background-color: #ffe6be;
+  color: #000;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 10%;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 10%;
+  right: 40%;
+  z-index: 999;
   &:hover {
-    background-color: #E37820;
+    background-color: #e37820;
   }
-}
 `;
 
 export const AddDivStyled = styled.div``;

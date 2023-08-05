@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import {
@@ -9,13 +8,14 @@ import {
 } from "./NurseProfile.styled";
 import UpdateNurse from "../UpdateNurse/UpdateNurse";
 
-export default function NurseProfile({ nurseData, onHandleDelete, onMutate }) {
-  const [isEditMode, setIsEditMode] = useState(false);
+export default function NurseProfile({
+  isEdit,
+  setIsEdit,
+  nurseData,
+  onDeleteNurse,
+  onSubmit,
+}) {
   const router = useRouter();
-
-  async function handleDelete() {
-    await onHandleDelete();
-  }
 
   function handleGoBack() {
     router.back();
@@ -35,18 +35,20 @@ export default function NurseProfile({ nurseData, onHandleDelete, onMutate }) {
       </StyledNurseProfile>
 
       <GoBackLinkStyled onClick={handleGoBack}>Return</GoBackLinkStyled>
-      <DeleteButtonStyled onClick={handleDelete} type="button">
+      <DeleteButtonStyled onClick={onDeleteNurse} type="button">
         Delete
       </DeleteButtonStyled>
-      <UpdateButtonStyled
-        onClick={() => {
-          setIsEditMode(!isEditMode);
-        }}
-        type="button"
-      >
-        {isEditMode ? "Cancel" : "Update"}
-      </UpdateButtonStyled>
-      {isEditMode && <UpdateNurse nurseData={nurseData} onMutate={onMutate} />}
+      {!isEdit && (
+        <UpdateButtonStyled
+          onClick={() => {
+            setIsEdit(!isEdit);
+          }}
+          type="button"
+        >
+          {!isEdit && "Update"}
+        </UpdateButtonStyled>
+      )}
+      {isEdit && <UpdateNurse nurseData={nurseData} onSubmit={onSubmit} />}
     </>
   );
 }

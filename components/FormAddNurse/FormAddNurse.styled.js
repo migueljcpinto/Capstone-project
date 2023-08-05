@@ -36,41 +36,45 @@ export const Select = styled.select`
 `;
 
 export const CancelButtonStyled = styled.button`
-background-color: #FCBC7F;
-color: #000;
-padding: 0.8rem 1.2rem;
-margin-top: 15px;
-margin-bottom: 30px;
-width: 100px;
-border: none;
-border-radius: 5px;
-font-weight: bold;
-cursor: pointer;
-transition: 0.3s;
-align-items: center;
-justify-content:center;
+  background-color: #fcbc7f;
+  color: #000;
+  padding: 0.8rem 1.2rem;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  width: 100px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  align-items: center;
+  justify-content: center;
   &:hover {
-    background-color: #EF8059;
+    background-color: #ef8059;
   }
-}
 `;
 
 export const AddButtonStyled = styled.button`
-background-color: #4AECA9;
-color: #000;
-padding: 0.8rem 1.2rem;
-margin-top: 15px;
-margin-bottom: 30px;
-width: 100px;
-border: none;
-border-radius: 5px;
-font-weight: bold;
-cursor: pointer;
-transition: 0.3s;
-align-items: center;
-justify-content:center;
+  background-color: #4aeca9;
+  color: #000;
+  padding: 0.8rem 1.2rem;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  width: 100px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  align-items: center;
+  justify-content: center;
   &:hover {
-    background-color: #8CFC9D;
+    background-color: #8cfc9d;
   }
-}
-  `;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 80px;
+`;

@@ -11,10 +11,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import SearchInput from "../SearchInput/SearchInput";
+import { useRouter } from "next/router";
 
 export default function NurseTeam() {
   const { data, isLoading } = useSWR("/api/nurses");
   const [search, setSearch] = useState("");
+  const router = useRouter();
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -29,7 +31,9 @@ export default function NurseTeam() {
       <StyledHeading>Available Nurses</StyledHeading>
       <AddDivStyled>
         <SearchInput onSearchChange={setSearch} />
-        <ButtonStyled href={"/addNurse"}>Add</ButtonStyled>
+        <ButtonStyled onClick={() => router.push("/addNurse")}>
+          Add
+        </ButtonStyled>
       </AddDivStyled>
       <StyledListContainer>
         <StyledList>
@@ -49,7 +53,7 @@ export default function NurseTeam() {
                 />
                 <Link
                   style={{ color: "black", textDecoration: "none" }}
-                  href={`/NursePage?id=${nurse._id}`}
+                  href={`/NursePage/${nurse._id}`}
                 >
                   {nurse.name} <br /> {nurse.role}
                 </Link>
