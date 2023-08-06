@@ -19,11 +19,16 @@ export default function NurseTeam() {
   const router = useRouter();
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <div>Loading...</div>;
   }
 
   if (!data) {
-    return <h1>You have no Team! 😩</h1>;
+    return (
+      <>
+        <h1>You have no Team! 😩</h1>
+        <p>Please try again later</p>
+      </>
+    );
   }
 
   return (

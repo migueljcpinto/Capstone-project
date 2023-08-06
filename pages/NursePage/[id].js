@@ -33,16 +33,23 @@ export default function NursePage() {
   }
 
   async function handleDelete() {
-    const response = await fetch(`/api/nurses/${id}`, { method: "DELETE" });
-
-    if (response.ok) {
-      window.confirm("Are you sure you want to fire this Nurse?");
-      router.push("/");
+    const shouldDelete = window.confirm(
+      `Are you sure you want to fire ${data?.name}?`
+    );
+    if (shouldDelete) {
+      const response = await fetch(`/api/nurses/${id}`, { method: "DELETE" });
+      if (response.ok) {
+        router.push("/");
+      }
     }
   }
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (!data) {
+    return <div>Nurse not found!</div>;
   }
 
   return (
