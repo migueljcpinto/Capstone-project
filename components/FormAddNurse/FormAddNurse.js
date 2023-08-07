@@ -31,8 +31,6 @@ export default function FormAddNurse({ onSubmitNurse }) {
 
     try {
       await onSubmitNurse(nurseData);
-      mutate();
-      setSelectedImage(getRandomImageURL());
     } catch (error) {
       console.error("Something wrong:", error.message);
     }
