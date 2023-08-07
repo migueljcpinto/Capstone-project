@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { StyledListItem } from "../NurseTeam/NurseTeam.styled";
+import { StyledListItem } from "../NurseItem/NurseItem.styled";
 
 export default function NurseItem({ nurse }) {
   return (
