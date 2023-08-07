@@ -27,7 +27,9 @@ export default async function handler(request, response) {
       const updatedNurse = request.body;
       const updatedNurseData = await Nurse.findByIdAndUpdate(id, updatedNurse);
       if (!updatedNurseData) {
-        return response.status(404).json({ status: "Nurse not Updated 🫣" });
+        return response
+          .status(404)
+          .json({ status: "Nurse not found for updating. 🫣" });
       }
       return response.status(200).json(updatedNurseData);
     } catch (error) {
@@ -47,10 +49,15 @@ export default async function handler(request, response) {
 
   if (request.method === "DELETE") {
     try {
-      await Nurse.findByIdAndDelete(id);
+      const deleteNurse = await Nurse.findByIdAndDelete(id);
+      if (!deleteNurse) {
+        return response
+          .status(404)
+          .json({ error: "Nurse not found for deletion." });
+      }
       return response.status(200).json({ status: "The Nurse was fired!" });
     } catch (error) {
-      return response.status(405).json({ error: "Method not allowed!" });
+      return response.status(500).json({ error: "Error deleting nurse." });
     }
   }
 }
