@@ -37,16 +37,6 @@ export default async function handler(request, response) {
     }
   }
 
-  if (request.method === "POST") {
-    try {
-      const nurseData = request.body;
-      const newNurse = await Nurse.create(nurseData);
-      return response.status(201).json(newNurse);
-    } catch (error) {
-      return response.status(500).json({ error: "Error adding nurse." });
-    }
-  }
-
   if (request.method === "DELETE") {
     try {
       const deleteNurse = await Nurse.findByIdAndDelete(id);

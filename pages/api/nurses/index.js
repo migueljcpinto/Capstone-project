@@ -18,4 +18,12 @@ export default async function handler(request, response) {
         .json({ error: "Error fetching the nurse data." });
     }
   }
+  if (request.method === "POST") {
+    try {
+      const newNurse = await Nurse.create(request.body);
+      return response.status(201).json(newNurse);
+    } catch (error) {
+      return response.status(500).json({ error: "Error adding nurse." });
+    }
+  }
 }
