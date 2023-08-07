@@ -56,12 +56,12 @@ export const ButtonStyled = styled.button`
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 10%;
-  right: 40%;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+
   z-index: 999;
   &:hover {
     background-color: #e37820;
   }
 `;
-
-export const AddDivStyled = styled.div``;

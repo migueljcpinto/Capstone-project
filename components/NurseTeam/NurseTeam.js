@@ -5,13 +5,13 @@ import {
   StyledListContainer,
   StyledListItem,
   ButtonStyled,
-  AddDivStyled,
 } from "./NurseTeam.styled";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import SearchInput from "../SearchInput/SearchInput";
 import { useRouter } from "next/router";
+import NurseItem from "../NurseItem/NurseItem";
 
 export default function NurseTeam() {
   const { data, isLoading } = useSWR("/api/nurses");
@@ -34,12 +34,10 @@ export default function NurseTeam() {
   return (
     <>
       <StyledHeading>Available Nurses</StyledHeading>
-      <AddDivStyled>
-        <SearchInput onSearchChange={setSearch} />
-        <ButtonStyled onClick={() => router.push("/addNurse")}>
-          Add
-        </ButtonStyled>
-      </AddDivStyled>
+      <SearchInput onSearchChange={setSearch} />
+      <ButtonStyled onClick={() => router.push("/addNurse")}>
+        Add Nurse
+      </ButtonStyled>
       <StyledListContainer>
         <StyledList>
           {data
@@ -49,20 +47,7 @@ export default function NurseTeam() {
                 : nurse.name.toLowerCase().includes(search); //Converting again to compare
             })
             .map((nurse) => (
-              <StyledListItem key={nurse._id}>
-                <Image
-                  width={76.8}
-                  height={76.8}
-                  src={nurse.image}
-                  alt="Random Nurse Photo"
-                />
-                <Link
-                  style={{ color: "black", textDecoration: "none" }}
-                  href={`/NursePage/${nurse._id}`}
-                >
-                  {nurse.name} <br /> {nurse.role}
-                </Link>
-              </StyledListItem>
+              <NurseItem key={nurse._id} nurse={nurse} />
             ))}
         </StyledList>
       </StyledListContainer>
