@@ -18,14 +18,4 @@ export default async function handler(request, response) {
         .json({ error: "Error fetching the nurse data." });
     }
   }
-  if (request.method === "POST") {
-    try {
-      const nurseData = request.body;
-      await Nurse.create(nurseData);
-      response.status(201).json({ message: "Nurse added!🍻" });
-    } catch (error) {
-      response.status(400).json({ message: error.message });
-    }
-  }
-  return response.status(405).json({ error: "Method not allowed" });
 }

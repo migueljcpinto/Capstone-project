@@ -31,7 +31,7 @@ export default async function handler(request, response) {
       }
       return response.status(200).json(updatedNurseData);
     } catch (error) {
-      response.status(500).json({ status: "Error updating nurse." });
+      return response.status(500).json({ status: "Error updating nurse." });
     }
   }
 

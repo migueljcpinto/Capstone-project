@@ -6,7 +6,7 @@ export default function AddNursePage() {
 
   async function handleSubmitNurse(nurseData) {
     try {
-      const response = await fetch(`/api/nurses`, {
+      const response = await fetch(`/api/nurses/$[id]`, {
         method: "POST",
         headers: { "Content-Type": "application/json" }, // Set the content type to JSON
         body: JSON.stringify(nurseData),
