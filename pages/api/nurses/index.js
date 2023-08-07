@@ -20,12 +20,10 @@ export default async function handler(request, response) {
   }
   if (request.method === "POST") {
     try {
-      const nurseData = request.body;
-      await Nurse.create(nurseData);
-      response.status(201).json({ message: "Nurse added!🍻" });
+      const newNurse = await Nurse.create(request.body);
+      return response.status(201).json(newNurse);
     } catch (error) {
-      response.status(400).json({ message: error.message });
+      return response.status(500).json({ error: "Error adding nurse." });
     }
   }
-  return response.status(405).json({ error: "Method not allowed" });
 }
