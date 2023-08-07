@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 
 export const StyledHeading = styled.h2`
   display: grid;
@@ -24,51 +23,25 @@ export const StyledList = styled.ul`
   margin-bottom: 2rem;
 `;
 
-export const StyledListItem = styled.li`
-  display: grid;
-  grid-template-columns: 4.8rem 1fr auto;
-  align-items: center;
-  column-gap: 1.6rem;
-  padding: 1.2rem;
-  border-radius: 7px;
-  background-color: #fafafc;
-  transition: 0.5s;
-
-  &:hover {
-    background-color: #fff4e6;
-  }
-
-  img {
-    border-radius: 50%;
-    width: 100%;
-  }
-`;
-
 export const ButtonStyled = styled.button`
-
-background-color: #FFE6BE;
-color: #000;
-padding: 0.8rem 1.2rem;
-margin: 0% 90%;
-width: 100px;
-border: none;
-border-radius: 10%;
-font-weight: bold;
-cursor: pointer;
-transition: 0.3s;
-align-items: center;
-justify-content:center;
-  &:hover {
-    background-color: #E37820;
-  }
-}
-`;
-
-export const AddLinkStyled = styled(Link)`
+  text-decoration: none;
+  background-color: #ffe6be;
+  color: #000;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 10%;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+  align-items: center;
+  justify-content: center;
   position: fixed;
-  top: 10%;
-  right: 30%;
-  left: -40%;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
 
   z-index: 999;
+  &:hover {
+    background-color: #e37820;
+  }
 `;

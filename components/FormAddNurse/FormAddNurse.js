@@ -1,5 +1,3 @@
-import useSWR from "swr";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import {
   FormContainer,
@@ -10,14 +8,12 @@ import {
   CancelButtonStyled,
   AddButtonStyled,
   HeaderStyled,
+  ButtonsContainer,
 } from "./FormAddNurse.styled";
 import getRandomImageURL from "@/utilities/getRandomImageURL";
 
-export default function FormAddNurse() {
-  const { mutate } = useSWR("/api/nurses"); //check if db has new data - re-validation!
+export default function FormAddNurse({ onSubmitNurse }) {
   const router = useRouter();
-
-  const [selectedImage, setSelectedImage] = useState(getRandomImageURL());
 
   async function handleSubmit(event) {
     event.preventDefault(); //preventing new loading
@@ -33,25 +29,12 @@ export default function FormAddNurse() {
       image: getRandomImageURL(), //to generate a random image
     }; //reading the nurse data
 
-    //calling API
     try {
-      const response = await fetch(`/api/nurses`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" }, // Set the content type to JSON
-        body: JSON.stringify(nurseData), //Adding in body the new nurse
-      });
-
-      if (!response.ok) {
-        const responseData = await response.json();
-        console.error("Error adding nurse:", responseData.message);
-        return;
-      }
-      mutate();
-      setSelectedImage(getRandomImageURL());
-      router.back();
+      await onSubmitNurse(nurseData);
     } catch (error) {
-      console.error("Something wrong with adding that!:", error.message);
+      console.error("Something wrong:", error.message);
     }
+
     event.target.reset();
     event.target.elements[0].focus();
   }
@@ -114,10 +97,12 @@ export default function FormAddNurse() {
           <option value="false">No</option>
           <option value="true">Yes</option>
         </Select>
-        <AddButtonStyled type="submit">New Nurse</AddButtonStyled>
-        <CancelButtonStyled type="button" onClick={handleCancelClick}>
-          Cancel and Return
-        </CancelButtonStyled>
+        <ButtonsContainer>
+          <AddButtonStyled type="submit">New Nurse</AddButtonStyled>
+          <CancelButtonStyled type="button" onClick={handleCancelClick}>
+            Cancel
+          </CancelButtonStyled>
+        </ButtonsContainer>
       </InputGroup>
     </FormContainer>
   );

@@ -5,6 +5,9 @@ export const HeaderStyled = styled.h1`
 `;
 
 export const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #fcfafb;
   max-width: 400px;
   padding: 40px 60px;
@@ -24,53 +27,57 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
+  width: 100%;
+  margin-bottom: 10px;
   padding: 10px;
   border: 1px solid gray;
   border-radius: 4px;
 `;
 
 export const Select = styled.select`
+  width: 100%;
+  margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid gray;
   border-radius: 4px;
 `;
 
 export const CancelButtonStyled = styled.button`
-background-color: #FCBC7F;
-color: #000;
-padding: 0.8rem 1.2rem;
-margin-top: 15px;
-margin-bottom: 30px;
-width: 100px;
-border: none;
-border-radius: 5px;
-font-weight: bold;
-cursor: pointer;
-transition: 0.3s;
-align-items: center;
-justify-content:center;
+  background-color: #fcbc7f;
+  color: #000;
+  padding: 0.8rem 1.2rem;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  align-items: center;
+  justify-content: center;
   &:hover {
-    background-color: #EF8059;
+    background-color: #ef8059;
   }
-}
 `;
 
 export const AddButtonStyled = styled.button`
-background-color: #4AECA9;
-color: #000;
-padding: 0.8rem 1.2rem;
-margin-top: 15px;
-margin-bottom: 30px;
-width: 100px;
-border: none;
-border-radius: 5px;
-font-weight: bold;
-cursor: pointer;
-transition: 0.3s;
-align-items: center;
-justify-content:center;
+  background-color: #4aeca9;
+  color: #000;
+  padding: 0.8rem 1.2rem;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  align-items: center;
+  justify-content: center;
   &:hover {
-    background-color: #8CFC9D;
+    background-color: #8cfc9d;
   }
-}
-  `;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 80px;
+  width: 100%;
+`;
