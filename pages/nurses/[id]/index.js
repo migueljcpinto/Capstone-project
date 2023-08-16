@@ -9,6 +9,7 @@ export default function NursePage() {
   const { id } = router.query;
   const { data, isLoading, mutate } = useSWR(`/api/nurses/${id}`);
   const [isEdit, setIsEdit] = useState(false);
+  const [isWorkSchedule, setIsWorkSchedule] = useState(false);
 
   async function handleEditNurse(event) {
     event.preventDefault();
@@ -57,6 +58,8 @@ export default function NursePage() {
     <NurseProfile
       isEdit={isEdit}
       setIsEdit={setIsEdit}
+      isWorkSchedule={isWorkSchedule}
+      setIsWorkSchedule={setIsWorkSchedule}
       nurseData={data}
       onDeleteNurse={handleDelete}
       onSubmit={handleEditNurse}

@@ -12,7 +12,7 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
-      const nurse = await Nurse.findById(id);
+      const nurse = await Nurse.findById(id).populate("workSchedule");
       if (!nurse) {
         return response.status(404).json({ status: "Nurse not Found 🫣" });
       }
@@ -25,7 +25,8 @@ export default async function handler(request, response) {
   if (request.method === "PUT") {
     try {
       const updatedNurse = request.body;
-      const updatedNurseData = await Nurse.findByIdAndUpdate(id, updatedNurse);
+      //to return the updated data after the PUT method
+      const updatedNurseData = await Nurse.findByIdAndUpdate(id, updatedNurse, { new: true }).populate("workSchedule");
       if (!updatedNurseData) {
         return response
           .status(404)
