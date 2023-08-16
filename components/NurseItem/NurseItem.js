@@ -13,7 +13,7 @@ export default function NurseItem({ nurse }) {
       />
       <Link
         style={{ color: "black", textDecoration: "none" }}
-        href={`/NursePage/${nurse._id}`}
+        href={`/nurses/${nurse._id}`}
       >
         {nurse.name} <br /> {nurse.role}
       </Link>

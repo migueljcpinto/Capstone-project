@@ -3,15 +3,13 @@ import {
   StyledHeading,
   StyledList,
   StyledListContainer,
-  StyledListItem,
   ButtonStyled,
 } from "./NurseTeam.styled";
-import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import SearchInput from "../SearchInput/SearchInput";
 import { useRouter } from "next/router";
 import NurseItem from "../NurseItem/NurseItem";
+import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 
 export default function NurseTeam() {
   const { data, isLoading } = useSWR("/api/nurses");
@@ -19,7 +17,7 @@ export default function NurseTeam() {
   const router = useRouter();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoaderSpinner />;
   }
 
   if (!data) {
@@ -35,7 +33,7 @@ export default function NurseTeam() {
     <>
       <StyledHeading>Available Nurses</StyledHeading>
       <SearchInput onSearchChange={setSearch} />
-      <ButtonStyled onClick={() => router.push("/addNurse")}>
+      <ButtonStyled onClick={() => router.push("/nurses/add-nurse")}>
         Add Nurse
       </ButtonStyled>
       <StyledListContainer>

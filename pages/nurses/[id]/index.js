@@ -2,6 +2,7 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import NurseProfile from "@/components/NurseProfile/NurseProfile";
+import LoaderSpinner from "@/components/LoaderSpinner/LoaderSpinner";
 
 export default function NursePage() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function NursePage() {
       hoursPerWeek: Number(formData.get("hoursPerWeek")),
       specialist: formData.get("isSpecialist") === "true",
     };
-    const response = await fetch(`/api/nurses/${id}`, {
+    const response = await fetch(`/api/nurses/${id}/`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedNurseData),
@@ -37,7 +38,7 @@ export default function NursePage() {
       `Are you sure you want to fire ${data?.name}?`
     );
     if (shouldDelete) {
-      const response = await fetch(`/api/nurses/${id}`, { method: "DELETE" });
+      const response = await fetch(`/api/nurses/${id}/`, { method: "DELETE" });
       if (response.ok) {
         router.push("/");
       }
@@ -45,7 +46,7 @@ export default function NursePage() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoaderSpinner />;
   }
 
   if (!data) {
