@@ -9,13 +9,10 @@ import {
   WorkScheduleButton,
 } from "./NurseProfile.styled";
 import UpdateNurse from "../UpdateNurse/UpdateNurse";
-import WorkScheduleForm from "../WorkScheduleForm/WorkScheduleForm";
 
 export default function NurseProfile({
   isEdit,
   setIsEdit,
-  isWorkSchedule,
-  setIsWorkSchedule,
   nurseData,
   onDeleteNurse,
   onSubmit,
@@ -27,7 +24,6 @@ export default function NurseProfile({
   function handleGoBack() {
     router.push("/");
   }
-  console.log(handleScheduleSubmit)
 
   return (
     <>
@@ -62,19 +58,7 @@ export default function NurseProfile({
           </UpdateButtonStyled>
         )}
         {isEdit && <UpdateNurse nurseData={nurseData} onSubmit={onSubmit} />}
-        {!isWorkSchedule && (
-          <WorkScheduleButton
-            onClick={() => {
-              setIsWorkSchedule(!isWorkSchedule);
-            }}
-            type="button"
-          >
-            {!isWorkSchedule && "Work Schedule"}
-          </WorkScheduleButton>
-        )}
-        {isWorkSchedule && (
-          <WorkScheduleForm onScheduleSubmit={handleScheduleSubmit} nurseData={nurseData} />
-        )}
+        <WorkScheduleButton href={`/nurses/${nurseData.id}/schedule` } handleScheduleSubmit={handleScheduleSubmit}>Work Schedule</WorkScheduleButton>
       </nav>
     </>
   );

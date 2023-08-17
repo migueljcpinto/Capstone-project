@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import NurseItem from "../NurseItem/NurseItem";
 import LoaderSpinner from "../LoaderSpinner/LoaderSpinner";
 
-export default function NurseTeam() {
+export default function NurseTeam({handleScheduleSubmit}) {
   const { data, isLoading } = useSWR("/api/nurses");
   const [search, setSearch] = useState("");
   const router = useRouter();
@@ -45,7 +45,7 @@ export default function NurseTeam() {
                 : nurse.name.toLowerCase().includes(search); //Converting again to compare
             })
             .map((nurse) => (
-              <NurseItem key={nurse._id} nurse={nurse} />
+              <NurseItem key={nurse._id} nurse={nurse} handleScheduleSubmit={handleScheduleSubmit}/>
             ))}
         </StyledList>
       </StyledListContainer>

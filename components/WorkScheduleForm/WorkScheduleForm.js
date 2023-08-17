@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {ScheduleFormContainer} from "./WorkScheduleForm.styled"
 import DatePickerRange from "../DatePicker/DatePickerRange";
 
 
-export default function WorkScheduleForm({ onScheduleSubmit}) {
+export default function WorkScheduleForm({ onScheduleSubmit, workDates}) {
     const [vacationDates, setVacationDates] = useState([]);
-console.log("Form",onScheduleSubmit);
+
+  useEffect(() => {
+    if(workDates) {
+      setVacationDates(workDates)
+    }
+  }, [workDates])
     
     // Adds a new date range to the dateRanges state array
     function handleAddDate() {
@@ -16,9 +21,9 @@ console.log("Form",onScheduleSubmit);
       setVacationDates(newDateRanges);
     }
     
-    function handleDateChange(index, update) {
+    function handleDateChange(index, [startDate, endDate]) {
       const updatedDateRanges = [...vacationDates];
-      updatedDateRanges[index] = update;
+      updatedDateRanges[index] = {startDate, endDate};
       setVacationDates(updatedDateRanges);
     }
     
@@ -31,7 +36,6 @@ console.log("Form",onScheduleSubmit);
   function handleSubmit(event) {
       event.preventDefault();
       const formWorkData = {vacationDates};
-      console.log(onScheduleSubmit);
 
       onScheduleSubmit(formWorkData);
     }
@@ -39,16 +43,16 @@ console.log("Form",onScheduleSubmit);
   return (
     <>
    <ScheduleFormContainer onSubmit={handleSubmit}>
-        <h3>Your Vacations:</h3>
-        {vacationDates.map((dateRange, index) => (
-        <div key={index}>
-        <DatePickerRange
-        startDate={dateRange.startDate}
-        endDate={dateRange.endDate}
-        onChange={(newDateRange) => handleDateChange(newDateRange, index)}
-        />
+    <h3>Your Vacations:</h3>
+    {vacationDates.map((dateRange, index) => (
+    <div key={index}>
+    <DatePickerRange
+    startDate={dateRange.startDate}
+     endDate={dateRange.endDate}
+      onChange={(newDateRange) => handleDateChange(newDateRange, index)}
+      />
         <button onClick={() => handleRemoveDate(index)}>Remove</button>
-        </div>
+        </div>        
         ))}
         <button type="button" onClick={handleAddDate}>Add Vacation Date</button>
         <button type="submit">Submit</button>

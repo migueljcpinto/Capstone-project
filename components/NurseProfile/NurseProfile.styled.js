@@ -101,7 +101,7 @@ export const ContactsContainer = styled.div`
   }
 `;
 
-export const WorkScheduleButton = styled.button`
+export const WorkScheduleButton = styled(Link)`
   background-color: #fafafc;
   color: #000;
   padding: 0.8rem 1.2rem;

@@ -3,6 +3,8 @@ import Image from "next/image";
 import { StyledListItem } from "../NurseItem/NurseItem.styled";
 
 export default function NurseItem({ nurse }) {
+
+  
   return (
     <StyledListItem>
       <Image

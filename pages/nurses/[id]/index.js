@@ -4,12 +4,11 @@ import { useState } from "react";
 import NurseProfile from "@/components/NurseProfile/NurseProfile";
 import LoaderSpinner from "@/components/LoaderSpinner/LoaderSpinner";
 
-export default function NursePage({handleScheduleSubmit}) {
+export default function NursePage() {
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, mutate } = useSWR(`/api/nurses/${id}`);
   const [isEdit, setIsEdit] = useState(false);
-  const [isWorkSchedule, setIsWorkSchedule] = useState(false);
 
   async function handleEditNurse(event) {
     event.preventDefault();
@@ -21,6 +20,9 @@ export default function NursePage({handleScheduleSubmit}) {
       role: formData.get("role"),
       hoursPerWeek: Number(formData.get("hoursPerWeek")),
       specialist: formData.get("isSpecialist") === "true",
+      email: formData.get("email"),
+      phoneNumber: Number(formData.get("phoneNumber")),
+      description: formData.get("description"),
     };
     const response = await fetch(`/api/nurses/${id}/`, {
       method: "PUT",
@@ -58,12 +60,9 @@ export default function NursePage({handleScheduleSubmit}) {
     <NurseProfile
       isEdit={isEdit}
       setIsEdit={setIsEdit}
-      isWorkSchedule={isWorkSchedule}
-      setIsWorkSchedule={setIsWorkSchedule}
       nurseData={data}
       onDeleteNurse={handleDelete}
       onSubmit={handleEditNurse}
-      handleScheduleSubmit={handleScheduleSubmit}
     />
   );
 }
