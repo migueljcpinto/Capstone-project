@@ -9,6 +9,7 @@ import {
   WorkScheduleButton,
 } from "./NurseProfile.styled";
 import UpdateNurse from "../UpdateNurse/UpdateNurse";
+import WorkScheduleForm from "../WorkScheduleForm/WorkScheduleForm";
 
 export default function NurseProfile({
   isEdit,
@@ -18,12 +19,15 @@ export default function NurseProfile({
   nurseData,
   onDeleteNurse,
   onSubmit,
+  handleScheduleSubmit
 }) {
+
   const router = useRouter();
 
   function handleGoBack() {
     router.push("/");
   }
+  console.log(handleScheduleSubmit)
 
   return (
     <>
@@ -69,11 +73,7 @@ export default function NurseProfile({
           </WorkScheduleButton>
         )}
         {isWorkSchedule && (
-         /*  <ScheduleTabs
-            handleVacationSubmit={handleVacationSubmit}
-            nurseData={nurseData}
-            nurseId={nurseId}
-          /> */
+          <WorkScheduleForm onScheduleSubmit={handleScheduleSubmit} nurseData={nurseData} />
         )}
       </nav>
     </>

@@ -10,7 +10,7 @@ export default function SchedulePage() {
   async function handleScheduleSubmit(formData) {
     const scheduleData = Object.fromEntries(formData);
 
-    const responseVacation = await fetch("/api/work-dates", {
+    const responseSchedule = await fetch("/api/work-dates", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +30,7 @@ export default function SchedulePage() {
         },
         body: JSON.stringify({
           ...scheduleData,
-          workSchedule: data._id,
+          vacationDates: [...nurseData.nurseWorkDates, data._id],
         }),
       });
 
@@ -39,5 +39,6 @@ export default function SchedulePage() {
       }
     }
   }
+
   return <WorkScheduleForm onScheduleSubmit={handleScheduleSubmit} nurseData={nurseData} />;
 }

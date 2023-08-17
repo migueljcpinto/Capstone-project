@@ -85,7 +85,7 @@ export default function UpdateNurse({ nurseData, onSubmit }) {
             type="tel"
             inputMode="numeric"
             defaultValue={nurseData.phoneNumber}
-            pattern="\d{10}"
+            pattern="\d+"
             required
           />
 

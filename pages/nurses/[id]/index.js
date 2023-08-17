@@ -4,7 +4,7 @@ import { useState } from "react";
 import NurseProfile from "@/components/NurseProfile/NurseProfile";
 import LoaderSpinner from "@/components/LoaderSpinner/LoaderSpinner";
 
-export default function NursePage() {
+export default function NursePage({handleScheduleSubmit}) {
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, mutate } = useSWR(`/api/nurses/${id}`);
@@ -63,6 +63,7 @@ export default function NursePage() {
       nurseData={data}
       onDeleteNurse={handleDelete}
       onSubmit={handleEditNurse}
+      handleScheduleSubmit={handleScheduleSubmit}
     />
   );
 }

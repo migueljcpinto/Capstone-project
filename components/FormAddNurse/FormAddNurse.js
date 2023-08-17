@@ -118,7 +118,7 @@ export default function FormAddNurse({ onSubmitNurse }) {
           name="phoneNumber"
           type="tel"
           inputMode="numeric"
-          pattern="\d{10}"
+          pattern="\d+"
           placeholder="Enter the phone number of the nurse"
           required
         />
