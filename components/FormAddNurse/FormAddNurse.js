@@ -31,6 +31,7 @@ export default function FormAddNurse({ onSubmitNurse }) {
       phoneNumber: Number(formData.get("phoneNumber")),
       description: formData.get("description"),
     }; //reading the nurse data
+    console.log("Nurse data to be sent:", nurseData);
 
     try {
       await onSubmitNurse(nurseData);

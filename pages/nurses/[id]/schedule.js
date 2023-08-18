@@ -8,18 +8,26 @@ import { GoBackLinkStyled } from "@/components/NurseProfile/NurseProfile.styled"
 export default function SchedulePage() {
   const router = useRouter();
   const { id } = router.query; //Nurse id
-  const { data: nurseData, isLoading, mutate } = useSWR(`/api/nurses/${id}`);
-  const { data: workDatesData } = useSWR(`/api/work-dates/${id}`, fetcher);
- 
+  console.log("ID from router.query:", id);
+  const { data: nurseData, isLoading, mutate } = useSWR(id ? `/api/nurses/${id}` : null);
+  const { data: workDatesData } = useSWR(id ? `/api/work-dates/${id}` : null, fetcher);
+  console.log("Nurse data:", nurseData);
+  console.log("Work dates data:", workDatesData);
+  
  if(isLoading) return <LoaderSpinner/>
   
   if(!nurseData) return <div>Failed to load nurse data</div>;
 
     if(!workDatesData) return <div>Failed to load work dates data</div>;
 
-  async function handleScheduleSubmit(formData) {
-    const scheduleData = Object.fromEntries(formData);
-
+  async function handleScheduleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    
+    const scheduleData = {
+      vacationDates: formData.get("vacationDates"),
+ //later add daysOff and availability
+    };
     const responseSchedule = await fetch("/api/work-dates", {
       method: "POST",
       headers: { "Content-Type": "application/json"},

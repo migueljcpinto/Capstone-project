@@ -15,6 +15,7 @@ export default function NurseTeam({handleScheduleSubmit}) {
   const { data, isLoading } = useSWR("/api/nurses");
   const [search, setSearch] = useState("");
   const router = useRouter();
+  console.log("All nurses data:", data);
 
   if (isLoading) {
     return <LoaderSpinner />;

@@ -38,6 +38,8 @@ export default function WorkScheduleForm({ onScheduleSubmit, workDates}) {
       const formWorkData = {vacationDates};
 
       onScheduleSubmit(formWorkData);
+      console.log("Form work data to be sent:", formWorkData);
+
     }
 
   return (

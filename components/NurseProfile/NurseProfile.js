@@ -18,6 +18,7 @@ export default function NurseProfile({
   onSubmit,
   handleScheduleSubmit
 }) {
+  console.log("Nurse data in NurseProfile:", nurseData);
 
   const router = useRouter();
 
