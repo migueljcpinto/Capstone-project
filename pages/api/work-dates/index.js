@@ -32,7 +32,12 @@ export default async function handler(request, response) {
 
       const workDatesData = {vacationDates/* , daysOff, availability */}
       const workDates = await NurseWorkDates.create(workDatesData); //work dates for the nurse
-      
+
+      if (!workDates) {
+        return response.status(500).json({ error: "Failed to create work dates." });
+    }
+    console.log("Received data:", request.body);
+
       await Nurse.findByIdAndUpdate(nurseId, {
         $push: { workSchedule: workDates._id }, //updating
       });

@@ -21,12 +21,11 @@ export default function SchedulePage() {
 
     if(!workDatesData) return <div>Failed to load work dates data</div>;
 
-  async function handleScheduleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    
+    async function handleScheduleSubmit(formData) {
+
+
     const scheduleData = {
-      vacationDates: formData.get("vacationDates"),
+      vacationDates: formData.vacationDates,
  //later add daysOff and availability
     };
     const responseSchedule = await fetch("/api/work-dates", {
@@ -38,6 +37,11 @@ export default function SchedulePage() {
       }),
     });
 
+    console.log("Sending data to /api/work-dates:", {
+      nurseId: id,
+      ...scheduleData,
+  });
+
     if (responseSchedule.ok) {
       const data = await responseSchedule.json();
       const responseNurse = await fetch(`/api/nurses/${id}`, {
@@ -47,9 +51,10 @@ export default function SchedulePage() {
         },
         body: JSON.stringify({
           ...scheduleData,
-          vacationDates: [...nurseData.nurseWorkDates, data._id],
+          vacationDates: nurseData.vacationDates ? [...nurseData.vacationDates, data._id] : [data._id],
         }),
       });
+      console.log(data);
 
       if (responseNurse.ok) {
         mutate();
