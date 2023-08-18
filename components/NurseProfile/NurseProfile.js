@@ -59,7 +59,7 @@ export default function NurseProfile({
           </UpdateButtonStyled>
         )}
         {isEdit && <UpdateNurse nurseData={nurseData} onSubmit={onSubmit} />}
-        <WorkScheduleButton href={`/nurses/${nurseData.id}/schedule` } handleScheduleSubmit={handleScheduleSubmit}>Work Schedule</WorkScheduleButton>
+        <WorkScheduleButton href={`/nurses/${nurseData._id}/schedule` } handleScheduleSubmit={handleScheduleSubmit}>Work Schedule</WorkScheduleButton>
       </nav>
     </>
   );

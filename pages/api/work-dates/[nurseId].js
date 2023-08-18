@@ -1,5 +1,4 @@
 import dbConnect from "../../../db/connect";
-import NurseWorkDates from "@/db/models/NurseWorkDates";
 import Nurse from "@/db/models/Nurse";
 
 export default async function handler(request, response) {

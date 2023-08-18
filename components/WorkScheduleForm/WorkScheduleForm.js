@@ -21,11 +21,17 @@ export default function WorkScheduleForm({ onScheduleSubmit, workDates}) {
       setVacationDates(newDateRanges);
     }
     
-    function handleDateChange(index, [startDate, endDate]) {
+    function handleDateChange(index, dates) {
+      if (!Array.isArray(dates)) {
+          console.error('Expected an array, but got:', dates);
+          return;
+      }
+  
+      const [startDate, endDate] = dates;
       const updatedDateRanges = [...vacationDates];
       updatedDateRanges[index] = {startDate, endDate};
       setVacationDates(updatedDateRanges);
-    }
+  }
     
     
     function handleRemoveDate(index) {

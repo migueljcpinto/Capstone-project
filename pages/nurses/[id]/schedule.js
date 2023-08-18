@@ -14,15 +14,16 @@ export default function SchedulePage() {
   console.log("Nurse data:", nurseData);
   console.log("Work dates data:", workDatesData);
   
-/*  if(isLoading) return <LoaderSpinner/>
+  
+ if(isLoading) return <LoaderSpinner/>
   
   if(!nurseData) return <div>Failed to load nurse data</div>;
 
     if(!workDatesData) return <div>Failed to load work dates data</div>;
- */
+
   async function handleScheduleSubmit(event) {
-/*     event.preventDefault();
- */    const formData = new FormData(event.target);
+    event.preventDefault();
+    const formData = new FormData(event.target);
     
     const scheduleData = {
       vacationDates: formData.get("vacationDates"),
@@ -57,7 +58,7 @@ export default function SchedulePage() {
   }
   return (
   <div>
-    <WorkScheduleForm onScheduleSubmit={handleScheduleSubmit} nurseData={nurseData} workDates={workDatesData} />;
+    <WorkScheduleForm onScheduleSubmit={handleScheduleSubmit} nurseData={nurseData} workDates={workDatesData} />
     <GoBackLinkStyled onClick={() => router.back()}>Return</GoBackLinkStyled>
   </div>
   )
