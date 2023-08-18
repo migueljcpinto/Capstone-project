@@ -8,19 +8,12 @@ import { GoBackLinkStyled } from "@/components/NurseProfile/NurseProfile.styled"
 export default function SchedulePage() {
   const router = useRouter();
   const { id } = router.query; //Nurse id
-  console.log("ID from router.query:", id);
   const { data: nurseData, isLoading, mutate } = useSWR(id ? `/api/nurses/${id}` : null);
   const { data: workDatesData } = useSWR(id ? `/api/work-dates/${id}` : null, fetcher);
-  console.log("Nurse data:", nurseData);
-  console.log("Work dates data:", workDatesData);
   
   
  if(isLoading) return <LoaderSpinner/>
   
-  if(!nurseData) return <div>Failed to load nurse data</div>;
-
-    if(!workDatesData) return <div>Failed to load work dates data</div>;
-
     async function handleScheduleSubmit(formData) {
 
 
@@ -37,10 +30,6 @@ export default function SchedulePage() {
       }),
     });
 
-    console.log("Sending data to /api/work-dates:", {
-      nurseId: id,
-      ...scheduleData,
-  });
 
     if (responseSchedule.ok) {
       const data = await responseSchedule.json();
@@ -54,16 +43,24 @@ export default function SchedulePage() {
           vacationDates: nurseData.vacationDates ? [...nurseData.vacationDates, data._id] : [data._id],
         }),
       });
-      console.log(data);
 
       if (responseNurse.ok) {
-        mutate();
+        mutate(`/api/work-dates/${id}`);
       }
     }
   }
   return (
   <div>
     <WorkScheduleForm onScheduleSubmit={handleScheduleSubmit} nurseData={nurseData} workDates={workDatesData} />
+    <div>
+    <h4>Datas de Férias Existentes:</h4>
+    {workDatesData && workDatesData.vacationDates && workDatesData.vacationDates.map((dateRange, index) => (
+    <div key={index}>
+        De: {new Date(dateRange.startDate).toLocaleDateString()} 
+        Até: {new Date(dateRange.endDate).toLocaleDateString()}
+    </div>
+))}
+</div>
     <GoBackLinkStyled onClick={() => router.back()}>Return</GoBackLinkStyled>
   </div>
   )
