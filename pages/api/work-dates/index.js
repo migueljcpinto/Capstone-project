@@ -22,21 +22,22 @@ export default async function handler(request, response) {
   }
   if (request.method === "POST") {
     try {
-      const { nurseId, vacationDates, /* daysOff, availability */ } = request.body;
-
+      const { nurseId, vacationDates /* daysOff, availability */ } =
+        request.body;
 
       //checking if it is the correct format
-      if(!Array.isArray(vacationDates) /* || !Array.isArray(daysOff) */) {
-        return response.status(400).json({error:"Invalid data format."});
+      if (!Array.isArray(vacationDates) /* || !Array.isArray(daysOff) */) {
+        return response.status(400).json({ error: "Invalid data format." });
       }
 
-      const workDatesData = {vacationDates/* , daysOff, availability */}
+      const workDatesData = { vacationDates /* , daysOff, availability */ };
       const workDates = await NurseWorkDates.create(workDatesData); //work dates for the nurse
 
       if (!workDates) {
-        return response.status(500).json({ error: "Failed to create work dates." });
-    }
-    console.log("Received data:", request.body);
+        return response
+          .status(500)
+          .json({ error: "Failed to create work dates." });
+      }
 
       await Nurse.findByIdAndUpdate(nurseId, {
         $push: { workSchedule: workDates._id }, //updating

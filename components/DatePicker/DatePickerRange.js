@@ -9,9 +9,7 @@ export default function DatePickerRange({ startDate, endDate, onChange }) {
     setDateRange(update);
     onChange(update);
     console.log("Selected date range:", dateRange);
-
-}
-
+  }
 
   return (
     <DatePicker

@@ -26,7 +26,9 @@ export default async function handler(request, response) {
     try {
       const updatedNurse = request.body;
       //to return the updated data after the PUT method
-      const updatedNurseData = await Nurse.findByIdAndUpdate(id, updatedNurse, { new: true }).populate("workSchedule");
+      const updatedNurseData = await Nurse.findByIdAndUpdate(id, updatedNurse, {
+        new: true,
+      }).populate("workSchedule");
       if (!updatedNurseData) {
         return response
           .status(404)

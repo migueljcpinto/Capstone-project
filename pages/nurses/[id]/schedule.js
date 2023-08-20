@@ -4,32 +4,61 @@ import { useRouter } from "next/router";
 import fetcher from "@/utilities/fetcher";
 import LoaderSpinner from "@/components/LoaderSpinner/LoaderSpinner";
 import { GoBackLinkStyled } from "@/components/NurseProfile/NurseProfile.styled";
+import WorkDatesDisplay from "@/components/WorkDatesDisplay/WorkDatesDisplay";
 
 export default function SchedulePage() {
   const router = useRouter();
   const { id } = router.query; //Nurse id
-  const { data: nurseData, isLoading, mutate } = useSWR(id ? `/api/nurses/${id}` : null);
-  const { data: workDatesData } = useSWR(id ? `/api/work-dates/${id}` : null, fetcher);
-  
-  
- if(isLoading) return <LoaderSpinner/>
-  
-    async function handleScheduleSubmit(formData) {
+  const {
+    data: nurseData,
+    isLoading,
+    mutate,
+  } = useSWR(id ? `/api/nurses/${id}` : null);
+  const { data: workDatesData } = useSWR(
+    id ? `/api/work-dates/${id}` : null,
+    fetcher
+  );
 
+  if (isLoading) return <LoaderSpinner />;
 
+  async function handleDateEdit(index, dateRange) {
+    const response = await fetch(`/api/work-dates/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ index, dateRange }),
+    });
+
+    if (response.ok) {
+      mutate(`/api/work-dates/${id}`);
+    }
+  }
+
+  async function handleRemoveDate(index, workDateId) {
+    const response = await fetch(`/api/work-dates/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ workDateId }),
+    });
+
+    if (response.ok) {
+      alert("Date deleted!");
+      mutate(`/api/work-dates/${id}`);
+    }
+  }
+
+  async function handleScheduleSubmit(formData) {
     const scheduleData = {
       vacationDates: formData.vacationDates,
- //later add daysOff and availability
+      //later add daysOff and availability
     };
     const responseSchedule = await fetch("/api/work-dates", {
       method: "POST",
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         nurseId: id,
         ...scheduleData,
       }),
     });
-
 
     if (responseSchedule.ok) {
       const data = await responseSchedule.json();
@@ -40,28 +69,32 @@ export default function SchedulePage() {
         },
         body: JSON.stringify({
           ...scheduleData,
-          vacationDates: nurseData.vacationDates ? [...nurseData.vacationDates, data._id] : [data._id],
+          vacationDates: nurseData.vacationDates
+            ? [...nurseData.vacationDates, data._id]
+            : [data._id],
         }),
       });
 
       if (responseNurse.ok) {
+        alert("Dates added!");
         mutate(`/api/work-dates/${id}`);
       }
     }
   }
+
   return (
-  <div>
-    <WorkScheduleForm onScheduleSubmit={handleScheduleSubmit} nurseData={nurseData} workDates={workDatesData} />
     <div>
-    <h4>Datas de Férias Existentes:</h4>
-    {workDatesData && workDatesData.vacationDates && workDatesData.vacationDates.map((dateRange, index) => (
-    <div key={index}>
-        De: {new Date(dateRange.startDate).toLocaleDateString()} 
-        Até: {new Date(dateRange.endDate).toLocaleDateString()}
+      <WorkScheduleForm
+        onScheduleSubmit={handleScheduleSubmit}
+        nurseData={nurseData}
+        workDates={workDatesData}
+      />
+      <WorkDatesDisplay
+        workDates={workDatesData}
+        onDateEdit={handleDateEdit}
+        onDateRemove={handleRemoveDate}
+      />
+      <GoBackLinkStyled onClick={() => router.back()}>Return</GoBackLinkStyled>
     </div>
-))}
-</div>
-    <GoBackLinkStyled onClick={() => router.back()}>Return</GoBackLinkStyled>
-  </div>
-  )
+  );
 }
