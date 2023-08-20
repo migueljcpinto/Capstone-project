@@ -1,8 +1,4 @@
-export default function WorkDatesDisplay({
-  workDates,
-  onDateEdit,
-  onDateRemove,
-}) {
+export default function WorkDatesDisplay({ workDates, onDateRemove }) {
   return (
     <div>
       <h4>Your Vacation Dates:</h4>
@@ -13,20 +9,7 @@ export default function WorkDatesDisplay({
               <div key={index}>
                 From: {new Date(dateRange.startDate).toLocaleDateString()}
                 To: {new Date(dateRange.endDate).toLocaleDateString()}
-                <button
-                  onClick={() => {
-                    console.log("Edit button clicked for index:", index);
-                    onDateEdit(index, dateRange);
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => {
-                    console.log("Remove button clicked for index:", index);
-                    onDateRemove(index, workDate._id);
-                  }}
-                >
+                <button onClick={() => onDateRemove(index, workDate._id)}>
                   Remove
                 </button>
               </div>

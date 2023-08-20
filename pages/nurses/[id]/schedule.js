@@ -21,18 +21,6 @@ export default function SchedulePage() {
 
   if (isLoading) return <LoaderSpinner />;
 
-  async function handleDateEdit(index, dateRange) {
-    const response = await fetch(`/api/work-dates/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ index, dateRange }),
-    });
-
-    if (response.ok) {
-      mutate(`/api/work-dates/${id}`);
-    }
-  }
-
   async function handleRemoveDate(index, workDateId) {
     const response = await fetch(`/api/work-dates/${id}`, {
       method: "DELETE",
@@ -91,7 +79,6 @@ export default function SchedulePage() {
       />
       <WorkDatesDisplay
         workDates={workDatesData}
-        onDateEdit={handleDateEdit}
         onDateRemove={handleRemoveDate}
       />
       <GoBackLinkStyled onClick={() => router.back()}>Return</GoBackLinkStyled>

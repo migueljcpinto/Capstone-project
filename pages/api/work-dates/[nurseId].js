@@ -23,21 +23,6 @@ export default async function handler(request, response) {
     }
   }
 
-  if (request.method === "PUT") {
-    const { workDateId, dateRange } = request.body;
-    try {
-      const workDate = await NurseWorkDates.findById(workDateId);
-      if (!workDate) {
-        return response.status(404).json({ status: "Work date not found 😕" });
-      }
-      workDate.vacationDates = dateRange; // or other that I want to update
-      await workDate.save();
-      response.status(200).json({ status: "Date updated successfully!" });
-    } catch (error) {
-      response.status(500).json({ status: "Error updating date." });
-    }
-  }
-
   if (request.method === "DELETE") {
     const { workDateId } = request.body;
     try {

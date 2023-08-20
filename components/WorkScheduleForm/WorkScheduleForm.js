@@ -14,7 +14,6 @@ export default function WorkScheduleForm({ onScheduleSubmit }) {
     event.preventDefault();
     const formWorkData = { vacationDates: [{ startDate, endDate }] };
     onScheduleSubmit(formWorkData);
-    console.log("Form work data to be sent:", formWorkData);
   }
 
   return (

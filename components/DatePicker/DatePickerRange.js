@@ -8,7 +8,6 @@ export default function DatePickerRange({ startDate, endDate, onChange }) {
   function handleDateChange(update) {
     setDateRange(update);
     onChange(update);
-    console.log("Selected date range:", dateRange);
   }
 
   return (

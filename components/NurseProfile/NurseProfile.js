@@ -21,8 +21,6 @@ export default function NurseProfile({
   onDateChange,
   onDateRemove,
 }) {
-  console.log("Nurse data in NurseProfile:", nurseData);
-
   const router = useRouter();
 
   function handleGoBack() {
