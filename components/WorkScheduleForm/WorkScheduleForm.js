@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ScheduleFormContainer } from "./WorkScheduleForm.styled";
 import DatePickerRange from "../DatePicker/DatePickerRange";
+import { Botton } from "./WorkScheduleForm.styled";
 
 export default function WorkScheduleForm({ onScheduleSubmit }) {
   const [startDate, setStartDate] = useState(new Date());
@@ -19,13 +20,13 @@ export default function WorkScheduleForm({ onScheduleSubmit }) {
   return (
     <>
       <ScheduleFormContainer onSubmit={handleSubmit}>
-        <h3>Your Vacations:</h3>
+        <h2>Schedule your vacations:</h2>
         <DatePickerRange
           startDate={startDate}
           endDate={endDate}
           onChange={handleDateChange}
         />
-        <button type="submit">Submit</button>
+        <Botton type="submit">Request your Vacation</Botton>
       </ScheduleFormContainer>
     </>
   );

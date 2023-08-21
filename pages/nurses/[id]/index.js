@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import NurseProfile from "@/components/NurseProfile/NurseProfile";
-import LoaderSpinner from "@/components/LoaderSpinner/LoaderSpinner";
+import LoaderSpinner from "@/components/LoaderSpinner/AmbulanceLoading";
 
 export default function NursePage() {
   const router = useRouter();

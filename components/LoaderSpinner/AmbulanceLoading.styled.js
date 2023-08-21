@@ -9,7 +9,7 @@ const spin = keyframes`
   }
 `;
 
-export const Loader = styled.div`
+export const AmbulanceLoader = styled.div`
   position: absolute;
   font-size: 17px;
   top: 50%;
