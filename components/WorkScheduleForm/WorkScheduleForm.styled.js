@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const ScheduleFormContainer = styled.form`
   display: grid;
   align-items: center;
-  width: 48%;
   background-color: #fff4e6;
   max-width: 400px;
   gap: 1.2rem;

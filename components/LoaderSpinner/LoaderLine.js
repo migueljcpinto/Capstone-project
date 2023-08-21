@@ -11,9 +11,9 @@ export default function LoaderLine() {
   }, []);
 
   return (
-    <div>
+    <>
       <LoadingLineLow />
       <LoadingLineHigh />
-    </div>
+    </>
   );
 }

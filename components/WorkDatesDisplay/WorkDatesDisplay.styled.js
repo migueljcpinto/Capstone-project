@@ -2,20 +2,15 @@ import styled from "styled-components";
 
 export const WorkDatesContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
   gap: 2rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
 `;
 
 export const DatesDisplay = styled.div`
   display: grid;
   align-items: center;
   background-color: #fff4e6;
-  width: 48%;
   max-width: 400px;
   padding: 3.2rem 4rem;
   border-radius: 7px;

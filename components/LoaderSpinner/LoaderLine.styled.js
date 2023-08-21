@@ -1,9 +1,8 @@
 import styled, { keyframes } from "styled-components";
 
 const BaseLine = styled.div`
-  position: absolute;
-  top: 50%;
   height: 4px;
+  margin-top: 1rem;
   transform: translateY(-50%);
 `;
 

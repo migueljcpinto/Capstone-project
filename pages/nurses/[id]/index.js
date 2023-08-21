@@ -53,7 +53,7 @@ export default function NursePage() {
   }
 
   if (!data) {
-    return <div>Nurse not found!</div>;
+    return <p>Nurse not found!</p>;
   }
 
   return (

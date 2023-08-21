@@ -17,9 +17,6 @@ export default function NurseProfile({
   onDeleteNurse,
   onSubmit,
   handleScheduleSubmit,
-  workDates,
-  onDateChange,
-  onDateRemove,
 }) {
   const router = useRouter();
 
