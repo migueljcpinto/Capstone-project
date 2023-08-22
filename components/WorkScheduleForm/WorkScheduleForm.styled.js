@@ -10,7 +10,7 @@ export const ScheduleFormContainer = styled.form`
   border-radius: 7px;
 `;
 
-export const Botton = styled.button`
+export const Button = styled.button`
   background-color: #ffa94d;
   color: black;
   padding: 0.8rem 1.2rem;
@@ -24,7 +24,7 @@ export const Botton = styled.button`
   }
 `;
 
-export const ReturnLinkStyled = styled.button`
+export const ReturnButton = styled.button`
   background-color: #fafafc;
   color: #000;
   padding: 0.6rem 1.2rem;

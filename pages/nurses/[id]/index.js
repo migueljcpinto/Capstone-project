@@ -24,7 +24,7 @@ export default function NursePage() {
       phoneNumber: Number(formData.get("phoneNumber")),
       description: formData.get("description"),
     };
-    const response = await fetch(`/api/nurses/${id}/`, {
+    const response = await fetch(`/api/nurses/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedNurseData),
@@ -41,7 +41,7 @@ export default function NursePage() {
       `Are you sure you want to fire ${data?.name}?`
     );
     if (shouldDelete) {
-      const response = await fetch(`/api/nurses/${id}/`, { method: "DELETE" });
+      const response = await fetch(`/api/nurses/${id}`, { method: "DELETE" });
       if (response.ok) {
         router.push("/");
       }

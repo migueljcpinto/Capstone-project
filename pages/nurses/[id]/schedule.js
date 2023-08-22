@@ -1,10 +1,12 @@
 import WorkScheduleForm from "@/components/WorkScheduleForm/WorkScheduleForm";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import fetcher from "@/utilities/fetcher";
-import { ReturnLinkStyled } from "@/components/WorkScheduleForm/WorkScheduleForm.styled";
+import { ReturnButton } from "@/components/WorkScheduleForm/WorkScheduleForm.styled";
 import WorkDatesDisplay from "@/components/WorkDatesDisplay/WorkDatesDisplay";
 import { WorkDatesContainer } from "@/components/WorkDatesDisplay/WorkDatesDisplay.styled";
+import Notification from "@/components/Notifications/Notification";
 
 export default function SchedulePage() {
   const router = useRouter();
@@ -14,8 +16,19 @@ export default function SchedulePage() {
     id ? `/api/work-dates/${id}` : null,
     fetcher
   );
+  const [notification, setNotification] = useState(null);
 
-  async function handleRemoveDate(index, workDateId) {
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => {
+        setNotification(null);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [notification]);
+
+  async function handleRemoveDate(workDateId) {
     const response = await fetch(`/api/work-dates/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -23,7 +36,7 @@ export default function SchedulePage() {
     });
 
     if (response.ok) {
-      alert("Date deleted!");
+      setNotification({ message: "Date deleted!", type: "remove" });
       mutate(`/api/work-dates/${id}`);
     }
   }
@@ -51,14 +64,14 @@ export default function SchedulePage() {
         },
         body: JSON.stringify({
           ...scheduleData,
-          vacationDates: nurseData.vacationDates
+          vacationDates: Array.isArray(nurseData.vacationDates)
             ? [...nurseData.vacationDates, data._id]
             : [data._id],
         }),
       });
 
       if (responseNurse.ok) {
-        alert("Dates added!");
+        setNotification({ message: "Dates added!", type: "add" });
         mutate(`/api/work-dates/${id}`);
       }
     }
@@ -66,6 +79,9 @@ export default function SchedulePage() {
 
   return (
     <>
+      {notification && (
+        <Notification message={notification.message} type={notification.type} />
+      )}
       <WorkDatesContainer>
         <WorkScheduleForm
           onScheduleSubmit={handleScheduleSubmit}
@@ -77,7 +93,7 @@ export default function SchedulePage() {
           onDateRemove={handleRemoveDate}
         />
       </WorkDatesContainer>
-      <ReturnLinkStyled onClick={() => router.back()}>Return</ReturnLinkStyled>
+      <ReturnButton onClick={() => router.back()}>Return</ReturnButton>
     </>
   );
 }

@@ -24,7 +24,7 @@ export const Dates = styled.div`
   margin: 2px;
 `;
 
-export const DeleteBotton = styled.button`
+export const DeleteButton = styled.button`
   background-color: #fafafc;
   color: black;
   padding: 0.8rem 1.2rem;

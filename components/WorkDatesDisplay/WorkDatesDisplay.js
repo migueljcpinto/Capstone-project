@@ -1,22 +1,23 @@
-import { DatesDisplay, DeleteBotton, Dates } from "./WorkDatesDisplay.styled";
+import React, { Fragment } from "react";
+import { DatesDisplay, DeleteButton, Dates } from "./WorkDatesDisplay.styled";
 
 export default function WorkDatesDisplay({ workDates, onDateRemove }) {
   return (
     <DatesDisplay>
       <h4>Your Vacation Dates:</h4>
       {workDates && workDates.length > 0 ? (
-        workDates.map((workDate, idx) => (
-          <div key={idx}>
+        workDates.map((workDate) => (
+          <div key={workDate._id}>
             {workDate.vacationDates.map((dateRange, index) => (
-              <>
-                <Dates key={index}>
+              <React.Fragment key={index}>
+                <Dates>
                   From: {new Date(dateRange.startDate).toLocaleDateString()}
                   To: {new Date(dateRange.endDate).toLocaleDateString()}
                 </Dates>
-                <DeleteBotton onClick={() => onDateRemove(index, workDate._id)}>
+                <DeleteButton onClick={() => onDateRemove(index, workDate._id)}>
                   Remove
-                </DeleteBotton>
-              </>
+                </DeleteButton>
+              </React.Fragment>
             ))}
           </div>
         ))

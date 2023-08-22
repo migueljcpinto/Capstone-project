@@ -40,7 +40,7 @@ export const DeleteButtonStyled = styled.button`
   }
 `;
 
-export const GoBackLinkStyled = styled.button`
+export const GoBackButton = styled.button`
   background-color: #fafafc;
   color: #000;
   padding: 0.6rem 1.2rem;
@@ -101,7 +101,7 @@ export const ContactsContainer = styled.div`
   }
 `;
 
-export const WorkScheduleButton = styled(Link)`
+export const WorkScheduleLink = styled(Link)`
   background-color: #fafafc;
   color: #000;
   padding: 0.8rem 1.2rem;

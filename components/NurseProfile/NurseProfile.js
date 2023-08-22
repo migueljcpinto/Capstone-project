@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import {
   DeleteButtonStyled,
-  GoBackLinkStyled,
+  GoBackButton,
   StyledNurseProfile,
   UpdateButtonStyled,
   ContactsContainer,
-  WorkScheduleButton,
+  WorkScheduleLink,
 } from "./NurseProfile.styled";
 import UpdateNurse from "../UpdateNurse/UpdateNurse";
 
@@ -42,7 +42,7 @@ export default function NurseProfile({
         <p>Phone Number: {nurseData.phoneNumber}</p>
       </ContactsContainer>
       <nav>
-        <GoBackLinkStyled onClick={handleGoBack}>Return</GoBackLinkStyled>
+        <GoBackButton onClick={handleGoBack}>Return</GoBackButton>
         <DeleteButtonStyled onClick={onDeleteNurse} type="button">
           Delete
         </DeleteButtonStyled>
@@ -57,12 +57,12 @@ export default function NurseProfile({
           </UpdateButtonStyled>
         )}
         {isEdit && <UpdateNurse nurseData={nurseData} onSubmit={onSubmit} />}
-        <WorkScheduleButton
+        <WorkScheduleLink
           href={`/nurses/${nurseData._id}/schedule`}
           handleScheduleSubmit={handleScheduleSubmit}
         >
           Work Schedule
-        </WorkScheduleButton>
+        </WorkScheduleLink>
       </nav>
     </>
   );
