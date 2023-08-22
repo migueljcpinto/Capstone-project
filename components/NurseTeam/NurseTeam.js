@@ -3,23 +3,21 @@ import {
   StyledHeading,
   StyledList,
   StyledListContainer,
-  StyledListItem,
   ButtonStyled,
 } from "./NurseTeam.styled";
-import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import SearchInput from "../SearchInput/SearchInput";
 import { useRouter } from "next/router";
 import NurseItem from "../NurseItem/NurseItem";
+import LoaderSpinner from "../LoaderSpinner/AmbulanceLoading";
 
-export default function NurseTeam() {
+export default function NurseTeam({ handleScheduleSubmit }) {
   const { data, isLoading } = useSWR("/api/nurses");
   const [search, setSearch] = useState("");
   const router = useRouter();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoaderSpinner />;
   }
 
   if (!data) {
@@ -35,7 +33,7 @@ export default function NurseTeam() {
     <>
       <StyledHeading>Available Nurses</StyledHeading>
       <SearchInput onSearchChange={setSearch} />
-      <ButtonStyled onClick={() => router.push("/addNurse")}>
+      <ButtonStyled onClick={() => router.push("/nurses/add-nurse")}>
         Add Nurse
       </ButtonStyled>
       <StyledListContainer>
@@ -47,7 +45,11 @@ export default function NurseTeam() {
                 : nurse.name.toLowerCase().includes(search); //Converting again to compare
             })
             .map((nurse) => (
-              <NurseItem key={nurse._id} nurse={nurse} />
+              <NurseItem
+                key={nurse._id}
+                nurse={nurse}
+                handleScheduleSubmit={handleScheduleSubmit}
+              />
             ))}
         </StyledList>
       </StyledListContainer>

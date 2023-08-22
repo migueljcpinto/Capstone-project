@@ -3,6 +3,8 @@ import Image from "next/image";
 import { StyledListItem } from "../NurseItem/NurseItem.styled";
 
 export default function NurseItem({ nurse }) {
+
+  
   return (
     <StyledListItem>
       <Image
@@ -13,7 +15,7 @@ export default function NurseItem({ nurse }) {
       />
       <Link
         style={{ color: "black", textDecoration: "none" }}
-        href={`/NursePage/${nurse._id}`}
+        href={`/nurses/${nurse._id}`}
       >
         {nurse.name} <br /> {nurse.role}
       </Link>

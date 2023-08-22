@@ -2,9 +2,11 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import {
   DeleteButtonStyled,
-  GoBackLinkStyled,
+  GoBackButton,
   StyledNurseProfile,
   UpdateButtonStyled,
+  ContactsContainer,
+  WorkScheduleLink,
 } from "./NurseProfile.styled";
 import UpdateNurse from "../UpdateNurse/UpdateNurse";
 
@@ -14,11 +16,12 @@ export default function NurseProfile({
   nurseData,
   onDeleteNurse,
   onSubmit,
+  handleScheduleSubmit,
 }) {
   const router = useRouter();
 
   function handleGoBack() {
-    router.back();
+    router.push("/");
   }
 
   return (
@@ -33,22 +36,34 @@ export default function NurseProfile({
         <h2>{nurseData.name} </h2>
         <h3>{nurseData.role}</h3>
       </StyledNurseProfile>
-
-      <GoBackLinkStyled onClick={handleGoBack}>Return</GoBackLinkStyled>
-      <DeleteButtonStyled onClick={onDeleteNurse} type="button">
-        Delete
-      </DeleteButtonStyled>
-      {!isEdit && (
-        <UpdateButtonStyled
-          onClick={() => {
-            setIsEdit(!isEdit);
-          }}
-          type="button"
+      <ContactsContainer>
+        <p>Notes: {nurseData.description}</p>
+        <p>Email: {nurseData.email}</p>
+        <p>Phone Number: {nurseData.phoneNumber}</p>
+      </ContactsContainer>
+      <nav>
+        <GoBackButton onClick={handleGoBack}>Return</GoBackButton>
+        <DeleteButtonStyled onClick={onDeleteNurse} type="button">
+          Delete
+        </DeleteButtonStyled>
+        {!isEdit && (
+          <UpdateButtonStyled
+            onClick={() => {
+              setIsEdit(!isEdit);
+            }}
+            type="button"
+          >
+            Update
+          </UpdateButtonStyled>
+        )}
+        {isEdit && <UpdateNurse nurseData={nurseData} onSubmit={onSubmit} />}
+        <WorkScheduleLink
+          href={`/nurses/${nurseData._id}/schedule`}
+          handleScheduleSubmit={handleScheduleSubmit}
         >
-          {!isEdit && "Update"}
-        </UpdateButtonStyled>
-      )}
-      {isEdit && <UpdateNurse nurseData={nurseData} onSubmit={onSubmit} />}
+          Work Schedule
+        </WorkScheduleLink>
+      </nav>
     </>
   );
 }

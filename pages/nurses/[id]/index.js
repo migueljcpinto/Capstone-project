@@ -2,6 +2,7 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import NurseProfile from "@/components/NurseProfile/NurseProfile";
+import LoaderSpinner from "@/components/LoaderSpinner/AmbulanceLoading";
 
 export default function NursePage() {
   const router = useRouter();
@@ -19,6 +20,9 @@ export default function NursePage() {
       role: formData.get("role"),
       hoursPerWeek: Number(formData.get("hoursPerWeek")),
       specialist: formData.get("isSpecialist") === "true",
+      email: formData.get("email"),
+      phoneNumber: Number(formData.get("phoneNumber")),
+      description: formData.get("description"),
     };
     const response = await fetch(`/api/nurses/${id}`, {
       method: "PUT",
@@ -45,11 +49,11 @@ export default function NursePage() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoaderSpinner />;
   }
 
   if (!data) {
-    return <div>Nurse not found!</div>;
+    return <p>Nurse not found!</p>;
   }
 
   return (

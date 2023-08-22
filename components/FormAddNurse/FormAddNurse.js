@@ -27,6 +27,9 @@ export default function FormAddNurse({ onSubmitNurse }) {
       hoursPerWeek: Number(formData.get("hoursPerWeek")),
       specialist: formData.get("isSpecialist") === "true", // Convert string to boolean
       image: getRandomImageURL(), //to generate a random image
+      email: formData.get("email"),
+      phoneNumber: Number(formData.get("phoneNumber")),
+      description: formData.get("description"),
     }; //reading the nurse data
 
     try {
@@ -97,6 +100,32 @@ export default function FormAddNurse({ onSubmitNurse }) {
           <option value="false">No</option>
           <option value="true">Yes</option>
         </Select>
+
+        <Label htmlFor="email">Enter the E-mail</Label>
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          pattern="[a-zA-Z0-9._%+ -]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
+          "
+          placeholder="Enter the email of the nurse"
+          required
+        />
+
+        <Label htmlFor="phoneNumber">Enter the phone number</Label>
+        <Input
+          id="phoneNumber"
+          name="phoneNumber"
+          type="tel"
+          inputMode="numeric"
+          pattern="\d+"
+          placeholder="Enter the phone number of the nurse"
+          required
+        />
+
+        <Label htmlFor="description">Notes</Label>
+        <Input as="textarea" name="description"></Input>
+
         <ButtonsContainer>
           <AddButtonStyled type="submit">New Nurse</AddButtonStyled>
           <CancelButtonStyled type="button" onClick={handleCancelClick}>

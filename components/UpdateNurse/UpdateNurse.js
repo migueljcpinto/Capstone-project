@@ -66,6 +66,36 @@ export default function UpdateNurse({ nurseData, onSubmit }) {
             <option value="false">No</option>
             <option value="true">Yes</option>
           </Select>
+
+          <Label htmlFor="email">Enter the email</Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            pattern="[a-zA-Z0-9._%+ -]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
+            "
+            defaultValue={nurseData.email}
+            required
+          />
+
+          <Label htmlFor="phoneNumber">Enter the phone number</Label>
+          <Input
+            id="phoneNumber"
+            name="phoneNumber"
+            type="tel"
+            inputMode="numeric"
+            defaultValue={nurseData.phoneNumber}
+            pattern="\d+"
+            required
+          />
+
+          <Label htmlFor="description">Notes</Label>
+          <Input
+            as="textarea"
+            name="description"
+            defaultValue={nurseData.description}
+          ></Input>
+
           <AddButtonStyled type="submit">Update</AddButtonStyled>
         </InputGroup>
       </FormContainer>
