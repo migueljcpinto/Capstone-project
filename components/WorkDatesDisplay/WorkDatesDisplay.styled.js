@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const WorkDatesContainer = styled.div`
+export const WorkDatesContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
 `;
 
-export const DatesDisplay = styled.div`
+export const DatesDisplay = styled.article`
   display: grid;
   align-items: center;
   background-color: #fff4e6;

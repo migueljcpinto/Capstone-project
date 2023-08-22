@@ -53,7 +53,7 @@ export default function NurseProfile({
             }}
             type="button"
           >
-            {!isEdit && "Update"}
+            Update
           </UpdateButtonStyled>
         )}
         {isEdit && <UpdateNurse nurseData={nurseData} onSubmit={onSubmit} />}

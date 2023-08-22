@@ -6,21 +6,25 @@ export default function WorkDatesDisplay({ workDates, onDateRemove }) {
     <DatesDisplay>
       <h4>Your Vacation Dates:</h4>
       {workDates && workDates.length > 0 ? (
-        workDates.map((workDate) => (
-          <div key={workDate._id}>
-            {workDate.vacationDates.map((dateRange, index) => (
-              <React.Fragment key={index}>
-                <Dates>
-                  From: {new Date(dateRange.startDate).toLocaleDateString()}
-                  To: {new Date(dateRange.endDate).toLocaleDateString()}
-                </Dates>
-                <DeleteButton onClick={() => onDateRemove(index, workDate._id)}>
-                  Remove
-                </DeleteButton>
-              </React.Fragment>
-            ))}
-          </div>
-        ))
+        <ul>
+          {workDates.map((workDate) => (
+            <li key={workDate._id}>
+              {workDate.vacationDates.map((dateRange, index) => (
+                <Fragment key={index}>
+                  <Dates>
+                    From: {new Date(dateRange.startDate).toLocaleDateString()}
+                    To: {new Date(dateRange.endDate).toLocaleDateString()}
+                  </Dates>
+                  <DeleteButton
+                    onClick={() => onDateRemove(index, workDate._id)}
+                  >
+                    Remove
+                  </DeleteButton>
+                </Fragment>
+              ))}
+            </li>
+          ))}
+        </ul>
       ) : (
         <p>No Vacations yet!</p>
       )}

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const NotificationContainer = styled.div`
   position: absolute;
@@ -10,6 +10,17 @@ export const NotificationContainer = styled.div`
   padding: 1rem 2rem;
   z-index: 10;
   border-radius: 5px;
-  background-color: ${({ type }) =>
-    type === "add" ? "#DFF2BF" : type === "remove" ? "#FFBABA" : "black"};
+  background-color: black;
+
+  ${({ type }) =>
+    type === "add" &&
+    css`
+      background-color: #dff2bf;
+    `}
+
+  ${({ type }) =>
+    type === "remove" &&
+    css`
+      background-color: #ffbaba;
+    `}
 `;

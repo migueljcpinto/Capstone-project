@@ -17,9 +17,11 @@ export default async function handler(request, response) {
       if (!nurse) {
         return response.status(404).json({ status: "Nurse not Found 🫣" });
       }
-      response.status(200).json(nurse.workSchedule);
+      return response.status(200).json(nurse.workSchedule);
     } catch (error) {
-      response.status(500).json({ status: "Error fetching nurse work dates." });
+      return response
+        .status(500)
+        .json({ status: "Error fetching nurse work dates." });
     }
   }
 
@@ -36,9 +38,9 @@ export default async function handler(request, response) {
         nurse.workSchedule.splice(index, 1);
         await nurse.save();
       }
-      response.status(200).json({ status: "Date removed successfully" });
+      return response.status(200).json({ status: "Date removed successfully" });
     } catch (error) {
-      response.status(500).json({ status: "Error removing date." });
+      return response.status(500).json({ status: "Error removing date." });
     }
   }
 }
