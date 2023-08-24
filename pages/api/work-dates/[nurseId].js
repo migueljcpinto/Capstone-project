@@ -26,9 +26,6 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "DELETE") {
-    console.log("DELETE method initiated for nurseId:", nurseId);
-    console.log("Received values in request body:", request.body);
-
     const { workDateId, vacationDateToRemove, dayOffToRemove } = request.body;
 
     if (!vacationDateToRemove && !dayOffToRemove) {
@@ -38,44 +35,25 @@ export default async function handler(request, response) {
     }
 
     try {
-      console.log("Trying to find the nurse");
-
       //First, where is the Nurse!?
       const nurse = await Nurse.findById(nurseId);
       if (!nurse) {
-        console.log("Nurse not found");
-
         return response.status(404).json({ status: "Nurse not Found 🫣" });
       }
-      console.log("Found nurse with ID:", nurse._id);
 
       //Second, How the Nurse wanted to work?!
       const nurseWorkDates = await NurseWorkDates.findById(workDateId);
       if (!nurseWorkDates) {
-        console.log("Work dates not found");
-
         return response.status(404).json({ status: "Work dates not found" });
       }
-      console.log("Found nurse work dates with ID:", nurseWorkDates._id); // 4
       if (vacationDateToRemove) {
-        console.log(
-          "Updating vacation dates. Current dates:",
-          nurseWorkDates.vacationDates
-        ); // 5
         nurseWorkDates.vacationDates = nurseWorkDates.vacationDates.filter(
           (range) =>
             range.startDate.toISOString() !== vacationDateToRemove.startDate &&
             range.endDate.toISOString() !== vacationDateToRemove.endDate
         );
         await nurseWorkDates.save();
-
-        console.log(
-          "Updated vacation dates. New dates:",
-          nurseWorkDates.vacationDates
-        ); // 6
       } else if (dayOffToRemove) {
-        console.log("Updating days off. Current days:", nurseWorkDates.daysOff); // 7
-
         nurseWorkDates.daysOff = nurseWorkDates.daysOff.filter(
           (date) => date.toISOString() !== dayOffToRemove
         );
@@ -86,11 +64,6 @@ export default async function handler(request, response) {
         nurseWorkDates.vacationDates.length === 0 &&
         nurseWorkDates.daysOff.length === 0
       ) {
-        console.log(
-          "Both arrays are empty. Removing entire work dates document with ID:",
-          workDateId
-        );
-
         const index = nurse.workSchedule.indexOf(workDateId);
         if (index > -1) {
           nurse.workSchedule.splice(index, 1);
