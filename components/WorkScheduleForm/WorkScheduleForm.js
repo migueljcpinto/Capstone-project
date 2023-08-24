@@ -22,7 +22,6 @@ export default function WorkScheduleForm({
       vacationDates: [{ startDate, endDate }],
       daysOff: daysOff,
     };
-    console.log("Form data being sent:", formWorkData);
 
     onScheduleSubmit(formWorkData);
   }

@@ -21,9 +21,7 @@ export default async function handler(request, response) {
     }
   }
   if (request.method === "POST") {
-    console.log("POST request received");
     try {
-      console.log("Trying to process POST request");
       const { nurseId, vacationDates, daysOff /* availability */ } =
         request.body;
 

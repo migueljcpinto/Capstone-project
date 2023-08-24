@@ -39,8 +39,6 @@ export default function SchedulePage() {
   }
 
   async function handleScheduleSubmit(formData) {
-    console.log("Data received in handleScheduleSubmit:", formData);
-
     const scheduleData = {
       vacationDates: formData.vacationDates,
       daysOff: formData.daysOff,
