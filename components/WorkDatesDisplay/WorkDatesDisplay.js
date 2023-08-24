@@ -16,7 +16,9 @@ export default function WorkDatesDisplay({ workDates, onDateRemove }) {
                     To: {new Date(dateRange.endDate).toLocaleDateString()}
                   </Dates>
                   <DeleteButton
-                    onClick={() => onDateRemove(index, workDate._id)}
+                    onClick={() =>
+                      onDateRemove(index, workDate._id, null, dateRange)
+                    }
                   >
                     Remove
                   </DeleteButton>

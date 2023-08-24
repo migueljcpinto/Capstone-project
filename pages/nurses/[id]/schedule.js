@@ -10,8 +10,12 @@ import Notification from "@/components/Notifications/Notification";
 export default function SchedulePage() {
   const router = useRouter();
   const { id } = router.query; //Nurse id
-  const { data: nurseData, mutate } = useSWR(id ? `/api/nurses/${id}` : null);
-  const { data: workDatesData } = useSWR(id ? `/api/work-dates/${id}` : null);
+  const { data: nurseData, mutate: mutateNurseData } = useSWR(
+    id ? `/api/nurses/${id}` : null
+  ); //This mutate function is not currently used, but it could be in the future so I leave it here.
+  const { data: workDatesData, mutate: mutateWorkDatesData } = useSWR(
+    id ? `/api/work-dates/${id}` : null
+  );
   const [notification, setNotification] = useState(null);
   const [daysOff, setDaysOff] = useState([]);
 
@@ -25,16 +29,29 @@ export default function SchedulePage() {
     }
   }, [notification]);
 
-  async function handleRemoveDate(index, workDateId, dayOffToRemove) {
+  async function handleRemoveDate(
+    index,
+    workDateId,
+    dayOffToRemove,
+    vacationDateToRemove
+  ) {
+    const requestBody = { workDateId };
+
+    if (dayOffToRemove) {
+      requestBody.dayOffToRemove = dayOffToRemove;
+    } else if (vacationDateToRemove) {
+      requestBody.vacationDateToRemove = vacationDateToRemove;
+    }
+
     const response = await fetch(`/api/work-dates/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ workDateId, dayOffToRemove }),
+      body: JSON.stringify(requestBody),
     });
 
     if (response.ok) {
       setNotification({ message: "Date deleted!", type: "remove" });
-      mutate(`/api/work-dates/${id}`);
+      mutateWorkDatesData();
     }
   }
 
@@ -70,7 +87,7 @@ export default function SchedulePage() {
 
       if (responseNurse.ok) {
         setNotification({ message: "Dates added!", type: "add" });
-        mutate(`/api/work-dates/${id}`);
+        mutateWorkDatesData();
       }
     }
   }
