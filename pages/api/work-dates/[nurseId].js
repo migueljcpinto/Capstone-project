@@ -26,18 +26,34 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "DELETE") {
-    const { workDateId } = request.body;
+    const { workDateId, dayOffToRemove } = request.body;
     try {
-      await NurseWorkDates.findByIdAndDelete(workDateId);
+      //First, where is the Nurse!?
       const nurse = await Nurse.findById(nurseId);
       if (!nurse) {
         return response.status(404).json({ status: "Nurse not Found 🫣" });
       }
-      const index = nurse.workSchedule.indexOf(workDateId);
-      if (index > -1) {
-        nurse.workSchedule.splice(index, 1);
-        await nurse.save();
+
+      //Second, How the Nurse wanted to work?!
+      const nurseWorkDates = await NurseWorkDates.findById(workDateId);
+      if (!nurseWorkDates) {
+        return response.status(404).json({ status: "Work dates not found" });
       }
+
+      if (dayOffToRemove) {
+        nurseWorkDates.daysOff = nurseWorkDates.daysOff.filter(
+          (date) => date.toISOString() !== dayOffToRemove
+        );
+        await nurseWorkDates.save();
+      } else {
+        const index = nurse.workSchedule.indexOf(workDateId);
+        if (index > -1) {
+          nurse.workSchedule.splice(index, 1);
+          await nurse.save();
+        }
+        await nurseWorkDates.remove();
+      }
+
       return response.status(200).json({ status: "Date removed successfully" });
     } catch (error) {
       return response.status(500).json({ status: "Error removing date." });

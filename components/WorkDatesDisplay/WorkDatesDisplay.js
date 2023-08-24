@@ -28,6 +28,29 @@ export default function WorkDatesDisplay({ workDates, onDateRemove }) {
       ) : (
         <p>No Vacations yet!</p>
       )}
+      <h4>Your Days-Off:</h4>
+      {workDates && workDates.length > 0 ? (
+        <ul>
+          {workDates.map((workDate) => (
+            <li key={workDate._id}>
+              {workDate.daysOff.map((dayOff, index) => (
+                <Fragment key={index}>
+                  <Dates>
+                    Day Off: {new Date(dayOff).toLocaleDateString()}
+                  </Dates>
+                  <DeleteButton
+                    onClick={() => onDateRemove(index, workDate._id, dayOff)}
+                  >
+                    Remove
+                  </DeleteButton>
+                </Fragment>
+              ))}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No Days Off yet!</p>
+      )}
     </DatesDisplay>
   );
 }

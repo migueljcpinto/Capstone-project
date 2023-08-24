@@ -13,6 +13,7 @@ export default function SchedulePage() {
   const { data: nurseData, mutate } = useSWR(id ? `/api/nurses/${id}` : null);
   const { data: workDatesData } = useSWR(id ? `/api/work-dates/${id}` : null);
   const [notification, setNotification] = useState(null);
+  const [daysOff, setDaysOff] = useState([]);
 
   useEffect(() => {
     if (notification) {
@@ -24,11 +25,11 @@ export default function SchedulePage() {
     }
   }, [notification]);
 
-  async function handleRemoveDate(index, workDateId) {
+  async function handleRemoveDate(index, workDateId, dayOffToRemove) {
     const response = await fetch(`/api/work-dates/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ workDateId }),
+      body: JSON.stringify({ workDateId, dayOffToRemove }),
     });
 
     if (response.ok) {
@@ -38,8 +39,11 @@ export default function SchedulePage() {
   }
 
   async function handleScheduleSubmit(formData) {
+    console.log("Data received in handleScheduleSubmit:", formData);
+
     const scheduleData = {
       vacationDates: formData.vacationDates,
+      daysOff: formData.daysOff,
       //later add daysOff and availability
     };
     const responseSchedule = await fetch("/api/work-dates", {
@@ -83,6 +87,8 @@ export default function SchedulePage() {
           onScheduleSubmit={handleScheduleSubmit}
           nurseData={nurseData}
           workDates={workDatesData}
+          daysOff={daysOff}
+          setDaysOff={setDaysOff}
         />
         <WorkDatesDisplay
           workDates={workDatesData}

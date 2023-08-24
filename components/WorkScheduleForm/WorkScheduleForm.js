@@ -2,8 +2,13 @@ import { useState } from "react";
 import { ScheduleFormContainer } from "./WorkScheduleForm.styled";
 import DatePickerRange from "../DatePicker/DatePickerRange";
 import { Button } from "./WorkScheduleForm.styled";
+import DayOffPicker from "../DatePicker/DayOffPicker";
 
-export default function WorkScheduleForm({ onScheduleSubmit }) {
+export default function WorkScheduleForm({
+  onScheduleSubmit,
+  daysOff,
+  setDaysOff,
+}) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -13,20 +18,32 @@ export default function WorkScheduleForm({ onScheduleSubmit }) {
   }
   function handleSubmit(event) {
     event.preventDefault();
-    const formWorkData = { vacationDates: [{ startDate, endDate }] };
+    const formWorkData = {
+      vacationDates: [{ startDate, endDate }],
+      daysOff: daysOff,
+    };
+    console.log("Form data being sent:", formWorkData);
+
     onScheduleSubmit(formWorkData);
   }
 
   return (
     <>
       <ScheduleFormContainer onSubmit={handleSubmit}>
-        <h2>Schedule your vacations:</h2>
+        <h3>Schedule your vacations and Days-Off:</h3>
         <DatePickerRange
           startDate={startDate}
           endDate={endDate}
           onChange={handleDateChange}
         />
-        <Button type="submit">Request your Vacation</Button>
+
+        <DayOffPicker
+          daysOff={daysOff}
+          onDateChange={(newDates) => {
+            setDaysOff(newDates);
+          }}
+        />
+        <Button type="submit">Request your Schedule</Button>
       </ScheduleFormContainer>
     </>
   );

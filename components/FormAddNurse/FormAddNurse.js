@@ -124,7 +124,7 @@ export default function FormAddNurse({ onSubmitNurse }) {
         />
 
         <Label htmlFor="description">Notes</Label>
-        <Input as="textarea" name="description"></Input>
+        <Input as="textarea" name="description" required></Input>
 
         <ButtonsContainer>
           <AddButtonStyled type="submit">New Nurse</AddButtonStyled>
