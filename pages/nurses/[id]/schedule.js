@@ -59,7 +59,7 @@ export default function SchedulePage() {
     const scheduleData = {
       vacationDates: formData.vacationDates,
       daysOff: formData.daysOff,
-      //later add daysOff and availability
+      //later add  availability
     };
     const responseSchedule = await fetch("/api/work-dates", {
       method: "POST",

@@ -33,7 +33,7 @@ export default function DayOffPicker({ daysOff, onDateChange }) {
   }
 
   function handleReset() {
-    setSelectedDates([]);
+    setSelectedDates(null);
   }
 
   return (
@@ -59,7 +59,10 @@ export default function DayOffPicker({ daysOff, onDateChange }) {
           <p style={{ color: "green" }}>
             You can only add to 5 days off per month.
           </p>
-          <p>You have selected {selectedDates.length} days-off.</p>
+          <p>
+            You have selected {selectedDates ? selectedDates.length : 0}{" "}
+            days-off.
+          </p>
           <button type="button" onClick={handleReset}>
             Reset Selection
           </button>

@@ -9,8 +9,8 @@ export default function WorkScheduleForm({
   daysOff,
   setDaysOff,
 }) {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   function handleDateChange(newDateRange) {
     setStartDate(newDateRange[0]);
@@ -23,7 +23,20 @@ export default function WorkScheduleForm({
       daysOff: daysOff,
     };
 
+    if (
+      !startDate ||
+      !endDate ||
+      new Date(startDate).getFullYear() === 1970 ||
+      new Date(endDate).getFullYear() === 1970 ||
+      daysOff.length === 0
+    ) {
+      alert("Por favor, selecione datas válidas antes de enviar.");
+      return;
+    }
+
     onScheduleSubmit(formWorkData);
+    setStartDate(null);
+    setEndDate(null);
   }
 
   return (

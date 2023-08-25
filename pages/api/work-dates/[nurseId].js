@@ -40,6 +40,11 @@ export default async function handler(request, response) {
       if (!nurseWorkDates) {
         return response.status(404).json({ status: "Work dates not found" });
       }
+
+      nurseWorkDates.vacationDates = nurseWorkDates.vacationDates.filter(
+        (range) => range.startDate && range.endDate
+      );
+
       if (vacationDateToRemove) {
         nurseWorkDates.vacationDates = nurseWorkDates.vacationDates.filter(
           (range) =>
@@ -47,6 +52,18 @@ export default async function handler(request, response) {
             range.endDate.toISOString() !== vacationDateToRemove.endDate
         );
       } else if (dayOffToRemove) {
+        // format Date validation
+        const isoDatePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
+        if (!isoDatePattern.test(dayOffToRemove)) {
+          return response.status(400).json({ status: "Invalid date format." });
+        }
+
+        // converting to object date
+        const dateToRemove = new Date(dayOffToRemove);
+        if (isNaN(dateToRemove.getTime())) {
+          return response.status(400).json({ status: "Invalid date." });
+        }
+
         nurseWorkDates.daysOff = nurseWorkDates.daysOff.filter(
           (date) => date.toISOString() !== dayOffToRemove
         );
@@ -70,6 +87,7 @@ export default async function handler(request, response) {
 
       return response.status(200).json({ status: "Date removed successfully" });
     } catch (error) {
+      console.error("Error during DELETE operation:", error);
       return response.status(500).json({ status: "Error removing date." });
     }
   }
