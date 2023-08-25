@@ -3,20 +3,14 @@ import Nurse from "@/db/models/Nurse";
 import NurseWorkDates from "@/db/models/NurseWorkDates";
 
 export default async function handler(request, response) {
-  const connection = await dbConnect();
+  await dbConnect();
   const { nurseId } = request.query;
-
-  if (!connection)
-    return response
-      .status(500)
-      .json({ error: "Unable to connect to the database!" });
 
   if (request.method === "GET") {
     try {
       const nurse = await Nurse.findById(nurseId).populate("workSchedule");
-      if (!nurse) {
+      if (!nurse)
         return response.status(404).json({ status: "Nurse not Found 🫣" });
-      }
       return response.status(200).json(nurse.workSchedule);
     } catch (error) {
       return response
@@ -52,17 +46,16 @@ export default async function handler(request, response) {
             range.startDate.toISOString() !== vacationDateToRemove.startDate &&
             range.endDate.toISOString() !== vacationDateToRemove.endDate
         );
-        await nurseWorkDates.save();
       } else if (dayOffToRemove) {
         nurseWorkDates.daysOff = nurseWorkDates.daysOff.filter(
           (date) => date.toISOString() !== dayOffToRemove
         );
-        await nurseWorkDates.save();
       }
+      await nurseWorkDates.save();
       //Check to remove entire document if both arrays are empty
       if (
-        nurseWorkDates.vacationDates.length === 0 &&
-        nurseWorkDates.daysOff.length === 0
+        !nurseWorkDates.vacationDates.length &&
+        !nurseWorkDates.daysOff.length
       ) {
         const index = nurse.workSchedule.indexOf(workDateId);
         if (index > -1) {
@@ -77,8 +70,6 @@ export default async function handler(request, response) {
 
       return response.status(200).json({ status: "Date removed successfully" });
     } catch (error) {
-      console.error("Error during DELETE:", error); // 10
-
       return response.status(500).json({ status: "Error removing date." });
     }
   }
