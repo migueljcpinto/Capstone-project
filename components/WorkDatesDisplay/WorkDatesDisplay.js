@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { DatesDisplay, DeleteButton, Dates } from "./WorkDatesDisplay.styled";
+import { format } from "date-fns";
 
 export default function WorkDatesDisplay({ workDates, onDateRemove }) {
   return (
@@ -12,8 +13,8 @@ export default function WorkDatesDisplay({ workDates, onDateRemove }) {
               {workDate.vacationDates.map((dateRange, index) => (
                 <Fragment key={index}>
                   <Dates>
-                    From: {new Date(dateRange.startDate).toLocaleDateString()}
-                    To: {new Date(dateRange.endDate).toLocaleDateString()}
+                    From: {format(new Date(dateRange.startDate), "dd/MM/yyyy")}
+                    To: {format(new Date(dateRange.endDate), "dd/MM/yyyy")}
                   </Dates>
                   <DeleteButton
                     onClick={() =>
@@ -38,7 +39,7 @@ export default function WorkDatesDisplay({ workDates, onDateRemove }) {
               {workDate.daysOff.map((dayOff, index) => (
                 <Fragment key={index}>
                   <Dates>
-                    Day Off: {new Date(dayOff).toLocaleDateString()}
+                    Day Off: {format(new Date(dayOff), "dd/MM/yyyy")}
                   </Dates>
                   <DeleteButton
                     onClick={() => onDateRemove(index, workDate._id, dayOff)}

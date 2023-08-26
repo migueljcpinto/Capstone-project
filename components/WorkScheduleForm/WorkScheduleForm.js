@@ -3,6 +3,7 @@ import { ScheduleFormContainer } from "./WorkScheduleForm.styled";
 import DatePickerRange from "../DatePicker/DatePickerRange";
 import { Button } from "./WorkScheduleForm.styled";
 import DayOffPicker from "../DatePicker/DayOffPicker";
+import { isValid } from "date-fns";
 
 export default function WorkScheduleForm({
   onScheduleSubmit,
@@ -23,14 +24,22 @@ export default function WorkScheduleForm({
       daysOff: daysOff,
     };
 
+    // checking if dates are valid
     if (
-      !startDate ||
-      !endDate ||
-      new Date(startDate).getFullYear() === 1970 ||
-      new Date(endDate).getFullYear() === 1970 ||
-      daysOff.length === 0
+      !isValid(new Date(startDate)) ||
+      !isValid(new Date(endDate)) ||
+      daysOff.some((date) => !isValid(new Date(date)))
     ) {
-      alert("Por favor, selecione datas válidas antes de enviar.");
+      alert("Please, select valid dates before submit.");
+      return;
+    }
+
+    // Check that the standard Unix dates are being used
+    if (
+      new Date(startDate).getTime() === 0 ||
+      new Date(endDate).getTime() === 0
+    ) {
+      alert("Please select valid dates before sending.");
       return;
     }
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { eachDayOfInterval, isValid } from "date-fns";
 
 export default function DatePickerRange({ startDate, endDate, onChange }) {
   const [dateRange, setDateRange] = useState([startDate, endDate]);
@@ -47,6 +48,14 @@ export default function DatePickerRange({ startDate, endDate, onChange }) {
           maxDate={nextMonthLastDate}
           onChange={handleDateChange}
           placeholderText="Choose your dates"
+          excludeDates={selectedDateRanges.flatMap((range) => {
+            const start = new Date(range[0]);
+            const end = new Date(range[1]);
+            if (isValid(start) && isValid(end) && start <= end) {
+              return eachDayOfInterval({ start, end });
+            }
+            return [];
+          })}
         >
           <button type="button" onClick={handleReset}>
             Reset Selection

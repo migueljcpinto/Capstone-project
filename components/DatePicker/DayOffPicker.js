@@ -55,6 +55,7 @@ export default function DayOffPicker({ daysOff, onDateChange }) {
           minDate={today}
           maxDate={nextMonthLastDate}
           shouldCloseOnSelect={false}
+          excludeDates={daysOff.map((date) => new Date(date))}
         >
           <p style={{ color: "green" }}>
             You can only add to 5 days off per month.
