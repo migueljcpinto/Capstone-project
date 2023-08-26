@@ -11,10 +11,12 @@ export default function DatePickerRange({ startDate, endDate, onChange }) {
     today.getMonth() + 2,
     0
   );
+  const [selectedDateRanges, setSelectedDateRanges] = useState([]);
 
   //updating the state of this component
   function handleDateChange(update) {
     setDateRange(update);
+    setSelectedDateRanges((prevRanges) => [...prevRanges, update]);
     onChange(update);
   }
 

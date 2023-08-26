@@ -33,7 +33,7 @@ export default function DayOffPicker({ daysOff, onDateChange }) {
   }
 
   function handleReset() {
-    setSelectedDates(null);
+    setSelectedDates([]);
   }
 
   return (
@@ -50,7 +50,7 @@ export default function DayOffPicker({ daysOff, onDateChange }) {
           inline
           selected={null}
           onChange={handleDateChange}
-          highlightDates={selectedDates}
+          highlightDates={selectedDates.map((d) => new Date(d))}
           placeholderText="Select Days-Off"
           minDate={today}
           maxDate={nextMonthLastDate}
