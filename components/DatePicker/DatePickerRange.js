@@ -19,6 +19,7 @@ export default function DatePickerRange({ startDate, endDate, onChange }) {
     setDateRange(update);
     setSelectedDateRanges((prevRanges) => [...prevRanges, update]);
     onChange(update);
+    console.log("Date range changed:", update);
   }
 
   function handleClick(e) {

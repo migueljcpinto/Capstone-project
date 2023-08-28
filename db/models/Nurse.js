@@ -15,7 +15,6 @@ const nurseSchema = new Schema({
   phoneNumber: { type: Number, required: true },
   description: { type: String, required: true },
   workSchedule: { type: [Schema.Types.ObjectId], ref: "NurseWorkDates" },
-  //define that it is an array of Object-Ids and has a reference to the `NurseWorkDates` schema
 });
 
 const Nurse =

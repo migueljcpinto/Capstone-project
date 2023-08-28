@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { DatesDisplay, DeleteButton, Dates } from "./WorkDatesDisplay.styled";
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 
 export default function WorkDatesDisplay({ workDates, onDateRemove }) {
   return (
@@ -10,21 +10,36 @@ export default function WorkDatesDisplay({ workDates, onDateRemove }) {
         <ul>
           {workDates.map((workDate) => (
             <li key={workDate._id}>
-              {workDate.vacationDates.map((dateRange, index) => (
-                <Fragment key={index}>
-                  <Dates>
-                    From: {format(new Date(dateRange.startDate), "dd/MM/yyyy")}
-                    To: {format(new Date(dateRange.endDate), "dd/MM/yyyy")}
-                  </Dates>
-                  <DeleteButton
-                    onClick={() =>
-                      onDateRemove(index, workDate._id, null, dateRange)
-                    }
-                  >
-                    Remove
-                  </DeleteButton>
-                </Fragment>
-              ))}
+              {workDate.vacationDates.map((dateRange, index) => {
+                const isValidStartDate =
+                  dateRange.startDate && isValid(new Date(dateRange.startDate));
+                const isValidEndDate =
+                  dateRange.endDate && isValid(new Date(dateRange.endDate));
+
+                return (
+                  <Fragment key={index}>
+                    {isValidStartDate && isValidEndDate ? (
+                      <>
+                        <Dates>
+                          From:{" "}
+                          {format(new Date(dateRange.startDate), "dd/MM/yyyy")}
+                          To:{" "}
+                          {format(new Date(dateRange.endDate), "dd/MM/yyyy")}
+                        </Dates>
+                        <DeleteButton
+                          onClick={() =>
+                            onDateRemove(index, workDate._id, null, dateRange)
+                          }
+                        >
+                          Remove
+                        </DeleteButton>
+                      </>
+                    ) : (
+                      <p>Error: Invalid date range</p>
+                    )}
+                  </Fragment>
+                );
+              })}
             </li>
           ))}
         </ul>

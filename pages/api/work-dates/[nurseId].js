@@ -20,6 +20,7 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "DELETE") {
+    console.log("Received data for DELETE request:", request.body);
     const { workDateId, vacationDateToRemove, dayOffToRemove } = request.body;
 
     if (!vacationDateToRemove && !dayOffToRemove) {

@@ -7,6 +7,8 @@ import { isValid } from "date-fns";
 
 export default function WorkScheduleForm({
   onScheduleSubmit,
+  onVacationSubmit,
+  onDaysOffSubmit,
   daysOff,
   setDaysOff,
 }) {
@@ -17,54 +19,42 @@ export default function WorkScheduleForm({
     setStartDate(newDateRange[0]);
     setEndDate(newDateRange[1]);
   }
-  function handleSubmit(event) {
+  function handleVacationSubmit(event) {
     event.preventDefault();
-    const formWorkData = {
+    const formVacationData = {
       vacationDates: [{ startDate, endDate }],
-      daysOff: daysOff,
     };
-
-    // checking if dates are valid
-    if (
-      !isValid(new Date(startDate)) ||
-      !isValid(new Date(endDate)) ||
-      daysOff.some((date) => !isValid(new Date(date)))
-    ) {
-      alert("Please, select valid dates before submit.");
-      return;
-    }
-
-    // Check that the standard Unix dates are being used
-    if (
-      new Date(startDate).getTime() === 0 ||
-      new Date(endDate).getTime() === 0
-    ) {
-      alert("Please select valid dates before sending.");
-      return;
-    }
-
-    onScheduleSubmit(formWorkData);
+    console.log("Submitting vacation dates:", formVacationData);
+    onVacationSubmit(formVacationData);
     setStartDate(null);
     setEndDate(null);
   }
 
+  function handleDaysOffSubmit(event) {
+    event.preventDefault();
+    const formDaysOffData = {
+      daysOff: daysOff,
+    };
+    console.log("Submitting days off:", formDaysOffData);
+    onDaysOffSubmit(formDaysOffData);
+  }
   return (
     <>
-      <ScheduleFormContainer onSubmit={handleSubmit}>
+      <ScheduleFormContainer>
         <h3>Schedule your vacations and Days-Off:</h3>
         <DatePickerRange
           startDate={startDate}
           endDate={endDate}
           onChange={handleDateChange}
         />
-
+        <Button onClick={handleVacationSubmit}>Request Vacation Dates</Button>
         <DayOffPicker
           daysOff={daysOff}
           onDateChange={(newDates) => {
             setDaysOff(newDates);
           }}
         />
-        <Button type="submit">Request your Schedule</Button>
+        <Button onClick={handleDaysOffSubmit}>Request Days Off</Button>
       </ScheduleFormContainer>
     </>
   );

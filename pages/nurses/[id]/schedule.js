@@ -53,20 +53,23 @@ export default function SchedulePage() {
       setNotification({ message: "Date deleted!", type: "remove" });
       mutateWorkDatesData();
     }
+    console.log(
+      "Removing date with parameters:",
+      index,
+      workDateId,
+      dayOffToRemove,
+      vacationDateToRemove
+    );
   }
 
-  async function handleScheduleSubmit(formData) {
-    const scheduleData = {
-      vacationDates: formData.vacationDates,
-      daysOff: formData.daysOff,
-      //later add  availability
-    };
+  async function handleVacationSubmit(formData) {
+    const { vacationDates } = formData;
     const responseSchedule = await fetch("/api/work-dates", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         nurseId: id,
-        ...scheduleData,
+        vacationDates,
       }),
     });
 
@@ -78,7 +81,6 @@ export default function SchedulePage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          ...scheduleData,
           vacationDates: Array.isArray(nurseData.vacationDates)
             ? [...nurseData.vacationDates, data._id]
             : [data._id],
@@ -86,7 +88,39 @@ export default function SchedulePage() {
       });
 
       if (responseNurse.ok) {
-        setNotification({ message: "Dates added!", type: "add" });
+        setNotification({ message: "Vacation Dates added!", type: "add" });
+        mutateWorkDatesData();
+      }
+    }
+  }
+
+  async function handleDaysOffSubmit(formData) {
+    const { daysOff } = formData;
+    const responseSchedule = await fetch("/api/work-dates", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nurseId: id,
+        daysOff,
+      }),
+    });
+
+    if (responseSchedule.ok) {
+      const data = await responseSchedule.json();
+      const responseNurse = await fetch(`/api/nurses/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          daysOff: Array.isArray(nurseData.daysOff)
+            ? [...nurseData.daysOff, ...daysOff]
+            : daysOff,
+        }),
+      });
+
+      if (responseNurse.ok) {
+        setNotification({ message: "Days Off added!", type: "add" });
         mutateWorkDatesData();
       }
     }
@@ -99,7 +133,8 @@ export default function SchedulePage() {
       )}
       <WorkDatesContainer>
         <WorkScheduleForm
-          onScheduleSubmit={handleScheduleSubmit}
+          onVacationSubmit={handleVacationSubmit}
+          onDaysOffSubmit={handleDaysOffSubmit}
           nurseData={nurseData}
           workDates={workDatesData}
           daysOff={daysOff}
