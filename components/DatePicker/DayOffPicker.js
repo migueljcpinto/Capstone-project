@@ -2,7 +2,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function DayOffPicker({ daysOff, onDateChange }) {
+export default function DayOffPicker({ daysOff, onDateChange, excludeDates }) {
   const today = new Date();
   const nextMonthLastDate = new Date(
     today.getFullYear(),
@@ -56,7 +56,7 @@ export default function DayOffPicker({ daysOff, onDateChange }) {
           minDate={today}
           maxDate={nextMonthLastDate}
           shouldCloseOnSelect={false}
-          excludeDates={daysOff.map((date) => new Date(date))}
+          excludeDates={excludeDates.map((date) => new Date(date))}
         >
           <p style={{ color: "green" }}>
             You can only add to 5 days off per month.

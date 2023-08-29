@@ -3,7 +3,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { eachDayOfInterval, isValid } from "date-fns";
 
-export default function DatePickerRange({ startDate, endDate, onChange }) {
+export default function DatePickerRange({
+  startDate,
+  endDate,
+  onChange,
+  excludeDates,
+}) {
   const [dateRange, setDateRange] = useState([startDate, endDate]);
   const [isOpen, setIsOpen] = useState(false);
   const today = new Date();
@@ -14,12 +19,27 @@ export default function DatePickerRange({ startDate, endDate, onChange }) {
   );
   const [selectedDateRanges, setSelectedDateRanges] = useState([]);
 
+  function getDatesBetween(start, end) {
+    const dates = [];
+    let currentDate = new Date(start);
+
+    while (currentDate <= end) {
+      dates.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return dates;
+  }
+
   //updating the state of this component
   function handleDateChange(update) {
     setDateRange(update);
     setSelectedDateRanges((prevRanges) => [...prevRanges, update]);
-    onChange(update);
-    console.log("Date range changed:", update);
+
+    const allDates = getDatesBetween(update[0], update[1]);
+
+    onChange(allDates);
+    console.log("Date range changed:", allDates);
   }
 
   function handleClick(e) {
@@ -49,14 +69,17 @@ export default function DatePickerRange({ startDate, endDate, onChange }) {
           maxDate={nextMonthLastDate}
           onChange={handleDateChange}
           placeholderText="Choose your dates"
-          excludeDates={selectedDateRanges.flatMap((range) => {
-            const start = new Date(range[0]);
-            const end = new Date(range[1]);
-            if (isValid(start) && isValid(end) && start <= end) {
-              return eachDayOfInterval({ start, end });
-            }
-            return [];
-          })}
+          excludeDates={[
+            ...selectedDateRanges.flatMap((range) => {
+              const start = new Date(range[0]);
+              const end = new Date(range[1]);
+              if (isValid(start) && isValid(end) && start <= end) {
+                return eachDayOfInterval({ start, end });
+              }
+              return [];
+            }),
+            ...excludeDates,
+          ]}
         >
           <button type="button" onClick={handleReset}>
             Reset Selection
