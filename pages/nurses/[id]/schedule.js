@@ -10,9 +10,17 @@ import Notification from "@/components/Notifications/Notification";
 export default function SchedulePage() {
   const router = useRouter();
   const { id } = router.query; //Nurse id
-  const { data: nurseData, mutate } = useSWR(id ? `/api/nurses/${id}` : null);
-  const { data: workDatesData } = useSWR(id ? `/api/work-dates/${id}` : null);
+  const { data: nurseData, mutate: mutateNurseData } = useSWR(
+    id ? `/api/nurses/${id}` : null
+  ); //This mutate function is not currently used, but it could be in the future so I leave it here.
+  const { data: absencesData, mutate: mutateAbsencesData } = useSWR(
+    id ? `/api/absences/${id}` : null
+  );
   const [notification, setNotification] = useState(null);
+  const [daysOff, setDaysOff] = useState([]);
+  const allAbsenceDates = absencesData
+    ? absencesData.flatMap((absence) => absence.date)
+    : [];
 
   useEffect(() => {
     if (notification) {
@@ -24,52 +32,52 @@ export default function SchedulePage() {
     }
   }, [notification]);
 
-  async function handleRemoveDate(index, workDateId) {
-    const response = await fetch(`/api/work-dates/${id}`, {
+  async function handleRemoveDate(absenceId) {
+    const response = await fetch(`/api/absences/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ workDateId }),
+      body: JSON.stringify({ absenceId }),
     });
 
     if (response.ok) {
       setNotification({ message: "Date deleted!", type: "remove" });
-      mutate(`/api/work-dates/${id}`);
+      mutateAbsencesData();
     }
   }
 
-  async function handleScheduleSubmit(formData) {
-    const scheduleData = {
-      vacationDates: formData.vacationDates,
-      //later add daysOff and availability
-    };
-    const responseSchedule = await fetch("/api/work-dates", {
+  async function handleVacationSubmit(formData) {
+    const { vacationDates } = formData;
+    const response = await fetch("/api/absences", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         nurseId: id,
-        ...scheduleData,
+        type: "vacation",
+        date: vacationDates,
       }),
     });
 
-    if (responseSchedule.ok) {
-      const data = await responseSchedule.json();
-      const responseNurse = await fetch(`/api/nurses/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...scheduleData,
-          vacationDates: Array.isArray(nurseData.vacationDates)
-            ? [...nurseData.vacationDates, data._id]
-            : [data._id],
-        }),
-      });
+    if (response.ok) {
+      setNotification({ message: "Vacation Dates added!", type: "add" });
+      mutateAbsencesData();
+    }
+  }
 
-      if (responseNurse.ok) {
-        setNotification({ message: "Dates added!", type: "add" });
-        mutate(`/api/work-dates/${id}`);
-      }
+  async function handleDaysOffSubmit(formData) {
+    const { daysOff } = formData;
+    const response = await fetch("/api/absences", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nurseId: id,
+        type: "dayOff",
+        date: daysOff,
+      }),
+    });
+
+    if (response.ok) {
+      setNotification({ message: "Days Off added!", type: "add" });
+      mutateAbsencesData();
     }
   }
 
@@ -80,12 +88,19 @@ export default function SchedulePage() {
       )}
       <WorkDatesContainer>
         <WorkScheduleForm
-          onScheduleSubmit={handleScheduleSubmit}
+          onVacationSubmit={handleVacationSubmit}
+          onDaysOffSubmit={handleDaysOffSubmit}
           nurseData={nurseData}
-          workDates={workDatesData}
+          nurseId={id}
+          absenceDates={allAbsenceDates}
+          daysOff={daysOff}
+          setDaysOff={setDaysOff}
+          excludeDates={
+            absencesData ? absencesData.map((dateStr) => new Date(dateStr)) : []
+          }
         />
         <WorkDatesDisplay
-          workDates={workDatesData}
+          absenceDates={absencesData}
           onDateRemove={handleRemoveDate}
         />
       </WorkDatesContainer>

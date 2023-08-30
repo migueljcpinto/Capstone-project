@@ -34,9 +34,7 @@ export default function FormAddNurse({ onSubmitNurse }) {
 
     try {
       await onSubmitNurse(nurseData);
-    } catch (error) {
-      console.error("Something wrong:", error.message);
-    }
+    } catch (error) {}
 
     event.target.reset();
     event.target.elements[0].focus();
@@ -106,8 +104,7 @@ export default function FormAddNurse({ onSubmitNurse }) {
           id="email"
           name="email"
           type="email"
-          pattern="[a-zA-Z0-9._%+ -]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
-          "
+          pattern="[a-zA-Z0-9._%+]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
           placeholder="Enter the email of the nurse"
           required
         />
@@ -124,7 +121,7 @@ export default function FormAddNurse({ onSubmitNurse }) {
         />
 
         <Label htmlFor="description">Notes</Label>
-        <Input as="textarea" name="description"></Input>
+        <Input as="textarea" name="description" required></Input>
 
         <ButtonsContainer>
           <AddButtonStyled type="submit">New Nurse</AddButtonStyled>

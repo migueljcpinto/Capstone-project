@@ -12,7 +12,7 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
-      const nurse = await Nurse.findById(id).populate("workSchedule");
+      const nurse = await Nurse.findById(id);
       if (!nurse) {
         return response.status(404).json({ status: "Nurse not Found 🫣" });
       }
