@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { StyledParagraph } from "./DatePicker.styled";
@@ -12,6 +12,12 @@ export default function DayOffPicker({ daysOff, onDateChange, excludeDates }) {
   );
   const [selectedDates, setSelectedDates] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (daysOff.length === 0) {
+      setSelectedDates([]);
+    }
+  }, [daysOff]);
 
   //checks if the date has already been selected.
   //If so, it removes the date from the list. And can not selecte more than 5 dates.

@@ -51,6 +51,7 @@ export default function WorkScheduleForm({
       daysOff: daysOff,
     };
     onDaysOffSubmit(formDaysOffData);
+    setDaysOff([]);
   }
 
   return (
