@@ -7,16 +7,14 @@ export default function WorkDatesDisplay({ absenceDates, onDateRemove }) {
     absenceDates?.filter((absence) => absence.type === "vacation") || [];
   const daysOff =
     absenceDates?.filter((absence) => absence.type === "dayOff") || [];
-  console.log(vacationDates);
-  console.log(daysOff);
   return (
     <DatesDisplay>
       <h4>Your Vacation Dates:</h4>
       <ul>
         {vacationDates.map((vacation) => (
           <Fragment key={vacation._id}>
-            {vacation.date.map((date, index) => (
-              <li key={index}>
+            {vacation.date.map((date) => (
+              <li key={date}>
                 Date: {format(new Date(date), "dd/MM/yyyy")}
                 <DeleteButton onClick={() => onDateRemove(vacation._id, date)}>
                   Remove
@@ -31,8 +29,8 @@ export default function WorkDatesDisplay({ absenceDates, onDateRemove }) {
       <ul>
         {daysOff.map((day) => (
           <Fragment key={day._id}>
-            {day.date.map((date, index) => (
-              <li key={index}>
+            {day.date.map((date) => (
+              <li key={date}>
                 Day Off: {format(new Date(date), "dd/MM/yyyy")}
                 <DeleteButton onClick={() => onDateRemove(day._id, date)}>
                   Remove

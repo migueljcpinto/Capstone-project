@@ -14,14 +14,11 @@ export default function AddNursePage() {
 
       if (!response.ok) {
         const responseData = await response.json();
-        console.error("Error adding nurse:", responseData.message);
         return;
       }
       alert("Nurse added successfully!");
       router.back();
-    } catch (error) {
-      console.error("Something wrong with adding that!:", error.message);
-    }
+    } catch (error) {}
   }
 
   return <FormAddNurse onSubmitNurse={handleSubmitNurse} />;

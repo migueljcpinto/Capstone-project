@@ -34,9 +34,7 @@ export default function FormAddNurse({ onSubmitNurse }) {
 
     try {
       await onSubmitNurse(nurseData);
-    } catch (error) {
-      console.error("Something wrong:", error.message);
-    }
+    } catch (error) {}
 
     event.target.reset();
     event.target.elements[0].focus();

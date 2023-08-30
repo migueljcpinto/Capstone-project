@@ -40,7 +40,6 @@ export default function WorkScheduleForm({
       const formVacationData = {
         vacationDates: allDates,
       };
-      console.log("Submitting vacation dates:", formVacationData);
       onVacationSubmit(formVacationData);
       setAllDates([]);
     }
@@ -51,7 +50,6 @@ export default function WorkScheduleForm({
     const formDaysOffData = {
       daysOff: daysOff,
     };
-    console.log("Submitting days off:", formDaysOffData);
     onDaysOffSubmit(formDaysOffData);
   }
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { StyledParagraph } from "./DatePicker.styled";
 
 export default function DayOffPicker({ daysOff, onDateChange, excludeDates }) {
   const today = new Date();
@@ -56,9 +57,9 @@ export default function DayOffPicker({ daysOff, onDateChange, excludeDates }) {
           shouldCloseOnSelect={false}
           excludeDates={excludeDates.map((date) => new Date(date))}
         >
-          <p style={{ color: "green" }}>
+          <StyledParagraph>
             You can only add to 5 days off per month.
-          </p>
+          </StyledParagraph>
           <p>
             You have selected {selectedDates ? selectedDates.length : 0}{" "}
             days-off.

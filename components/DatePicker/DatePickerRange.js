@@ -39,7 +39,6 @@ export default function DatePickerRange({
     const allDates = getDatesBetween(update[0], update[1]);
 
     onChange(allDates);
-    console.log("Date range changed:", allDates);
   }
 
   function handleClick(e) {
@@ -52,11 +51,7 @@ export default function DatePickerRange({
 
   return (
     <>
-      <button
-        type="button"
-        className="example-custom-input"
-        onClick={handleClick}
-      >
+      <button type="button" onClick={handleClick}>
         {isOpen ? "Ok" : "Vacations"}
       </button>
       {isOpen && (
