@@ -22,8 +22,14 @@ export default async function handler(request, response) {
 
   if (request.method === "POST") {
     try {
-      const newAbsence = await Absence.create(request.body);
-      return response.status(201).json(newAbsence);
+      const { nurseId, type, date } = request.body;
+      if (Array.isArray(date)) {
+        const absences = date.map((d) => ({ nurseId, type, date: d }));
+        await Absence.insertMany(absences);
+      } else {
+        await Absence.create(request.body);
+      }
+      return response.status(201).json({ status: "Absences added!" });
     } catch (error) {
       return response.status(500).json({ error: "Error adding absence." });
     }

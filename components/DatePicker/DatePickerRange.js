@@ -49,6 +49,7 @@ export default function DatePickerRange({
   function handleReset() {
     setDateRange([]);
   }
+
   return (
     <>
       <button

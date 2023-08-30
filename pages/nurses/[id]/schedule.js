@@ -18,6 +18,9 @@ export default function SchedulePage() {
   );
   const [notification, setNotification] = useState(null);
   const [daysOff, setDaysOff] = useState([]);
+  const allAbsenceDates = absencesData
+    ? absencesData.flatMap((absence) => absence.date)
+    : [];
 
   useEffect(() => {
     if (notification) {
@@ -29,24 +32,11 @@ export default function SchedulePage() {
     }
   }, [notification]);
 
-  async function handleRemoveDate(
-    index,
-    absenceId,
-    dayOffToRemove,
-    vacationDateToRemove
-  ) {
-    const requestBody = { absenceId };
-
-    if (dayOffToRemove) {
-      requestBody.dayOffToRemove = dayOffToRemove;
-    } else if (vacationDateToRemove) {
-      requestBody.vacationDateToRemove = vacationDateToRemove;
-    }
-
+  async function handleRemoveDate(absenceId) {
     const response = await fetch(`/api/absences/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify({ absenceId }),
     });
 
     if (response.ok) {
@@ -90,6 +80,7 @@ export default function SchedulePage() {
       mutateAbsencesData();
     }
   }
+  console.log(absencesData);
 
   return (
     <>
@@ -101,12 +92,16 @@ export default function SchedulePage() {
           onVacationSubmit={handleVacationSubmit}
           onDaysOffSubmit={handleDaysOffSubmit}
           nurseData={nurseData}
-          absenceDates={absencesData}
+          nurseId={id}
+          absenceDates={allAbsenceDates}
           daysOff={daysOff}
           setDaysOff={setDaysOff}
+          excludeDates={
+            absencesData ? absencesData.map((dateStr) => new Date(dateStr)) : []
+          }
         />
         <WorkDatesDisplay
-          absenceDates={absencesData}
+          absenceDates={allAbsenceDates}
           onDateRemove={handleRemoveDate}
         />
       </WorkDatesContainer>

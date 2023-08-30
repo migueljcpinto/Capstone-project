@@ -3,14 +3,31 @@ import { ScheduleFormContainer } from "./WorkScheduleForm.styled";
 import DatePickerRange from "../DatePicker/DatePickerRange";
 import { Button } from "./WorkScheduleForm.styled";
 import DayOffPicker from "../DatePicker/DayOffPicker";
+import fetcher from "@/utilities/fetcher";
+import useSWR from "swr";
 
 export default function WorkScheduleForm({
   onVacationSubmit,
   onDaysOffSubmit,
   daysOff,
   setDaysOff,
+  nurseId,
+  nurseData,
 }) {
   const [allDates, setAllDates] = useState([]);
+
+  const { data: absencesFromDB, error } = useSWR(
+    nurseId ? `/api/absences/${nurseId}` : null,
+    fetcher
+  );
+
+  if (error) console.error("Error searching the blocked dates:", error);
+
+  const excludeDatesList = [
+    ...daysOff,
+    ...allDates,
+    ...(absencesFromDB || []).map((dateObj) => new Date(dateObj.date)),
+  ];
 
   function handleDateChange(dates) {
     setAllDates(dates);
@@ -38,22 +55,18 @@ export default function WorkScheduleForm({
     onDaysOffSubmit(formDaysOffData);
   }
 
-  useEffect(() => {
-    console.log("All dates:", allDates);
-  }, [allDates]);
-
   return (
     <>
       <ScheduleFormContainer>
         <h3>Schedule your vacations and Days-Off:</h3>
         <DatePickerRange
           onChange={handleDateChange}
-          excludeDates={[...daysOff, ...allDates]}
+          excludeDates={excludeDatesList}
         />
         <Button onClick={handleVacationSubmit}>Request Vacation Dates</Button>
         <DayOffPicker
           daysOff={daysOff}
-          excludeDates={[...allDates, ...daysOff]}
+          excludeDates={excludeDatesList}
           onDateChange={(newDates) => {
             setDaysOff(newDates);
           }}

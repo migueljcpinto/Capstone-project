@@ -7,52 +7,40 @@ export default function WorkDatesDisplay({ absenceDates, onDateRemove }) {
     absenceDates?.filter((absence) => absence.type === "vacation") || [];
   const daysOff =
     absenceDates?.filter((absence) => absence.type === "dayOff") || [];
-
+  console.log(absenceDates);
   return (
     <DatesDisplay>
       <h4>Your Vacation Dates:</h4>
-      {vacationDates.length > 0 ? (
-        <ul>
-          {vacationDates.map((vacation) => (
-            <li key={vacation._id}>
-              {vacation.date.map((date, index) => (
-                <Fragment key={index}>
-                  <Dates>Date: {format(new Date(date), "dd/MM/yyyy")}</Dates>
-                  <DeleteButton
-                    onClick={() => onDateRemove(index, vacation._id, date)}
-                  >
-                    Remove
-                  </DeleteButton>
-                </Fragment>
-              ))}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No Vacations yet!</p>
-      )}
+      <ul>
+        {vacationDates.map((vacation) => (
+          <Fragment key={vacation._id}>
+            {vacation.date.map((date, index) => (
+              <li key={index}>
+                Date: {format(new Date(date), "dd/MM/yyyy")}
+                <DeleteButton onClick={() => onDateRemove(vacation._id, date)}>
+                  Remove
+                </DeleteButton>
+              </li>
+            ))}
+          </Fragment>
+        ))}
+      </ul>
 
       <h4>Your Days-Off:</h4>
-      {daysOff.length > 0 ? (
-        <ul>
-          {daysOff.map((day) => (
-            <li key={day._id}>
-              {day.date.map((date, index) => (
-                <Fragment key={index}>
-                  <Dates>Day Off: {format(new Date(date), "dd/MM/yyyy")}</Dates>
-                  <DeleteButton
-                    onClick={() => onDateRemove(index, day._id, date)}
-                  >
-                    Remove
-                  </DeleteButton>
-                </Fragment>
-              ))}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No Days Off yet!</p>
-      )}
+      <ul>
+        {daysOff.map((day) => (
+          <Fragment key={day._id}>
+            {day.date.map((date, index) => (
+              <li key={index}>
+                Day Off: {format(new Date(date), "dd/MM/yyyy")}
+                <DeleteButton onClick={() => onDateRemove(day._id, date)}>
+                  Remove
+                </DeleteButton>
+              </li>
+            ))}
+          </Fragment>
+        ))}
+      </ul>
     </DatesDisplay>
   );
 }

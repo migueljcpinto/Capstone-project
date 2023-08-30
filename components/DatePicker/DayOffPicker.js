@@ -25,7 +25,6 @@ export default function DayOffPicker({ daysOff, onDateChange, excludeDates }) {
     }
     setSelectedDates(newDates);
     onDateChange(newDates);
-    console.log("Selected days off:", newDates);
   }
 
   function handleClick(e) {
@@ -36,7 +35,6 @@ export default function DayOffPicker({ daysOff, onDateChange, excludeDates }) {
   function handleReset() {
     setSelectedDates([]);
   }
-
   return (
     <>
       <button
