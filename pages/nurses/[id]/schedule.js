@@ -80,7 +80,6 @@ export default function SchedulePage() {
       mutateAbsencesData();
     }
   }
-  console.log(absencesData);
 
   return (
     <>
@@ -101,7 +100,7 @@ export default function SchedulePage() {
           }
         />
         <WorkDatesDisplay
-          absenceDates={allAbsenceDates}
+          absenceDates={absencesData}
           onDateRemove={handleRemoveDate}
         />
       </WorkDatesContainer>

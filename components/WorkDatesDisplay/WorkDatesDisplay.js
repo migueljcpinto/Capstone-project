@@ -7,7 +7,8 @@ export default function WorkDatesDisplay({ absenceDates, onDateRemove }) {
     absenceDates?.filter((absence) => absence.type === "vacation") || [];
   const daysOff =
     absenceDates?.filter((absence) => absence.type === "dayOff") || [];
-  console.log(absenceDates);
+  console.log(vacationDates);
+  console.log(daysOff);
   return (
     <DatesDisplay>
       <h4>Your Vacation Dates:</h4>

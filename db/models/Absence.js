@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const absenceSchema = new Schema({
   nurseId: { type: Schema.Types.ObjectId, ref: "Nurse", required: true },
   type: { type: String, enum: ["dayOff", "vacation"], required: true },
-  date: { type: Date, required: true },
+  date: { type: [Date], required: true },
 });
 
 const Absence =
