@@ -52,19 +52,20 @@ export default function WorkDatesDisplay({
 
       <h4>Your Availability:</h4>
       <ul>
-        {availabilityDates.map((availability) => (
-          <Fragment key={availability._id}>
-            <li key={availability.date}>
-              Date: {format(new Date(availability.date), "dd/MM/yyyy")} - Shift:{" "}
-              {availability.shift}
-              <DeleteButton
-                onClick={() => onAvailabilityRemove(availability._id)}
-              >
-                Remove
-              </DeleteButton>
-            </li>
-          </Fragment>
-        ))}
+        {availabilityDates &&
+          availabilityDates.map((availability) => (
+            <Fragment key={availability._id}>
+              <li key={availability.date}>
+                Date: {format(new Date(availability.date), "dd/MM/yyyy")} -
+                Shift: {availability.shift}
+                <DeleteButton
+                  onClick={() => onAvailabilityRemove(availability._id)}
+                >
+                  Remove
+                </DeleteButton>
+              </li>
+            </Fragment>
+          ))}
       </ul>
     </DatesDisplay>
   );
