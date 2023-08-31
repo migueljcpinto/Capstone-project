@@ -1,33 +1,52 @@
 import { useState, useEffect } from "react";
-import { ScheduleFormContainer } from "./WorkScheduleForm.styled";
+import { ScheduleFormContainer, Button } from "./WorkScheduleForm.styled";
 import DatePickerRange from "../DatePicker/DatePickerRange";
-import { Button } from "./WorkScheduleForm.styled";
 import DayOffPicker from "../DatePicker/DayOffPicker";
 import fetcher from "@/utilities/fetcher";
 import useSWR from "swr";
+import { AvailabilityDatePicker } from "../DatePicker/AvailabilityDatePicker";
 
 export default function WorkScheduleForm({
   onVacationSubmit,
   onDaysOffSubmit,
+  onAvailabilitySubmit,
   daysOff,
   setDaysOff,
   nurseId,
   nurseData,
 }) {
   const [allDates, setAllDates] = useState([]);
+  const [selectedAvailabilityDate, setSelectedAvailabilityDate] =
+    useState(null);
+  const [selectedShift, setSelectedShift] = useState("");
 
-  const { data: absencesFromDB, error } = useSWR(
+  const { data: absencesFromDB, error: absenceError } = useSWR(
     nurseId ? `/api/absences/${nurseId}` : null,
     fetcher
   );
+  const { data: availabilityData, error: availabilityError } = useSWR(
+    nurseId ? `/api/availability/${nurseId}` : null,
+    fetcher
+  );
 
-  if (error) console.error("Error searching the blocked dates:", error);
+  if (absenceError)
+    console.error("Error searching the blocked dates:", absenceError);
+  if (availabilityError)
+    console.error("Error fetching availability:", availabilityError);
+
+  const allAbsenceDates = absencesFromDB
+    ? absencesFromDB.flatMap((absence) => absence.date)
+    : [];
+  const allAvailabilityDates = availabilityData
+    ? availabilityData.map((availability) => availability.date)
+    : [];
 
   const excludeDatesList = [
     ...daysOff,
     ...allDates,
-    ...(absencesFromDB || []).map((dateObj) => new Date(dateObj.date)),
-  ];
+    ...allAbsenceDates,
+    ...allAvailabilityDates,
+  ].map((dateStr) => new Date(dateStr));
 
   function handleDateChange(dates) {
     setAllDates(dates);
@@ -54,6 +73,23 @@ export default function WorkScheduleForm({
     setDaysOff([]);
   }
 
+  function handleAvailabilitySubmit(event) {
+    event.preventDefault();
+    if (selectedAvailabilityDate && selectedShift) {
+      const formAvailabilityData = {
+        availability: {
+          date: selectedAvailabilityDate,
+          shift: selectedShift,
+        },
+      };
+      console.log("Sending availability data:", formAvailabilityData);
+      onAvailabilitySubmit(formAvailabilityData);
+      setSelectedAvailabilityDate(null);
+      setSelectedShift("");
+    } else {
+      console.error("Please select a date and a shift for availability.");
+    }
+  }
   return (
     <>
       <ScheduleFormContainer>
@@ -71,6 +107,12 @@ export default function WorkScheduleForm({
           }}
         />
         <Button onClick={handleDaysOffSubmit}>Request Days Off</Button>
+        <AvailabilityDatePicker
+          excludeDates={excludeDatesList}
+          onDateChange={(date) => setSelectedAvailabilityDate(date)}
+          onShiftChange={(shift) => setSelectedShift(shift)}
+        />
+        <Button onClick={handleAvailabilitySubmit}>Request Availability</Button>
       </ScheduleFormContainer>
     </>
   );

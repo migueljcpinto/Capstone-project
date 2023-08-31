@@ -2,7 +2,14 @@ import React, { Fragment } from "react";
 import { DatesDisplay, DeleteButton, Dates } from "./WorkDatesDisplay.styled";
 import { format } from "date-fns";
 
-export default function WorkDatesDisplay({ absenceDates, onDateRemove }) {
+export default function WorkDatesDisplay({
+  absenceDates,
+  availabilityDates,
+  onAbsenceRemove,
+  onAvailabilityRemove,
+}) {
+  console.log("Absence Dates:", absenceDates);
+  console.log("Availability Dates:", availabilityDates);
   const vacationDates =
     absenceDates?.filter((absence) => absence.type === "vacation") || [];
   const daysOff =
@@ -16,7 +23,9 @@ export default function WorkDatesDisplay({ absenceDates, onDateRemove }) {
             {vacation.date.map((date) => (
               <li key={date}>
                 Date: {format(new Date(date), "dd/MM/yyyy")}
-                <DeleteButton onClick={() => onDateRemove(vacation._id, date)}>
+                <DeleteButton
+                  onClick={() => onAbsenceRemove(vacation._id, date)}
+                >
                   Remove
                 </DeleteButton>
               </li>
@@ -32,11 +41,28 @@ export default function WorkDatesDisplay({ absenceDates, onDateRemove }) {
             {day.date.map((date) => (
               <li key={date}>
                 Day Off: {format(new Date(date), "dd/MM/yyyy")}
-                <DeleteButton onClick={() => onDateRemove(day._id, date)}>
+                <DeleteButton onClick={() => onAbsenceRemove(day._id, date)}>
                   Remove
                 </DeleteButton>
               </li>
             ))}
+          </Fragment>
+        ))}
+      </ul>
+
+      <h4>Your Availability:</h4>
+      <ul>
+        {availabilityDates.map((availability) => (
+          <Fragment key={availability._id}>
+            <li key={availability.date}>
+              Date: {format(new Date(availability.date), "dd/MM/yyyy")} - Shift:{" "}
+              {availability.shift}
+              <DeleteButton
+                onClick={() => onAvailabilityRemove(availability._id)}
+              >
+                Remove
+              </DeleteButton>
+            </li>
           </Fragment>
         ))}
       </ul>
