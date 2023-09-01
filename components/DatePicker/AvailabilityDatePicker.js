@@ -8,6 +8,7 @@ export function AvailabilityDatePicker({
   onDateChange,
   onShiftChange,
   excludeDates,
+  reset,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -16,19 +17,30 @@ export function AvailabilityDatePicker({
   const minDate = new Date();
   const maxDate = endOfMonth(addMonths(new Date(), 1));
 
-  function handleClick(e) {
-    e.preventDefault();
+  useEffect(() => {
+    if (reset) {
+      setSelectedDate(null);
+      setSelectedShift("");
+    }
+  }, [reset]);
+
+  function handleClick() {
     setIsOpen(!isOpen);
   }
 
-  useEffect(() => {
+  function handleDateChange(date) {
+    setSelectedDate(date);
     if (onDateChange) {
-      onDateChange(selectedDate);
+      onDateChange(date);
     }
+  }
+  function handleShiftChange(e) {
+    const shift = e.target.value;
+    setSelectedShift(shift);
     if (onShiftChange) {
-      onShiftChange(selectedShift);
+      onShiftChange(shift);
     }
-  }, [selectedDate, selectedShift]);
+  }
 
   return (
     <>
@@ -39,23 +51,20 @@ export function AvailabilityDatePicker({
         <div>
           <DatePicker
             selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
+            onChange={handleDateChange}
             dateFormat="dd/MM/yyyy"
             minDate={minDate}
             maxDate={maxDate}
             excludeDates={excludeDates}
           ></DatePicker>
 
-          <select
-            value={selectedShift}
-            onChange={(e) => setSelectedShift(e.target.value)}
-          >
+          <select value={selectedShift} onChange={handleShiftChange}>
             <option value="" disabled>
               Select a shift
             </option>
-            <option value="Morning">Morning</option>
-            <option value="Afternoon">Afternoon</option>
-            <option value="Night">Night</option>
+            <option value="morning">Morning</option>
+            <option value="afternoon">Afternoon</option>
+            <option value="night">Night</option>
           </select>
         </div>
       )}

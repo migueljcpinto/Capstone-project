@@ -124,6 +124,7 @@ export default function SchedulePage() {
       setNotification({ message: "Availability added!", type: "add" });
       mutateAvailabilityData();
     }
+    return response;
   }
 
   return (

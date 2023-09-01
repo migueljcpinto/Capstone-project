@@ -28,7 +28,16 @@ export default async function handler(request, response) {
     if (!nurseId || !type || !date) {
       return response.status(400).json({ error: "Incomplete data provided." });
     }
+    const existingAvailabilities = await Availability.find({
+      nurseId: nurseId,
+    });
 
+    if (existingAvailabilities.length >= 5) {
+      response
+        .status(400)
+        .json({ error: "You can only have 5 availabilities." });
+      return;
+    }
     try {
       if (Array.isArray(date)) {
         const availability = date.map((d) => ({ nurseId, type, date: d }));

@@ -19,6 +19,7 @@ export default function WorkScheduleForm({
   const [selectedAvailabilityDate, setSelectedAvailabilityDate] =
     useState(null);
   const [selectedShift, setSelectedShift] = useState("");
+  const [resetAvailability, setResetAvailability] = useState(false);
 
   const { data: absencesFromDB, error: absenceError } = useSWR(
     nurseId ? `/api/absences/${nurseId}` : null,
@@ -73,8 +74,12 @@ export default function WorkScheduleForm({
     setDaysOff([]);
   }
 
-  function handleAvailabilitySubmit(event) {
+  async function handleAvailabilitySubmit(event) {
     event.preventDefault();
+    if (!selectedShift) {
+      alert("Please select a shift before submitting.");
+      return;
+    }
     if (selectedAvailabilityDate && selectedShift) {
       const formAvailabilityData = {
         availability: {
@@ -83,13 +88,28 @@ export default function WorkScheduleForm({
         },
       };
       console.log("Sending availability data:", formAvailabilityData);
-      onAvailabilitySubmit(formAvailabilityData);
-      setSelectedAvailabilityDate(null);
-      setSelectedShift("");
-    } else {
-      console.error("Please select a date and a shift for availability.");
+      const response = await onAvailabilitySubmit(formAvailabilityData);
+
+      if (response && response.ok) {
+        setSelectedAvailabilityDate(null);
+        setSelectedShift("");
+        setResetAvailability(true);
+      } else {
+        const errorData = await response.json();
+        if (errorData.error === "You can only have 5 availabilities.") {
+          alert("You have already added 5 availabilities. You can't add more.");
+        } else {
+          console.error("Please select a date and a shift for availability.");
+        }
+      }
     }
   }
+
+  useEffect(() => {
+    if (resetAvailability) {
+      setResetAvailability(false);
+    }
+  }, [resetAvailability]);
   return (
     <>
       <ScheduleFormContainer>
@@ -111,8 +131,11 @@ export default function WorkScheduleForm({
           excludeDates={excludeDatesList}
           onDateChange={(date) => setSelectedAvailabilityDate(date)}
           onShiftChange={(shift) => setSelectedShift(shift)}
+          reset={resetAvailability}
         />
-        <Button onClick={handleAvailabilitySubmit}>Request Availability</Button>
+        <Button onClick={handleAvailabilitySubmit} disabled={!selectedShift}>
+          Request Availability
+        </Button>
       </ScheduleFormContainer>
     </>
   );
