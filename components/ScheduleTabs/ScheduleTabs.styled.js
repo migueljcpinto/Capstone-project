@@ -43,8 +43,8 @@ export const Separator = styled.hr`
   background: #222;
   margin-bottom: 5px;
 `;
-
 export const Paragraph = styled.p`
-  width: 100%;
-  height: 100%;
+  font-size: 14px;
+  color: #483d8b;
+  margin-top: 5px;
 `;

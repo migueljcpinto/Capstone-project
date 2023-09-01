@@ -14,7 +14,7 @@ export default function Accordion({ title, children }) {
 
   return (
     <>
-      <AccordionItemContainer isOpen={isOpen} onClick={handleToggle}>
+      <AccordionItemContainer $isOpen={isOpen} onClick={handleToggle}>
         <AccordionTitle isOpen={isOpen}>{title}</AccordionTitle>
         <p>{isOpen ? "-" : "+"}</p>
       </AccordionItemContainer>
