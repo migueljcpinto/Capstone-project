@@ -27,7 +27,6 @@ export default function VacationForm({
   return (
     <>
       <ScheduleFormContainer>
-        <h3>Schedule your vacations:</h3>
         <DatePickerRange
           onChange={handleDateChange}
           excludeDates={excludeDates}

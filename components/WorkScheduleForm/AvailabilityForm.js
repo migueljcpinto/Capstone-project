@@ -49,7 +49,6 @@ export default function AvailabilityForm({
 
   return (
     <ScheduleFormContainer>
-      <h3>Set your availability:</h3>
       <AvailabilityDatePicker
         excludeDates={excludeDates}
         onDateChange={(date) => setSelectedAvailabilityDate(date)}

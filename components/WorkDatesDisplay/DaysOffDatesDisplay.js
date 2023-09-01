@@ -1,5 +1,10 @@
 import React, { Fragment } from "react";
-import { Dates, DatesDisplay, DeleteButton } from "./WorkDatesDisplay.styled";
+import {
+  Dates,
+  DatesItem,
+  DatesDisplay,
+  DeleteButton,
+} from "./WorkDatesDisplay.styled";
 import { format } from "date-fns";
 
 export default function DaysOffDatesDisplay({ absencesData, onAbsenceRemove }) {
@@ -8,20 +13,20 @@ export default function DaysOffDatesDisplay({ absencesData, onAbsenceRemove }) {
 
   return (
     <DatesDisplay>
-      <ul>
+      <Dates>
         {daysOff.map((day) => (
           <Fragment key={day._id}>
             {day.date.map((date) => (
-              <Dates key={date}>
-                Day Off: {format(new Date(date), "dd/MM/yyyy")}
+              <DatesItem key={date}>
+                {format(new Date(date), "dd/MM/yyyy")}
                 <DeleteButton onClick={() => onAbsenceRemove(day._id, date)}>
                   Remove
                 </DeleteButton>
-              </Dates>
+              </DatesItem>
             ))}
           </Fragment>
         ))}
-      </ul>
+      </Dates>
     </DatesDisplay>
   );
 }

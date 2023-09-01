@@ -19,7 +19,6 @@ export default function DaysOffForm({
 
   return (
     <ScheduleFormContainer>
-      <h3>Schedule your Days-Off:</h3>
       <DayOffPicker
         daysOff={daysOff}
         excludeDates={excludeDates}

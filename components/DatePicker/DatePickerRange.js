@@ -47,7 +47,6 @@ export default function DatePickerRange({
   return (
     <>
       <DatePicker
-        inline
         selectsRange={true}
         dateFormat="dd/MM/yyyy"
         startDate={dateRange[0]}
