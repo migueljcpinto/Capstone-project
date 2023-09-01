@@ -3,7 +3,6 @@ import Availability from "@/db/models/Availability";
 
 export default async function handler(request, response) {
   const connection = await dbConnect();
-  console.log("Received availability data:", request.body);
 
   if (!connection)
     return response

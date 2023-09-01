@@ -123,7 +123,6 @@ export default function SchedulePage() {
 
   async function handleAvailabilitySubmit(formData) {
     const { availability } = formData;
-    console.log("Handling availability with data:", formData);
     const response = await fetch("/api/availability", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

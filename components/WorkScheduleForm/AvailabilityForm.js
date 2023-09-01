@@ -24,7 +24,6 @@ export default function AvailabilityForm({
           shift: selectedShift,
         },
       };
-      console.log("Sending availability data:", formAvailabilityData);
       const response = await onAvailabilitySubmit(formAvailabilityData);
 
       if (response && response.ok) {

@@ -4,7 +4,6 @@ import Availability from "@/db/models/Availability";
 export default async function handler(request, response) {
   await dbConnect();
   const { nurseId } = request.query;
-  console.log("Received availability data:", request.body);
   if (request.method === "GET") {
     try {
       const availability = await Availability.find({ nurseId });
