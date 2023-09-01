@@ -10,7 +10,6 @@ export function AvailabilityDatePicker({
   excludeDates,
   reset,
 }) {
-  const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedShift, setSelectedShift] = useState("");
 
@@ -23,10 +22,6 @@ export function AvailabilityDatePicker({
       setSelectedShift("");
     }
   }, [reset]);
-
-  function handleClick() {
-    setIsOpen(!isOpen);
-  }
 
   function handleDateChange(date) {
     setSelectedDate(date);
@@ -44,30 +39,25 @@ export function AvailabilityDatePicker({
 
   return (
     <>
-      <button type="button" onClick={handleClick}>
-        {isOpen ? "Ok" : "Availability"}
-      </button>
-      {isOpen && (
-        <div>
-          <DatePicker
-            selected={selectedDate}
-            onChange={handleDateChange}
-            dateFormat="dd/MM/yyyy"
-            minDate={minDate}
-            maxDate={maxDate}
-            excludeDates={excludeDates}
-          ></DatePicker>
+      <div>
+        <DatePicker
+          selected={selectedDate}
+          onChange={handleDateChange}
+          dateFormat="dd/MM/yyyy"
+          minDate={minDate}
+          maxDate={maxDate}
+          excludeDates={excludeDates}
+        ></DatePicker>
 
-          <select value={selectedShift} onChange={handleShiftChange}>
-            <option value="" disabled>
-              Select a shift
-            </option>
-            <option value="morning">Morning</option>
-            <option value="afternoon">Afternoon</option>
-            <option value="night">Night</option>
-          </select>
-        </div>
-      )}
+        <select value={selectedShift} onChange={handleShiftChange}>
+          <option value="" disabled>
+            Select a shift
+          </option>
+          <option value="morning">Morning</option>
+          <option value="afternoon">Afternoon</option>
+          <option value="night">Night</option>
+        </select>
+      </div>
     </>
   );
 }

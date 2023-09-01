@@ -31,9 +31,9 @@ export const ContentTabs = styled.div`
 `;
 
 export const Content = styled.div`
-  background: white;
-  padding: 20px;
-  width: 100%;
+  background: #fcfafb;
+  padding: 25px;
+  width: 400px;
   display: ${({ active }) => (active ? "block" : "none")};
 `;
 

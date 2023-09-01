@@ -1,32 +1,48 @@
-import WorkScheduleForm from "@/components/WorkScheduleForm/WorkScheduleForm";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { ReturnButton } from "@/components/WorkScheduleForm/WorkScheduleForm.styled";
-import WorkDatesDisplay from "@/components/WorkDatesDisplay/WorkDatesDisplay";
-import { WorkDatesContainer } from "@/components/WorkDatesDisplay/WorkDatesDisplay.styled";
 import Notification from "@/components/Notifications/Notification";
+import ScheduleTabs from "@/components/ScheduleTabs/ScheduleTabs";
 
 export default function SchedulePage() {
   const router = useRouter();
-  const { id } = router.query; //Nurse id
-  const { data: nurseData } = useSWR(id ? `/api/nurses/${id}` : null);
+  const nurseId = router.query.id; //Nurse id
+  const { data: nurseData } = useSWR(nurseId ? `/api/nurses/${nurseId}` : null);
   const { data: absencesData, mutate: mutateAbsencesData } = useSWR(
-    id ? `/api/absences/${id}` : null
+    nurseId ? `/api/absences/${nurseId}` : null
   );
   const { data: availabilityData, mutate: mutateAvailabilityData } = useSWR(
-    id ? `/api/availability/${id}` : null
+    nurseId ? `/api/availability/${nurseId}` : null
   );
+
   const [notification, setNotification] = useState(null);
   const [daysOff, setDaysOff] = useState([]);
 
-  const allAbsenceDates = absencesData
-    ? absencesData.flatMap((absence) => absence.date)
+  const { data: absencesFromDB, error: absenceError } = useSWR(
+    nurseId ? `/api/absences/${nurseId}` : null
+  );
+  const { data: availabilityDataFromSWR, error: availabilityError } = useSWR(
+    nurseId ? `/api/availability/${nurseId}` : null
+  );
+
+  if (absenceError)
+    console.error("Error searching the blocked dates:", absenceError);
+  if (availabilityError)
+    console.error("Error fetching availability:", availabilityError);
+
+  const allAbsenceDates = absencesFromDB
+    ? absencesFromDB.flatMap((absence) => absence.date)
+    : [];
+  const allAvailabilityDates = availabilityDataFromSWR
+    ? availabilityDataFromSWR.map((availability) => availability.date)
     : [];
 
-  const allAvailabilityDates = availabilityData
-    ? availabilityData.flatMap((availability) => availability.date)
-    : [];
+  const excludeDatesList = [
+    ...daysOff,
+    ...allAbsenceDates,
+    ...allAvailabilityDates,
+  ].map((dateStr) => new Date(dateStr));
 
   useEffect(() => {
     if (notification) {
@@ -37,9 +53,8 @@ export default function SchedulePage() {
       return () => clearTimeout(timer);
     }
   }, [notification]);
-
   async function handleRemoveAbsence(absenceId) {
-    const response = await fetch(`/api/absences/${id}`, {
+    const response = await fetch(`/api/absences/${nurseId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ absenceId }),
@@ -52,7 +67,7 @@ export default function SchedulePage() {
   }
 
   async function handleRemoveAvailability(availabilityId) {
-    const response = await fetch(`/api/availability/${id}`, {
+    const response = await fetch(`/api/availability/${nurseId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ availabilityId }),
@@ -70,7 +85,7 @@ export default function SchedulePage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        nurseId: id,
+        nurseId: nurseId,
         type: "vacation",
         date: vacationDates,
       }),
@@ -94,7 +109,7 @@ export default function SchedulePage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        nurseId: id,
+        nurseId: nurseId,
         type: "dayOff",
         date: daysOff,
       }),
@@ -113,7 +128,7 @@ export default function SchedulePage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        nurseId: id,
+        nurseId: nurseId,
         type: "availability",
         date: availability.date,
         shift: availability.shift,
@@ -132,31 +147,23 @@ export default function SchedulePage() {
       {notification && (
         <Notification message={notification.message} type={notification.type} />
       )}
-      <WorkDatesContainer>
-        <WorkScheduleForm
-          onVacationSubmit={handleVacationSubmit}
-          onDaysOffSubmit={handleDaysOffSubmit}
-          onAvailabilitySubmit={handleAvailabilitySubmit}
-          nurseData={nurseData}
-          nurseId={id}
-          absenceDates={allAbsenceDates}
-          availabilityDates={allAvailabilityDates}
-          daysOff={daysOff}
-          setDaysOff={setDaysOff}
-          excludeDates={[
-            ...(absencesData
-              ? absencesData.map((dateStr) => new Date(dateStr))
-              : []),
-            ...allAvailabilityDates,
-          ]}
-        />
-        <WorkDatesDisplay
-          absenceDates={absencesData}
-          availabilityDates={availabilityData}
-          onAbsenceRemove={handleRemoveAbsence}
-          onAvailabilityRemove={handleRemoveAvailability}
-        />
-      </WorkDatesContainer>
+      <ScheduleTabs
+        onVacationSubmit={handleVacationSubmit}
+        onDaysOffSubmit={handleDaysOffSubmit}
+        onAvailabilitySubmit={handleAvailabilitySubmit}
+        nurseData={nurseData}
+        nurseId={nurseId}
+        absenceDates={allAbsenceDates}
+        availabilityDates={allAvailabilityDates}
+        daysOff={daysOff}
+        setDaysOff={setDaysOff}
+        excludeDates={excludeDatesList}
+        absencesData={absencesData}
+        availabilityData={availabilityData}
+        onAbsenceRemove={handleRemoveAbsence}
+        onAvailabilityRemove={handleRemoveAvailability}
+      />
+
       <ReturnButton onClick={() => router.back()}>Return</ReturnButton>
     </>
   );
