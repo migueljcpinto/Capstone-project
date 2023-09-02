@@ -1,27 +1,34 @@
 import styled from "styled-components";
 
-export const WorkDatesContainer = styled.section`
+export const DatesDisplay = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-`;
-
-export const DatesDisplay = styled.article`
-  display: grid;
+  justify-content: center;
+  gap: 2.5rem;
+  width: 100%;
   align-items: center;
-  background-color: #fff4e6;
-  max-width: 400px;
-  padding: 3.2rem 4rem;
+  background-color: white;
+  width: 300px;
+  padding: 0.5rem 0.5rem;
   border-radius: 7px;
 `;
 
-export const Dates = styled.div`
+export const Dates = styled.ul`
   padding: 1rem;
-  align-items: center;
+  background-color: white;
+  border-radius: 7px;
+  margin: 5px 5px;
+  list-style-type: none;
+`;
+
+export const DatesItem = styled.li`
+  padding: 1rem;
+  background-color: #fff4e6;
   border: solid 1px white;
   border-radius: 7px;
-  margin: 2px;
+  margin: 5px 5px;
+  list-style-type: none;
 `;
 
 export const DeleteButton = styled.button`
@@ -30,6 +37,7 @@ export const DeleteButton = styled.button`
   padding: 0.8rem 1.2rem;
   border: none;
   border-radius: 7px;
+  margin: 10px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;

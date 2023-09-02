@@ -10,7 +10,6 @@ export default function DatePickerRange({
   excludeDates,
 }) {
   const [dateRange, setDateRange] = useState([startDate, endDate]);
-  const [isOpen, setIsOpen] = useState(false);
   const today = new Date();
   const nextMonthLastDate = new Date(
     today.getFullYear(),
@@ -41,47 +40,37 @@ export default function DatePickerRange({
     onChange(allDates);
   }
 
-  function handleClick(e) {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-  }
   function handleReset() {
     setDateRange([]);
   }
 
   return (
     <>
-      <button type="button" onClick={handleClick}>
-        {isOpen ? "Ok" : "Vacations"}
-      </button>
-      {isOpen && (
-        <DatePicker
-          inline
-          selectsRange={true}
-          dateFormat="dd/MM/yyyy"
-          startDate={dateRange[0]}
-          endDate={dateRange[1]}
-          minDate={today}
-          maxDate={nextMonthLastDate}
-          onChange={handleDateChange}
-          placeholderText="Choose your dates"
-          excludeDates={[
-            ...selectedDateRanges.flatMap((range) => {
-              const start = new Date(range[0]);
-              const end = new Date(range[1]);
-              if (isValid(start) && isValid(end) && start <= end) {
-                return eachDayOfInterval({ start, end });
-              }
-              return [];
-            }),
-            ...excludeDates,
-          ]}
-        >
-          <button type="button" onClick={handleReset}>
-            Reset Selection
-          </button>
-        </DatePicker>
-      )}
+      <DatePicker
+        selectsRange={true}
+        dateFormat="dd/MM/yyyy"
+        startDate={dateRange[0]}
+        endDate={dateRange[1]}
+        minDate={today}
+        maxDate={nextMonthLastDate}
+        onChange={handleDateChange}
+        placeholderText="Choose your dates"
+        excludeDates={[
+          ...selectedDateRanges.flatMap((range) => {
+            const start = new Date(range[0]);
+            const end = new Date(range[1]);
+            if (isValid(start) && isValid(end) && start <= end) {
+              return eachDayOfInterval({ start, end });
+            }
+            return [];
+          }),
+          ...excludeDates,
+        ]}
+      >
+        <button type="button" onClick={handleReset}>
+          Reset Selection
+        </button>
+      </DatePicker>
     </>
   );
 }

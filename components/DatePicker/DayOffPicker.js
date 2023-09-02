@@ -11,7 +11,6 @@ export default function DayOffPicker({ daysOff, onDateChange, excludeDates }) {
     0
   );
   const [selectedDates, setSelectedDates] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (daysOff.length === 0) {
@@ -34,47 +33,31 @@ export default function DayOffPicker({ daysOff, onDateChange, excludeDates }) {
     onDateChange(newDates);
   }
 
-  function handleClick(e) {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-  }
-
   function handleReset() {
     setSelectedDates([]);
   }
   return (
     <>
-      <button
-        type="button"
-        className="example-custom-input"
-        onClick={handleClick}
+      <DatePicker
+        selected={null}
+        onChange={handleDateChange}
+        highlightDates={selectedDates.map((d) => new Date(d))}
+        placeholderText="Select Days-Off"
+        minDate={today}
+        maxDate={nextMonthLastDate}
+        shouldCloseOnSelect={false}
+        excludeDates={excludeDates.map((date) => new Date(date))}
       >
-        {isOpen ? "Ok" : "Days-Off"}
-      </button>
-      {isOpen && (
-        <DatePicker
-          inline
-          selected={null}
-          onChange={handleDateChange}
-          highlightDates={selectedDates.map((d) => new Date(d))}
-          placeholderText="Select Days-Off"
-          minDate={today}
-          maxDate={nextMonthLastDate}
-          shouldCloseOnSelect={false}
-          excludeDates={excludeDates.map((date) => new Date(date))}
-        >
-          <StyledParagraph>
-            You can only add to 5 days off per month.
-          </StyledParagraph>
-          <p>
-            You have selected {selectedDates ? selectedDates.length : 0}{" "}
-            days-off.
-          </p>
-          <button type="button" onClick={handleReset}>
-            Reset Selection
-          </button>
-        </DatePicker>
-      )}
+        <StyledParagraph>
+          You can only add to 5 days off per month.
+        </StyledParagraph>
+        <p>
+          You have selected {selectedDates ? selectedDates.length : 0} days-off.
+        </p>
+        <button type="button" onClick={handleReset}>
+          Reset Selection
+        </button>
+      </DatePicker>
     </>
   );
 }
