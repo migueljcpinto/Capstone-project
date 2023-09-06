@@ -1,35 +1,35 @@
 import styled from "styled-components";
 import Image from "next/image";
-import { Datepicker } from "@meinefinsternis/react-horizontal-date-picker";
+import Accordion from "../Accordion/Accordion";
 
 export const DashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 16px 0px 0px;
 `;
 
 export const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   margin-bottom: 20px;
 `;
 
 export const Welcome = styled.p`
   color: #838aa3;
-  margin-left: 10px;
+  margin-left: 5px;
 `;
 
 export const ProfileName = styled.p`
-  margin-left: 10px;
   color: #414247;
 `;
 
 export const ProfileImage = styled(Image)`
   border-radius: 99.5px;
   margin-right: 10px;
+  border: 2px solid grey;
 `;
 
 export const SVGSeach = styled.svg`
@@ -74,10 +74,11 @@ export const CalendarContainer = styled.section`
   display: flex;
   width: 354px;
   height: 101px;
-  padding: 12px;
   align-items: flex-end;
   gap: 6px;
   flex-shrink: 0;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 2px solid #fafafc;
   border-radius: 18px;
   margin-top: 30px;
   justify-content: center;
@@ -92,7 +93,18 @@ export const ShiftsContainer = styled.section`
   width: 354px;
 `;
 
-const ShiftBox = styled.div`
+export const ShiftBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding-bottom: 16px;
+  line-height: 1.6;
+`;
+
+export const MorningShiftAccordion = styled(Accordion)`
+  background: #fbf2ef;
   display: flex;
   align-items: center;
   width: 354px;
@@ -100,16 +112,57 @@ const ShiftBox = styled.div`
   margin-bottom: 20px;
   border-radius: 12px;
   gap: 20px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  span {
+    display: block;
+    font-size: 14px;
+    color: darkgray;
+    margin-top: 5px;
+  }
 `;
 
-export const MorningShiftBox = styled(ShiftBox)`
-  background: #fbf2ef;
-`;
-
-export const AfternoonShiftBox = styled(ShiftBox)`
+export const AfternoonShiftAccordion = styled(Accordion)`
   background: #eff2f8;
+  display: flex;
+  align-items: center;
+  width: 354px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  gap: 20px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  span {
+    display: block;
+    font-size: 14px;
+    color: darkgray;
+    margin-top: 5px;
+  }
 `;
 
-export const NightShiftBox = styled(ShiftBox)`
+export const NightShiftAccordion = styled(Accordion)`
   background: #fbf2ef;
+  display: flex;
+  align-items: center;
+  width: 354px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  gap: 20px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  span {
+    display: block;
+    font-size: 14px;
+    color: darkgray;
+    margin-top: 5px;
+  }
+`;
+
+export const Slot = styled.div`
+  display: inline-flex;
+  padding: 11px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 18px;
+  background: #fff;
 `;

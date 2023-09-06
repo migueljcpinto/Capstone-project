@@ -11,6 +11,7 @@ export default function HorizontalCalendar({ selectedDate, onDateChange }) {
     const [newSelectedDate] = d;
     if (
       selectedDate &&
+      newSelectedDate &&
       newSelectedDate.toISOString() === selectedDate.toISOString()
     ) {
       onDateChange(null);

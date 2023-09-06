@@ -1,91 +1,139 @@
+import { useState } from "react";
 import {
   ShiftsContainer,
-  MorningShiftBox,
-  AfternoonShiftBox,
-  NightShiftBox,
+  ShiftBox,
+  MorningShiftAccordion,
+  AfternoonShiftAccordion,
+  NightShiftAccordion,
 } from "@/components/Dashboard/Dashboard.styled";
+import SearchInput from "../SearchInput/SearchInput";
+import NurseSlot from "./NurseSlot";
 
-export default function ShiftDetails({ shifts }) {
+export default function ShiftDetails({
+  shifts,
+  onAddNurseClick,
+  onRemoveNurse,
+}) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
+  const [filteredNurses, setFilteredNurses] = useState([]);
+  const [currentShiftType, setCurrentShiftType] = useState(null);
+
+  function handleSearchChange(term) {
+    setSearchTerm(term);
+    fetch(`/api/nurses?search=${term}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setFilteredNurses(data);
+        console.log("Filtered nurses:", data);
+      })
+      .catch((error) => {
+        console.error("Error fetching filtered nurses:", error);
+      });
+  }
+
+  function handleAddClick(shiftType) {
+    console.log("Shift type on add click:", shiftType);
+
+    setShowSearch(true);
+    setCurrentShiftType(shiftType);
+  }
+  console.log("Morning shifts before rendering slots:", shifts.morning);
+
   return (
     <ShiftsContainer>
-      <MorningShiftBox>
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="31"
-            height="31"
-            viewBox="0 0 31 31"
-            fill="none"
-          >
-            <path
-              d="M6.00172 9.00264H10.503V6.00176C10.503 5.17652 11.1782 4.50132 12.0035 4.50132H18.0052C18.8305 4.50132 19.5057 5.17652 19.5057 6.00176V9.00264H24.007C24.8322 9.00264 25.5074 9.67784 25.5074 10.5031V24.007C25.5074 24.8323 24.8322 25.5075 24.007 25.5075H6.00172C5.17648 25.5075 4.50128 24.8323 4.50128 24.007V10.5031C4.50128 9.67784 5.17648 9.00264 6.00172 9.00264ZM18.0052 6.00176H12.0035V9.00264H18.0052V6.00176ZM6.00172 24.007H24.007V10.5031H6.00172V24.007Z"
-              fill="black"
-            />
-            <path
-              d="M14.2542 13.504H15.7546V16.5048H18.7555V18.0053H15.7546V21.0062H14.2542V18.0053H11.2533V16.5048H14.2542V13.504Z"
-              fill="black"
-            />
-          </svg>
-        </div>
-        <div>
-          <p>Morning Shift</p>
-          <h4>06:00 - 14:30</h4>
-          {shifts.morning}
-        </div>
-        <div></div>
-      </MorningShiftBox>
-      <AfternoonShiftBox>
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="31"
-            height="31"
-            viewBox="0 0 31 31"
-            fill="none"
-          >
-            <path
-              d="M6.00172 9.00264H10.503V6.00176C10.503 5.17652 11.1782 4.50132 12.0035 4.50132H18.0052C18.8305 4.50132 19.5057 5.17652 19.5057 6.00176V9.00264H24.007C24.8322 9.00264 25.5074 9.67784 25.5074 10.5031V24.007C25.5074 24.8323 24.8322 25.5075 24.007 25.5075H6.00172C5.17648 25.5075 4.50128 24.8323 4.50128 24.007V10.5031C4.50128 9.67784 5.17648 9.00264 6.00172 9.00264ZM18.0052 6.00176H12.0035V9.00264H18.0052V6.00176ZM6.00172 24.007H24.007V10.5031H6.00172V24.007Z"
-              fill="black"
-            />
-            <path
-              d="M14.2542 13.504H15.7546V16.5048H18.7555V18.0053H15.7546V21.0062H14.2542V18.0053H11.2533V16.5048H14.2542V13.504Z"
-              fill="black"
-            />
-          </svg>
-        </div>
-        <div>
-          <p>Afternoon Shift</p>
-          <h4>14:00 - 21:30</h4>
-          {shifts.afternoon}
-        </div>
-      </AfternoonShiftBox>
-      <NightShiftBox>
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="31"
-            height="31"
-            viewBox="0 0 31 31"
-            fill="none"
-          >
-            <path
-              d="M6.00172 9.00264H10.503V6.00176C10.503 5.17652 11.1782 4.50132 12.0035 4.50132H18.0052C18.8305 4.50132 19.5057 5.17652 19.5057 6.00176V9.00264H24.007C24.8322 9.00264 25.5074 9.67784 25.5074 10.5031V24.007C25.5074 24.8323 24.8322 25.5075 24.007 25.5075H6.00172C5.17648 25.5075 4.50128 24.8323 4.50128 24.007V10.5031C4.50128 9.67784 5.17648 9.00264 6.00172 9.00264ZM18.0052 6.00176H12.0035V9.00264H18.0052V6.00176ZM6.00172 24.007H24.007V10.5031H6.00172V24.007Z"
-              fill="black"
-            />
-            <path
-              d="M14.2542 13.504H15.7546V16.5048H18.7555V18.0053H15.7546V21.0062H14.2542V18.0053H11.2533V16.5048H14.2542V13.504Z"
-              fill="black"
-            />
-          </svg>
-        </div>
-        <div>
-          <p>Night Shift</p>
-          <h4>21:00 - 06:30</h4>
-          {shifts.night}
-
-          <div></div>
-        </div>
-      </NightShiftBox>{" "}
+      {showSearch && (
+        <>
+          <SearchInput onSearchChange={handleSearchChange} />
+          <div>
+            {filteredNurses.map((nurse) => (
+              <div key={nurse._id}>
+                {nurse.name}
+                <button
+                  onClick={() => onAddNurseClick(nurse._id, currentShiftType)}
+                >
+                  Add
+                </button>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+      <MorningShiftAccordion
+        title={
+          <>
+            Morning Shift
+            <span>06:00 - 14:30</span>
+          </>
+        }
+      >
+        <ShiftBox>
+          {Array(5)
+            .fill(null)
+            .map((_, index) => (
+              <NurseSlot
+                key={
+                  shifts.morning[index]
+                    ? shifts.morning[index].id
+                    : `morning-${index}`
+                }
+                nurse={shifts.morning && shifts.morning[index]}
+                onAdd={() => handleAddClick("morning")}
+                onRemove={onRemoveNurse}
+              />
+            ))}
+        </ShiftBox>
+      </MorningShiftAccordion>
+      <AfternoonShiftAccordion
+        title={
+          <>
+            Afternoon Shift
+            <span>14:00 - 21:30</span>
+          </>
+        }
+      >
+        <ShiftBox>
+          {Array(5)
+            .fill(null)
+            .map((_, index) => (
+              <NurseSlot
+                key={
+                  shifts.afternoon[index]
+                    ? shifts.afternoon[index].id
+                    : `afternoon-${index}`
+                }
+                nurse={shifts.afternoon && shifts.afternoon[index]}
+                onAdd={() => handleAddClick("afternoon")}
+                onRemove={onRemoveNurse}
+              />
+            ))}
+        </ShiftBox>
+      </AfternoonShiftAccordion>
+      <NightShiftAccordion
+        title={
+          <>
+            Night Shift
+            <span>21:00 - 06:30</span>
+          </>
+        }
+      >
+        <ShiftBox>
+          {Array(5)
+            .fill(null)
+            .map((_, index) => (
+              <NurseSlot
+                key={
+                  shifts.night[index]
+                    ? shifts.night[index].id
+                    : `night-${index}`
+                }
+                nurse={shifts.night && shifts.night[index]}
+                onAdd={() => handleAddClick("night")}
+                onRemove={onRemoveNurse}
+              />
+            ))}
+        </ShiftBox>
+      </NightShiftAccordion>{" "}
     </ShiftsContainer>
   );
 }

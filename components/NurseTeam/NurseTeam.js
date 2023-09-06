@@ -33,7 +33,7 @@ export default function NurseTeam({ handleScheduleSubmit }) {
     <>
       <StyledHeading>Available Nurses</StyledHeading>
       <SearchInput onSearchChange={setSearch} />
-      <ButtonStyled onClick={() => router.push("/nurses/add-nurse")}>
+      <ButtonStyled onClick={() => router.push("/nurses/new-nurse")}>
         Add Nurse
       </ButtonStyled>
       <StyledListContainer>

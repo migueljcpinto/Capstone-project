@@ -3,9 +3,10 @@ import {
   AccordionContent,
   AccordionItemContainer,
   AccordionTitle,
+  Arrow,
 } from "./Accordion.styled";
 
-export default function Accordion({ title, children }) {
+export default function Accordion({ title, children, className }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleToggle() {
@@ -14,9 +15,14 @@ export default function Accordion({ title, children }) {
 
   return (
     <>
-      <AccordionItemContainer $isOpen={isOpen} onClick={handleToggle}>
-        <AccordionTitle isOpen={isOpen}>{title}</AccordionTitle>
-        <p>{isOpen ? "-" : "+"}</p>
+      <AccordionItemContainer
+        $isOpen={isOpen}
+        onClick={handleToggle}
+        className={className}
+      >
+        <AccordionTitle $isOpen={isOpen}>{title}</AccordionTitle>
+
+        <Arrow $isOpen={isOpen} />
       </AccordionItemContainer>
       {isOpen && <AccordionContent>{children}</AccordionContent>}
     </>

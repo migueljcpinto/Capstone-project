@@ -1,7 +1,7 @@
 import FormAddNurse from "@/components/FormAddNurse/FormAddNurse";
 import { useRouter } from "next/router";
 
-export default function AddNursePage() {
+export default function NewNursePage() {
   const router = useRouter();
 
   async function handleSubmitNurse(nurseData) {
