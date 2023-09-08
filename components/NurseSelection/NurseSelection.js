@@ -4,8 +4,6 @@ export default function NurseSelection({ nursesList, shiftType, onAddNurse }) {
   const [selectedRole, setSelectedRole] = useState("");
   const [showSpecialistsOnly, setShowSpecialistsOnly] = useState(false);
 
-  console.log("nursesList in NurseSelection:", nursesList);
-
   //creating a new copy from the original array
   let filteredNurses = [...nursesList];
 
@@ -50,10 +48,6 @@ export default function NurseSelection({ nursesList, shiftType, onAddNurse }) {
             {nurse.name}
             <button
               onClick={() => {
-                console.log(
-                  "Nurse Selected in NurseSelection - Nurse ID:",
-                  nurse._id
-                );
                 onAddNurse(nurse._id, shiftType);
               }}
             >

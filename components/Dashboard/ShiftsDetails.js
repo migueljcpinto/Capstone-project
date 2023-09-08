@@ -32,12 +32,8 @@ export default function ShiftDetails({
   }, []);
 
   function handleAddClick(shiftType) {
-    console.log("Handle Add Click - Shift Type:", shiftType);
     setCurrentShiftType(shiftType);
   }
-
-  console.log("ShiftsDetails", nursesList);
-  console.log("Shifts State in ShiftDetails:", shifts);
 
   return (
     <ShiftsContainer>

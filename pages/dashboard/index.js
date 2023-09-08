@@ -72,16 +72,12 @@ export default function DashboardPage() {
     if (selectedDate) {
       fetch(`/api/shifts?date=${selectedDate.toISOString()}`)
         .then((response) => {
-          console.log("API response:", response);
-
           if (!response.ok) {
             throw new Error("Failed to fetch shifts.");
           }
           return response.json();
         })
         .then((data) => {
-          console.log("Shift data received:", data);
-
           setShifts({
             morningShift: data.morningShift || [],
             afternoonShift: data.afternoonShift || [],
@@ -93,8 +89,6 @@ export default function DashboardPage() {
           setError(error.message);
         });
     } else {
-      console.log("No selected date.");
-
       setShifts({
         morningShift: [],
         afternoonShift: [],
@@ -104,7 +98,6 @@ export default function DashboardPage() {
   }, [selectedDate]);
 
   function handleAddNurse(nurseId, shiftType) {
-    console.log("Adding nurse with ID:", nurseId, "to shift type:", shiftType);
     if (!selectedDate) {
       console.error("Selected date is null or undefined.");
       return;
@@ -116,7 +109,8 @@ export default function DashboardPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Updated shift data from API:", data);
+        console.log("Data received from API:", data);
+
         if (
           data &&
           data.morningShift &&
@@ -128,10 +122,12 @@ export default function DashboardPage() {
             afternoonShift: data.afternoonShift,
             nightShift: data.nightShift,
           });
+          console.log("Shift data received for date:", selectedDate, data);
         } else {
           console.error("Unexpected data format from API:", data);
         }
         mutate(`/api/shifts?date=${selectedDate.toISOString()}`);
+        console.log("Updated shifts state:", shifts);
       })
       .catch((error) => {
         console.error("Error adding nurse:", error);
@@ -161,7 +157,6 @@ export default function DashboardPage() {
         console.error("Error removing nurse:", error);
       });
   }
-
   return (
     <DashboardContainer>
       {error && <p style={{ color: "red" }}>{error}</p>}

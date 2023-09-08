@@ -8,13 +8,10 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
-      console.log("Fetching shift for date:", date);
-      console.log("Searching for shift with date:", new Date(date));
       const shift = await Shift.findOne({ date: new Date(date) })
         .populate("morningShift")
         .populate("afternoonShift")
         .populate("nightShift");
-      console.log("Shift found:", shift);
 
       if (!shift) {
         return response
@@ -31,12 +28,8 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "PUT") {
-    console.log("Received data in PUT endpoint:", request.body);
-
     try {
       const { nurseId, shiftType } = request.body;
-      console.log("Received nurseId:", nurseId);
-      console.log("Received shiftType:", shiftType);
 
       const nurse = await Nurse.findById(nurseId);
 
@@ -79,7 +72,6 @@ export default async function handler(request, response) {
   if (request.method === "DELETE") {
     try {
       const { nurseId, shiftType } = request.body;
-      console.log("Removing nurseId:", nurseId, "from shiftType:", shiftType);
 
       const shiftForDate = await Shift.findOne({ date: new Date(date) });
 

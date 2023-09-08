@@ -11,7 +11,6 @@ export default function NurseSlot({
 }) {
   const [isSelectionOpen, setIsSelectionOpen] = useState(false);
   console.log("Nurse prop in NurseSlot:", nurse);
-  console.log("NurseSlot", nursesList);
 
   if (!nurse) {
     return (
@@ -37,6 +36,7 @@ export default function NurseSlot({
       >
         {isSelectionOpen ? "-" : "+"}
       </button>
+      {nurse && <p>{nurse.name}</p>}
       {isSelectionOpen && (
         <NurseSelection
           nursesList={nursesList}
