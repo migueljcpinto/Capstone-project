@@ -1,7 +1,7 @@
 import React from "react";
 import { Datepicker } from "@meinefinsternis/react-horizontal-date-picker";
 import { startOfMonth, endOfMonth } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { de } from "date-fns/locale";
 
 export default function HorizontalCalendar({ selectedDate, onDateChange }) {
   const currentMonthStart = startOfMonth(new Date());
@@ -23,7 +23,7 @@ export default function HorizontalCalendar({ selectedDate, onDateChange }) {
   return (
     <Datepicker
       onChange={handleChange}
-      locale={enUS}
+      locale={de}
       startValue={selectedDate}
       startDate={currentMonthStart}
       endDate={currentMonthEnd}

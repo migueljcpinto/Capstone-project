@@ -1,64 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ShiftsContainer,
-  ShiftBox,
   MorningShiftAccordion,
   AfternoonShiftAccordion,
   NightShiftAccordion,
 } from "@/components/Dashboard/Dashboard.styled";
-import SearchInput from "../SearchInput/SearchInput";
 import NurseSlot from "./NurseSlot";
+import OneShift from "./OneShift";
 
 export default function ShiftDetails({
   shifts,
-  onAddNurseClick,
+  onAddNurse,
   onRemoveNurse,
+  nurseId,
 }) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [showSearch, setShowSearch] = useState(false);
-  const [filteredNurses, setFilteredNurses] = useState([]);
   const [currentShiftType, setCurrentShiftType] = useState(null);
+  const [nursesList, setNursesList] = useState([]);
 
-  function handleSearchChange(term) {
-    setSearchTerm(term);
-    fetch(`/api/nurses?search=${term}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setFilteredNurses(data);
-        console.log("Filtered nurses:", data);
-      })
-      .catch((error) => {
-        console.error("Error fetching filtered nurses:", error);
-      });
-  }
+  useEffect(() => {
+    async function fetchNurses() {
+      try {
+        const response = await fetch("/api/nurses");
+        const data = await response.json();
+        setNursesList(data);
+      } catch (error) {
+        console.error("Error fetching nurses:", error);
+      }
+    }
+
+    fetchNurses();
+  }, []);
 
   function handleAddClick(shiftType) {
-    console.log("Shift type on add click:", shiftType);
-
-    setShowSearch(true);
+    console.log("Handle Add Click - Shift Type:", shiftType);
     setCurrentShiftType(shiftType);
   }
-  console.log("Morning shifts before rendering slots:", shifts.morning);
+
+  console.log("ShiftsDetails", nursesList);
+  console.log("Shifts State in ShiftDetails:", shifts);
 
   return (
     <ShiftsContainer>
-      {showSearch && (
-        <>
-          <SearchInput onSearchChange={handleSearchChange} />
-          <div>
-            {filteredNurses.map((nurse) => (
-              <div key={nurse._id}>
-                {nurse.name}
-                <button
-                  onClick={() => onAddNurseClick(nurse._id, currentShiftType)}
-                >
-                  Add
-                </button>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
       <MorningShiftAccordion
         title={
           <>
@@ -67,22 +49,14 @@ export default function ShiftDetails({
           </>
         }
       >
-        <ShiftBox>
-          {Array(5)
-            .fill(null)
-            .map((_, index) => (
-              <NurseSlot
-                key={
-                  shifts.morning[index]
-                    ? shifts.morning[index].id
-                    : `morning-${index}`
-                }
-                nurse={shifts.morning && shifts.morning[index]}
-                onAdd={() => handleAddClick("morning")}
-                onRemove={onRemoveNurse}
-              />
-            ))}
-        </ShiftBox>
+        <OneShift
+          shiftName="morningShift"
+          nursesList={nursesList}
+          shifts={shifts}
+          onAddNurse={onAddNurse}
+          onAddClick={handleAddClick}
+          onRemoveNurse={onRemoveNurse}
+        />
       </MorningShiftAccordion>
       <AfternoonShiftAccordion
         title={
@@ -92,22 +66,15 @@ export default function ShiftDetails({
           </>
         }
       >
-        <ShiftBox>
-          {Array(5)
-            .fill(null)
-            .map((_, index) => (
-              <NurseSlot
-                key={
-                  shifts.afternoon[index]
-                    ? shifts.afternoon[index].id
-                    : `afternoon-${index}`
-                }
-                nurse={shifts.afternoon && shifts.afternoon[index]}
-                onAdd={() => handleAddClick("afternoon")}
-                onRemove={onRemoveNurse}
-              />
-            ))}
-        </ShiftBox>
+        {" "}
+        <OneShift
+          shiftName="afternoonShift"
+          nursesList={nursesList}
+          shifts={shifts}
+          onAddNurse={onAddNurse}
+          onAddClick={handleAddClick}
+          onRemoveNurse={onRemoveNurse}
+        />{" "}
       </AfternoonShiftAccordion>
       <NightShiftAccordion
         title={
@@ -117,22 +84,14 @@ export default function ShiftDetails({
           </>
         }
       >
-        <ShiftBox>
-          {Array(5)
-            .fill(null)
-            .map((_, index) => (
-              <NurseSlot
-                key={
-                  shifts.night[index]
-                    ? shifts.night[index].id
-                    : `night-${index}`
-                }
-                nurse={shifts.night && shifts.night[index]}
-                onAdd={() => handleAddClick("night")}
-                onRemove={onRemoveNurse}
-              />
-            ))}
-        </ShiftBox>
+        <OneShift
+          shiftName="nightShift"
+          nursesList={nursesList}
+          shifts={shifts}
+          onAddNurse={onAddNurse}
+          onAddClick={handleAddClick}
+          onRemoveNurse={onRemoveNurse}
+        />{" "}
       </NightShiftAccordion>{" "}
     </ShiftsContainer>
   );

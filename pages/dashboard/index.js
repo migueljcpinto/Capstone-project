@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { mutate } from "swr";
 import {
   DashboardContainer,
   CalendarContainer,
@@ -12,35 +13,36 @@ import ShiftDetails from "@/components/Dashboard/ShiftsDetails";
 export default function DashboardPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [shifts, setShifts] = useState({
-    morning: [],
-    afternoon: [],
-    night: [],
+    morningShift: [],
+    afternoonShift: [],
+    nightShift: [],
   });
+
   const [teamStats, setTeamStats] = useState({
     totalNurses: 0,
     availableNurses: 0,
     nursesOnVacation: 0,
   });
   const [error, setError] = useState(null);
+
   const router = useRouter();
-  console.log("Shifts on component mount:", shifts);
 
   //The idea is to initiate all three API calls at the same time and, once they have all been completed, process the data.
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [nurseData, absenceData, availabilityData] = await Promise.all([
-          fetch("/api/nurses").then((res) => {
-            if (!res.ok) throw new Error("Failed to fetch nurses.");
-            return res.json();
+          fetch("/api/nurses").then((response) => {
+            if (!response.ok) throw new Error("Failed to fetch nurses.");
+            return response.json();
           }),
-          fetch("/api/absences").then((res) => {
-            if (!res.ok) throw new Error("Failed to fetch absences.");
-            return res.json();
+          fetch("/api/absences").then((response) => {
+            if (!response.ok) throw new Error("Failed to fetch absences.");
+            return response.json();
           }),
-          fetch("/api/availability").then((res) => {
-            if (!res.ok) throw new Error("Failed to fetch availability.");
-            return res.json();
+          fetch("/api/availability").then((response) => {
+            if (!response.ok) throw new Error("Failed to fetch availability.");
+            return response.json();
           }),
         ]);
 
@@ -70,16 +72,20 @@ export default function DashboardPage() {
     if (selectedDate) {
       fetch(`/api/shifts?date=${selectedDate.toISOString()}`)
         .then((response) => {
+          console.log("API response:", response);
+
           if (!response.ok) {
             throw new Error("Failed to fetch shifts.");
           }
           return response.json();
         })
         .then((data) => {
+          console.log("Shift data received:", data);
+
           setShifts({
-            morning: data.morningShift || [],
-            afternoon: data.afternoonShift || [],
-            night: data.nightShift || [],
+            morningShift: data.morningShift || [],
+            afternoonShift: data.afternoonShift || [],
+            nightShift: data.nightShift || [],
           });
         })
         .catch((error) => {
@@ -87,15 +93,22 @@ export default function DashboardPage() {
           setError(error.message);
         });
     } else {
+      console.log("No selected date.");
+
       setShifts({
-        morning: [],
-        afternoon: [],
-        night: [],
+        morningShift: [],
+        afternoonShift: [],
+        nightShift: [],
       });
     }
   }, [selectedDate]);
 
   function handleAddNurse(nurseId, shiftType) {
+    console.log("Adding nurse with ID:", nurseId, "to shift type:", shiftType);
+    if (!selectedDate) {
+      console.error("Selected date is null or undefined.");
+      return;
+    }
     fetch(`/api/shifts/${selectedDate.toISOString()}`, {
       method: "PUT",
       body: JSON.stringify({ nurseId, shiftType }),
@@ -103,11 +116,22 @@ export default function DashboardPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setShifts({
-          morning: data.morningShift || [],
-          afternoon: data.afternoonShift || [],
-          night: data.nightShift || [],
-        });
+        console.log("Updated shift data from API:", data);
+        if (
+          data &&
+          data.morningShift &&
+          data.afternoonShift &&
+          data.nightShift
+        ) {
+          setShifts({
+            morningShift: data.morningShift,
+            afternoonShift: data.afternoonShift,
+            nightShift: data.nightShift,
+          });
+        } else {
+          console.error("Unexpected data format from API:", data);
+        }
+        mutate(`/api/shifts?date=${selectedDate.toISOString()}`);
       })
       .catch((error) => {
         console.error("Error adding nurse:", error);
@@ -115,18 +139,23 @@ export default function DashboardPage() {
   }
 
   function handleRemoveNurse(nurseId, shiftType) {
+    if (!nurseId || !shiftType) {
+      console.error("nurseId or shiftType is undefined");
+      return;
+    }
     fetch(`/api/shifts/${selectedDate.toISOString()}`, {
-      method: "PUT",
-      body: JSON.stringify({ nurseId, shiftType, action: "remove" }),
+      method: "DELETE",
+      body: JSON.stringify({ nurseId, shiftType }),
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
       .then((data) => {
         setShifts({
-          morning: data.morningShift || [],
-          afternoon: data.afternoonShift || [],
-          night: data.nightShift || [],
+          morningShift: data.morningShift || [],
+          afternoonShift: data.afternoonShift || [],
+          nightShift: data.nightShift || [],
         });
+        mutate(`/api/shifts?date=${selectedDate.toISOString()}`);
       })
       .catch((error) => {
         console.error("Error removing nurse:", error);
@@ -136,6 +165,7 @@ export default function DashboardPage() {
   return (
     <DashboardContainer>
       {error && <p style={{ color: "red" }}>{error}</p>}
+
       <Profile />
       <TeamStats stats={teamStats} />
       <CalendarContainer>
@@ -146,7 +176,7 @@ export default function DashboardPage() {
       </CalendarContainer>
       <ShiftDetails
         shifts={shifts}
-        onAddNurseClick={handleAddNurse}
+        onAddNurse={handleAddNurse}
         onRemoveNurse={handleRemoveNurse}
       />
 

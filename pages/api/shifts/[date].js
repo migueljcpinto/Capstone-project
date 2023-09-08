@@ -8,10 +8,14 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
+      console.log("Fetching shift for date:", date);
+      console.log("Searching for shift with date:", new Date(date));
       const shift = await Shift.findOne({ date: new Date(date) })
         .populate("morningShift")
         .populate("afternoonShift")
         .populate("nightShift");
+      console.log("Shift found:", shift);
+
       if (!shift) {
         return response
           .status(404)
@@ -19,6 +23,7 @@ export default async function handler(request, response) {
       }
       return response.status(200).json(shift);
     } catch (error) {
+      console.error("Error fetching shift:", error);
       return response
         .status(500)
         .json({ status: "Error fetching shift data." });
@@ -26,6 +31,8 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "PUT") {
+    console.log("Received data in PUT endpoint:", request.body);
+
     try {
       const { nurseId, shiftType } = request.body;
       console.log("Received nurseId:", nurseId);
@@ -42,16 +49,16 @@ export default async function handler(request, response) {
       let shiftForDate = await Shift.findOne({ date: new Date(date) });
 
       if (!shiftForDate) {
-        // Se o turno para a data não existir, crie um novo
+        // If the shift do not exist, create one
         shiftForDate = await Shift.create({
           date: new Date(date),
           [`${shiftType}Shift`]: [nurseId],
         });
       } else {
-        // Se o turno para a data existir, atualize-o
+        // If the shift exist, update it
         await Shift.updateOne(
           { date: new Date(date) },
-          { $push: { [`${shiftType}Shift`]: nurseId } }
+          { $addToSet: { [shiftType]: nurseId } }
         );
       }
 
@@ -60,7 +67,7 @@ export default async function handler(request, response) {
         .populate("afternoonShift")
         .populate("nightShift");
 
-      return response.status(200).json(updatedShift);
+      return response.status(200).json(updatedShift.toObject());
     } catch (error) {
       console.error("Mongoose error:", error);
       return response
@@ -68,5 +75,47 @@ export default async function handler(request, response) {
         .json({ status: "Error updating shift data." });
     }
   }
+
+  if (request.method === "DELETE") {
+    try {
+      const { nurseId, shiftType } = request.body;
+      console.log("Removing nurseId:", nurseId, "from shiftType:", shiftType);
+
+      const shiftForDate = await Shift.findOne({ date: new Date(date) });
+
+      if (!shiftForDate) {
+        return response
+          .status(404)
+          .json({ status: "Shift not found for the given date." });
+      }
+
+      if (!shiftForDate[shiftType]) {
+        console.error(`Shift type ${shiftType} not found for the given date.`);
+        return response.status(404).json({
+          status: `Shift type ${shiftType} not found for the given date.`,
+        });
+      }
+
+      // Remove the nurseId from the specific shiftType
+      shiftForDate[`${shiftType}Shift`] = shiftForDate[
+        `${shiftType}Shift`
+      ].filter((id) => id.toString() !== nurseId);
+
+      await shiftForDate.save();
+
+      const updatedShift = await Shift.findOne({ date: new Date(date) })
+        .populate("morningShift")
+        .populate("afternoonShift")
+        .populate("nightShift");
+
+      return response.status(200).json(updatedShift);
+    } catch (error) {
+      console.error("Error removing nurse from shift:", error);
+      return response
+        .status(500)
+        .json({ status: "Error removing nurse from shift." });
+    }
+  }
+
   return response.status(405).json({ status: "Method not allowed." });
 }
