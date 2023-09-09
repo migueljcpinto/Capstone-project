@@ -1,50 +1,27 @@
-/* import NurseSelection from "../NurseSelection/NurseSelection";
+import NurseSelection from "../NurseSelection/NurseSelection";
 import { useState } from "react";
-import { Slot } from "./Dashboard.styled";
+import { Slot, NurseImage } from "./Dashboard.styled";
+import Image from "next/image";
 
-export default function NurseSlot({
-  nurse,
-  onAddNurse,
-  nursesList,
-  onRemove,
-  shiftType,
-}) {
-  const [isSelectionOpen, setIsSelectionOpen] = useState(false);
-  console.log("Nurse data in NurseSlot:", nurse);
-
-  if (!nurse) {
-    return (
-      <Slot>
-        <button onClick={() => setIsSelectionOpen(!isSelectionOpen)}>+</button>
-        {isSelectionOpen && (
-          <NurseSelection
-            nursesList={nursesList}
-            shiftType={shiftType}
-            onAddNurse={onAddNurse}
-          />
-        )}
-      </Slot>
-    );
-  }
-
+export default function NurseSlot({ currentNurse, onAddClick }) {
   return (
-    <Slot>
-      <button
-        onClick={() => {
-          setIsSelectionOpen(!isSelectionOpen);
-        }}
-      >
-        {isSelectionOpen ? "-" : "+"}
-      </button>
-      {nurse && <p>{nurse.name}</p>}
-      {isSelectionOpen && (
-        <NurseSelection
-          nursesList={nursesList}
-          shiftType={shiftType}
-          onAddNurse={onAddNurse}
-        />
+    <div>
+      {currentNurse ? (
+        <Slot>
+          <NurseImage
+            width={42}
+            height={42}
+            src={currentNurse.image}
+            alt={`${currentNurse.name} Nurse Photo`}
+          />
+          <span>
+            <h4>{currentNurse.name}</h4>
+            <h5>{currentNurse.role}</h5>
+          </span>{" "}
+        </Slot>
+      ) : (
+        <button onClick={onAddClick}>+</button>
       )}
-    </Slot>
+    </div>
   );
 }
- */

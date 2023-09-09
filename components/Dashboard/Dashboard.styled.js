@@ -98,7 +98,6 @@ export const ShiftBox = styled.div`
   flex-direction: column;
   width: 340px;
   border-radius: 0 0 12px 12px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding-bottom: 16px;
   line-height: 1.6;
 `;
@@ -158,11 +157,18 @@ export const NightShiftAccordion = styled(Accordion)`
 `;
 
 export const Slot = styled.div`
-  display: inline-flex;
-  padding: 11px 12px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
+  display: flex;
+  flex-direction: rown;
+  width: 330px;
+  padding: 6px 12px 6px 6px;
+  justify-content: space-around;
+  align-items: center;
   border-radius: 18px;
-  background: #fff;
+  background: rgba(17, 179, 207, 0.05);
+  margin: 6px;
+`;
+
+export const NurseImage = styled(Image)`
+  border-radius: 42px;
+  background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 `;

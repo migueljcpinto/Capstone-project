@@ -1,5 +1,7 @@
 import { ShiftBox, Slot } from "./Dashboard.styled";
 import { useState } from "react";
+import NurseSlot from "./NurseSlot";
+import NurseSelection from "../NurseSelection/NurseSelection";
 
 export default function OneShift({
   shiftName,
@@ -9,20 +11,17 @@ export default function OneShift({
   onAddClick,
   onRemoveNurse,
 }) {
-  const [isSelectionOpen, setIsSelectionOpen] = useState(false);
+  const [selectedSlot, setSelectionSlot] = useState(null);
   const [selectedRole, setSelectedRole] = useState("");
   const [showSpecialistsOnly, setShowSpecialistsOnly] = useState(false);
 
-  let filteredNurses = [...nursesList];
-
-  if (selectedRole) {
-    filteredNurses = filteredNurses.filter(
-      (nurse) => nurse.role === selectedRole
-    );
+  function handleSlotClick(index) {
+    setSelectionSlot(index);
   }
 
-  if (showSpecialistsOnly) {
-    filteredNurses = filteredNurses.filter((nurse) => nurse.specialist);
+  function handleNurseSelection(nurseId) {
+    onAddNurse(nurseId, shiftName);
+    setSelectionSlot(null); //It should close the Selection after adding the nurse
   }
 
   return (
@@ -34,66 +33,26 @@ export default function OneShift({
             ? shifts[shiftName][index]
             : null;
 
-          if (!currentNurse) {
-            return (
-              <Slot key={index}>
-                <button onClick={() => setIsSelectionOpen(!isSelectionOpen)}>
-                  +
-                </button>
-                {isSelectionOpen && (
-                  <div>
-                    <div>
-                      <label>Filter by Role:</label>
-                      <select
-                        value={selectedRole}
-                        onChange={(e) => setSelectedRole(e.target.value)}
-                      >
-                        <option value="">All</option>
-                        <option value="nurse">Nurse</option>
-                        <option value="chief">Chief</option>
-                        <option value="sub-chief">Sub-Chief</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="student">Student</option>{" "}
-                      </select>
-                    </div>
-                    <div>
-                      <label>Show only specialists:</label>
-                      <input
-                        type="checkbox"
-                        checked={showSpecialistsOnly}
-                        onChange={(e) =>
-                          setShowSpecialistsOnly(e.target.checked)
-                        }
-                      />
-                    </div>
-                    <ul>
-                      {filteredNurses.map((nurse) => (
-                        <li key={nurse._id}>
-                          {nurse.name}
-                          <button
-                            onClick={() => {
-                              onAddNurse(nurse._id, shiftName);
-                              setIsSelectionOpen(false);
-                            }}
-                          >
-                            Add
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </Slot>
-            );
-          } else {
-            return (
-              <Slot key={index}>
-                <button onClick={() => setIsSelectionOpen(!isSelectionOpen)}>
-                  {currentNurse.name}
-                </button>
-              </Slot>
-            );
-          }
+          return (
+            <div key={index}>
+              <NurseSlot
+                currentNurse={currentNurse}
+                onAddClick={() => handleSlotClick(index)}
+              />
+              {selectedSlot === index && (
+                <NurseSelection
+                  nursesList={nursesList}
+                  selectedRole={selectedRole}
+                  showSpecialistsOnly={showSpecialistsOnly}
+                  setSelectedRole={setSelectedRole}
+                  setShowSpecialistsOnly={setShowSpecialistsOnly}
+                  onAddNurse={handleNurseSelection}
+                  shiftName={shiftName}
+                  setSelectionSlot={setSelectionSlot}
+                />
+              )}
+            </div>
+          );
         })}
     </ShiftBox>
   );

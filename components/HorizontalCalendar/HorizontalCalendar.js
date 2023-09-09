@@ -24,7 +24,7 @@ export default function HorizontalCalendar({ selectedDate, onDateChange }) {
     <Datepicker
       onChange={handleChange}
       locale={de}
-      startValue={new Date()}
+      startValue={selectedDate}
       startDate={new Date()}
       endDate={currentMonthEnd}
     />
