@@ -7,25 +7,25 @@ export default function HorizontalCalendar({ selectedDate, onDateChange }) {
   const currentMonthStart = startOfMonth(new Date());
   const currentMonthEnd = endOfMonth(new Date());
 
-  const handleChange = (d) => {
+  function handleChange(d) {
     const [newSelectedDate] = d;
     if (
       selectedDate &&
       newSelectedDate &&
-      newSelectedDate.toISOString() === selectedDate.toISOString()
+      newSelectedDate.toISOString().split("T")[0] ===
+        selectedDate.toISOString().split("T")[0]
     ) {
       onDateChange(null);
     } else {
       onDateChange(newSelectedDate);
     }
-  };
-
+  }
   return (
     <Datepicker
       onChange={handleChange}
       locale={de}
-      startValue={selectedDate}
-      startDate={currentMonthStart}
+      startValue={new Date()}
+      startDate={new Date()}
       endDate={currentMonthEnd}
     />
   );

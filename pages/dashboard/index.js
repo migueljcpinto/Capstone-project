@@ -68,33 +68,42 @@ export default function DashboardPage() {
     fetchData();
   }, []);
 
+  //fecthing the dates...
+
   useEffect(() => {
-    if (selectedDate) {
-      fetch(`/api/shifts?date=${selectedDate.toISOString()}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to fetch shifts.");
-          }
-          return response.json();
-        })
-        .then((data) => {
+    const fetchData = async () => {
+      if (!selectedDate) return;
+      try {
+        const formattedDate = selectedDate.toISOString().split("T")[0];
+        const response = await fetch(`/api/shifts/${formattedDate}`);
+
+        if (response.status === 404) {
           setShifts({
-            morningShift: data.morningShift || [],
-            afternoonShift: data.afternoonShift || [],
-            nightShift: data.nightShift || [],
+            morningShift: [],
+            afternoonShift: [],
+            nightShift: [],
           });
-        })
-        .catch((error) => {
-          console.error("Error fetching shifts:", error);
-          setError(error.message);
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+
+        const data = await response.json();
+        console.log("Data received from API:", data);
+        setShifts({
+          morningShift: data.morningShift || [],
+          afternoonShift: data.afternoonShift || [],
+          nightShift: data.nightShift || [],
         });
-    } else {
-      setShifts({
-        morningShift: [],
-        afternoonShift: [],
-        nightShift: [],
-      });
-    }
+      } catch (error) {
+        console.error("Error fetching shifts:", error.message);
+        setError(error.message);
+      }
+    };
+
+    fetchData();
   }, [selectedDate]);
 
   function handleAddNurse(nurseId, shiftType) {
@@ -102,7 +111,9 @@ export default function DashboardPage() {
       console.error("Selected date is null or undefined.");
       return;
     }
-    fetch(`/api/shifts/${selectedDate.toISOString()}`, {
+    const formattedDate = selectedDate.toISOString().split("T")[0];
+
+    fetch(`/api/shifts/${formattedDate}`, {
       method: "PUT",
       body: JSON.stringify({ nurseId, shiftType }),
       headers: { "Content-Type": "application/json" },
@@ -126,7 +137,7 @@ export default function DashboardPage() {
         } else {
           console.error("Unexpected data format from API:", data);
         }
-        mutate(`/api/shifts?date=${selectedDate.toISOString()}`);
+        mutate(`/api/shifts/${formattedDate}`);
         console.log("Updated shifts state:", shifts);
       })
       .catch((error) => {
@@ -139,7 +150,9 @@ export default function DashboardPage() {
       console.error("nurseId or shiftType is undefined");
       return;
     }
-    fetch(`/api/shifts/${selectedDate.toISOString()}`, {
+    const formattedDate = selectedDate.toISOString().split("T")[0];
+
+    fetch(`/api/shifts/${formattedDate}`, {
       method: "DELETE",
       body: JSON.stringify({ nurseId, shiftType }),
       headers: { "Content-Type": "application/json" },
@@ -151,7 +164,7 @@ export default function DashboardPage() {
           afternoonShift: data.afternoonShift || [],
           nightShift: data.nightShift || [],
         });
-        mutate(`/api/shifts?date=${selectedDate.toISOString()}`);
+        mutate(`/api/shifts/${formattedDate}`);
       })
       .catch((error) => {
         console.error("Error removing nurse:", error);

@@ -1,4 +1,4 @@
-import NurseSelection from "../NurseSelection/NurseSelection";
+/* import NurseSelection from "../NurseSelection/NurseSelection";
 import { useState } from "react";
 import { Slot } from "./Dashboard.styled";
 
@@ -10,7 +10,7 @@ export default function NurseSlot({
   shiftType,
 }) {
   const [isSelectionOpen, setIsSelectionOpen] = useState(false);
-  console.log("Nurse prop in NurseSlot:", nurse);
+  console.log("Nurse data in NurseSlot:", nurse);
 
   if (!nurse) {
     return (
@@ -47,3 +47,4 @@ export default function NurseSlot({
     </Slot>
   );
 }
+ */
