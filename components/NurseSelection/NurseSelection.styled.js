@@ -33,3 +33,17 @@ export const ModalCloseButton = styled.button`
   font-size: 24px;
   cursor: pointer;
 `;
+
+export const FilterSelection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
+export const FilteredList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+`;

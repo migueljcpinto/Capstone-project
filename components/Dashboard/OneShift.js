@@ -38,6 +38,7 @@ export default function OneShift({
               <NurseSlot
                 currentNurse={currentNurse}
                 onAddClick={() => handleSlotClick(index)}
+                onRemoveClick={() => onRemoveNurse(currentNurse._id, shiftName)}
               />
               {selectedSlot === index && (
                 <NurseSelection

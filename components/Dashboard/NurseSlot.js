@@ -1,9 +1,8 @@
-import NurseSelection from "../NurseSelection/NurseSelection";
-import { useState } from "react";
-import { Slot, NurseImage } from "./Dashboard.styled";
-import Image from "next/image";
+import AddNurseSVGIcon from "@/utilities/Icons/AddNurseSlotIcon";
+import RemoveSVGIcon from "@/utilities/Icons/RemoveNurseSlotIcon";
+import { Slot, NurseImage, ButtonSlot } from "./Dashboard.styled";
 
-export default function NurseSlot({ currentNurse, onAddClick }) {
+export default function NurseSlot({ currentNurse, onAddClick, onRemoveClick }) {
   return (
     <div>
       {currentNurse ? (
@@ -17,10 +16,17 @@ export default function NurseSlot({ currentNurse, onAddClick }) {
           <span>
             <h4>{currentNurse.name}</h4>
             <h5>{currentNurse.role}</h5>
-          </span>{" "}
+          </span>
+          <ButtonSlot onClick={onRemoveClick}>
+            <RemoveSVGIcon />
+          </ButtonSlot>
         </Slot>
       ) : (
-        <button onClick={onAddClick}>+</button>
+        <Slot>
+          <ButtonSlot onClick={onAddClick}>
+            <AddNurseSVGIcon />
+          </ButtonSlot>
+        </Slot>
       )}
     </div>
   );

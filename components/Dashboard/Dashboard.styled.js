@@ -172,3 +172,11 @@ export const NurseImage = styled(Image)`
   border-radius: 42px;
   background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 `;
+
+export const ButtonSlot = styled.button`
+  background-color: white;
+  border: 1px solid #add8e6;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+`;

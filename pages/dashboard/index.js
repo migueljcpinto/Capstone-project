@@ -91,7 +91,6 @@ export default function DashboardPage() {
         }
 
         const data = await response.json();
-        console.log("Data received from API:", data);
         setShifts({
           morningShift: data.morningShift || [],
           afternoonShift: data.afternoonShift || [],
@@ -120,8 +119,6 @@ export default function DashboardPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Data received from API:", data);
-
         if (
           data &&
           data.morningShift &&
@@ -133,12 +130,10 @@ export default function DashboardPage() {
             afternoonShift: data.afternoonShift,
             nightShift: data.nightShift,
           });
-          console.log("Shift data received for date:", selectedDate, data);
         } else {
           console.error("Unexpected data format from API:", data);
         }
         mutate(`/api/shifts/${formattedDate}`);
-        console.log("Updated shifts state:", shifts);
       })
       .catch((error) => {
         console.error("Error adding nurse:", error);
