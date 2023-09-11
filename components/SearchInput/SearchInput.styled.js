@@ -6,11 +6,11 @@ export const SearchInputStyled = styled.input`
   height: 45px;
   padding: 0 20px;
   font-size: 1rem;
-  border: 1px solid #D0CFCE;
+  border: 1px solid #d0cfce;
   outline: none;
 
-  &:focus{
-    border: 1px solid #008ABF;
+  &:focus {
+    border: 1px solid #008abf;
     transition: 0.35s ease;
     color: grey;
 
@@ -18,6 +18,5 @@ export const SearchInputStyled = styled.input`
       transition: opacity 0.45s ease;
       opacity: 0;
     }
-   }
- }
+  }
 `;

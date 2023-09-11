@@ -48,22 +48,13 @@ export default function ScheduleTabs({
       <TabContainer>
         <h3>Work Schedule</h3>
         <BlocTabs>
-          <Tabs
-            isactive={activeTab === 1 ? "true" : undefined}
-            onClick={() => handleTabActive(1)}
-          >
+          <Tabs $isactive={activeTab === 1} onClick={() => handleTabActive(1)}>
             Vacations
           </Tabs>
-          <Tabs
-            isactive={activeTab === 2 ? "true" : undefined}
-            onClick={() => handleTabActive(2)}
-          >
+          <Tabs $isactive={activeTab === 2} onClick={() => handleTabActive(2)}>
             Days-off
           </Tabs>
-          <Tabs
-            isactive={activeTab === 3 ? "true" : undefined}
-            onClick={() => handleTabActive(3)}
-          >
+          <Tabs $isactive={activeTab === 3} onClick={() => handleTabActive(3)}>
             Availability
           </Tabs>
         </BlocTabs>

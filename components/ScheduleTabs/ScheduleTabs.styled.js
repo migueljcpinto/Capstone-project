@@ -21,9 +21,9 @@ export const Tabs = styled.div`
   cursor: pointer;
   padding: 10px;
   border-radius: 7px;
-  background-color: ${({ isactive }) => (isactive ? "#fff4e6" : "white")};
-  border-bottom: ${({ isactive }) =>
-    isactive ? "1px solid #222" : "1px solid transparent"};
+  background-color: ${({ $isactive }) => ($isactive ? "#fff4e6" : "white")};
+  border-bottom: ${({ $isactive }) =>
+    $isactive ? "1px solid #222" : "1px solid transparent"};
 `;
 
 export const ContentTabs = styled.div`

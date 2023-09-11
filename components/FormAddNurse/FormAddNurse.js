@@ -79,7 +79,7 @@ export default function FormAddNurse({ onSubmitNurse }) {
           type="number"
           required
           min={0}
-          max={60}
+          max={50}
           pattern="\d+"
           placeholder="Enter years of experience"
         />
