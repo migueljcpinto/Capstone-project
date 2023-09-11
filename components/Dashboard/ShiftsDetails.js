@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useSWR from "swr";
 import {
   ShiftsContainer,
   MorningShiftAccordion,
   AfternoonShiftAccordion,
   NightShiftAccordion,
 } from "@/components/Dashboard/Dashboard.styled";
-import NurseSlot from "./NurseSlot";
 import OneShift from "./OneShift";
 
 export default function ShiftDetails({
@@ -15,21 +15,12 @@ export default function ShiftDetails({
   nurseId,
 }) {
   const [currentShiftType, setCurrentShiftType] = useState(null);
-  const [nursesList, setNursesList] = useState([]);
 
-  useEffect(() => {
-    async function fetchNurses() {
-      try {
-        const response = await fetch("/api/nurses");
-        const data = await response.json();
-        setNursesList(data);
-      } catch (error) {
-        console.error("Error fetching nurses:", error);
-      }
-    }
+  const { data: nursesList, error } = useSWR("/api/nurses");
 
-    fetchNurses();
-  }, []);
+  if (error) {
+    console.error("Error fetching nurses:", error);
+  }
 
   function handleAddClick(shiftType) {
     setCurrentShiftType(shiftType);
