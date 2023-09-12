@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const NavContainer = styled.nav`
   position: fixed;
   bottom: 20px;
-  left: 25.5px;
+  left: 50%;
+  transform: translateX(-50%);
   max-width: 500px;
   z-index: 1000;
   display: flex;
@@ -19,14 +20,14 @@ export const NavItem = styled.div`
   flex-direction: column;
   align-items: center;
   color: white;
-  background: ${({ isActive }) =>
-    isActive ? "rgba(250, 255, 0, 0.29)" : "#70d2a9"};
-  border-radius: ${({ isActive }) => (isActive ? "15px" : "16px")};
 `;
 
 export const NavLinkText = styled.span`
-  display: ${({ isActive }) => (isActive ? "inline" : "none")};
+  display: inline;
   color: white;
   font-size: 12px;
-  text-decoration: ${({ isActive }) => (isActive ? "none" : "underline")};
+  background: rgba(250, 255, 0, 0.29)
+  border-radius: 15px;
+  text-align:center;
+  text-decoration-line: none;  
 `;

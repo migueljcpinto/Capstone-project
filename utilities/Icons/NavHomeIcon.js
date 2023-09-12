@@ -7,9 +7,8 @@ const hoverAnimation = keyframes`
   background: rgba(250, 255, 0, 0.29);
 }`;
 
-export default function NavHomeIcon() {
+export default function NavHomeIcon({ isActive }) {
   const StyledHomeIcon = styled.svg`
-    display: flex;
     width: 76px;
     height: 50px;
     padding: 10px;
@@ -30,6 +29,7 @@ export default function NavHomeIcon() {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      isActive={isActive}
     >
       <g id="Nav Icons">
         <path

@@ -8,7 +8,6 @@ const hoverAnimation = keyframes`
 }`;
 export default function NavProfileIcon() {
   const StyledProfileIcon = styled.svg`
-    display: flex;
     width: 76px;
     height: 50px;
     padding: 10px;
