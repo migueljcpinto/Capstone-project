@@ -1,11 +1,4 @@
-import styled, { keyframes } from "styled-components";
-const hoverAnimation = keyframes`
-0% {
-    background-color: #70d2a9;
-}
-100% {
-  background: rgba(250, 255, 0, 0.29);
-}`;
+import styled from "styled-components";
 
 export default function NavHomeIcon({ isActive }) {
   const StyledHomeIcon = styled.svg`
@@ -17,9 +10,6 @@ export default function NavHomeIcon({ isActive }) {
     gap: 10px;
     flex-shrink: 0;
     border-radius: 16px;
-    &:hover {
-      animation: ${hoverAnimation} 0.3s forwards;
-    }
   `;
 
   return (
