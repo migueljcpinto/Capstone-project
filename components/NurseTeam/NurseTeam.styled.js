@@ -23,7 +23,7 @@ export const StyledList = styled.ul`
   margin-bottom: 2rem;
 `;
 
-export const ButtonStyled = styled.button`
+/* export const ButtonStyled = styled.button`
   text-decoration: none;
   background-color: #ffe6be;
   color: #000;
@@ -44,4 +44,4 @@ export const ButtonStyled = styled.button`
   &:hover {
     background-color: #e37820;
   }
-`;
+`; */

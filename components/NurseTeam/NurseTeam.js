@@ -3,7 +3,6 @@ import {
   StyledHeading,
   StyledList,
   StyledListContainer,
-  ButtonStyled,
 } from "./NurseTeam.styled";
 import { useState } from "react";
 import SearchInput from "../SearchInput/SearchInput";
@@ -33,9 +32,6 @@ export default function NurseTeam({ handleScheduleSubmit }) {
     <>
       <StyledHeading>Available Nurses</StyledHeading>
       <SearchInput onSearchChange={setSearch} />
-      <ButtonStyled onClick={() => router.push("/nurses/new-nurse")}>
-        Add Nurse
-      </ButtonStyled>
       <StyledListContainer>
         <StyledList>
           {data
