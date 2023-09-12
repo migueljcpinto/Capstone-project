@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import NurseTeam from "@/components/NurseTeam/NurseTeam";
 import Dashboard from "./dashboard";
+import NavBurger from "@/components/NavBar/NavBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +14,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className={inter.className}>
-        {/*         <NurseTeam />*/}
         <Dashboard />
       </main>
     </>

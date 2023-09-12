@@ -182,8 +182,6 @@ export default function DashboardPage() {
         onAddNurse={handleAddNurse}
         onRemoveNurse={handleRemoveNurse}
       />
-
-      <button onClick={() => router.push("/nurseteam")}>Team </button>
     </DashboardContainer>
   );
 }

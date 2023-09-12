@@ -1,0 +1,417 @@
+[
+  {
+    "name": "Morpheus Meds",
+    "age": 47,
+    "yearsExperience": 21,
+    "role": "chief",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=68",
+    "email": "morpheus@sapo.da",
+    "phoneNumber": {
+      "$numberLong": "12491241262"
+    },
+    "description": "Offering the red pill of reality or the blue pill of anesthesia."
+  },
+  {
+    "name": "Gollum Glucose",
+    "age": 40,
+    "yearsExperience": 16,
+    "role": "teacher",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=18",
+    "email": "gollum@sapo.da",
+    "phoneNumber": {
+      "$numberLong": "12491241263"
+    },
+    "description": "My precious insulin..."
+  },
+  {
+    "name": "Han Solo-Cup",
+    "age": 40,
+    "yearsExperience": 15,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=12",
+    "email": "hansolo@sapo.da",
+    "phoneNumber": 12491241242,
+    "description": "The fastest needle in the galaxy!",
+    "workSchedule": []
+  },
+  {
+    "name": "Indiana Gauze",
+    "age": 50,
+    "yearsExperience": 25,
+    "role": "Teacher",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=20",
+    "email": "indiana@sapo.da",
+    "phoneNumber": 12491241243,
+    "description": "Uncovering the mysteries of medicine, one patient at a time.",
+    "workSchedule": []
+  },
+  {
+    "name": "Sherlock Bonesetter",
+    "age": 30,
+    "yearsExperience": 5,
+    "role": "Student",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=35",
+    "email": "sherlock@sapo.da",
+    "phoneNumber": 12491241244,
+    "description": "The game is afoot, and so is the health of our patients!",
+    "workSchedule": []
+  },
+  {
+    "name": "Luke Syringe-Walker",
+    "age": 25,
+    "yearsExperience": 4,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=45",
+    "email": "luke@sapo.da",
+    "phoneNumber": 12491241245,
+    "description": "May the health force be with you!",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Forrest Stump",
+    "age": 55,
+    "yearsExperience": 30,
+    "role": "Sub-chief",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=50",
+    "email": "forrest@sapo.da",
+    "phoneNumber": 12491241246,
+    "description": "Health is like a box of chocolates, you never know what you're gonna get.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Waldo Health-Seeker",
+    "age": 32,
+    "yearsExperience": 8,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=55",
+    "email": "waldo@sapo.da",
+    "phoneNumber": 12491241247,
+    "description": "Where's the patient? Waldo is always on the lookout!",
+    "workSchedule": []
+  },
+
+  {
+    "name": "James Band-Aid",
+    "age": 45,
+    "yearsExperience": 20,
+    "role": "Teacher",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=60",
+    "email": "james@sapo.da",
+    "phoneNumber": 12491241248,
+    "description": "The name's Band-Aid. James Band-Aid. Licensed to heal.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Marty McVaccine",
+    "age": 28,
+    "yearsExperience": 6,
+    "role": "Student",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=65",
+    "email": "marty@sapo.da",
+    "phoneNumber": 12491241249,
+    "description": "Traveling through time, ensuring everyone's health.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Bruce IV",
+    "age": 60,
+    "yearsExperience": 40,
+    "role": "Sub-chief",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=5",
+    "email": "bruce@sapo.da",
+    "phoneNumber": 12491241250,
+    "description": "Always ready to hang tough and drip the good stuff.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Diana Thermometer",
+    "age": 35,
+    "yearsExperience": 10,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=2",
+    "email": "diana@sapo.da",
+    "phoneNumber": 12491241251,
+    "description": "With the precision of an Amazonian, Diana ensures temperatures are just right.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Vinnie Vitals",
+    "age": 42,
+    "yearsExperience": 18,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=10",
+    "email": "vinnie@sapo.da",
+    "phoneNumber": 12491241252,
+    "description": "When it comes to checking your vitals, Vinnie is the real deal.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Ricky Resuscitator",
+    "age": 30,
+    "yearsExperience": 7,
+    "role": "Teacher",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=21",
+    "email": "ricky@sapo.da",
+    "phoneNumber": 12491241253,
+    "description": "Bringing breath back to the big screen and patients.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Belle Blood-Pressure",
+    "age": 29,
+    "yearsExperience": 5,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=22",
+    "email": "belle@sapo.da",
+    "phoneNumber": 12491241254,
+    "description": "Ensuring your heartbeats are as rhythmic as a dance in the ballroom.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Termin-Eater Arnold",
+    "age": 52,
+    "yearsExperience": 25,
+    "role": "Sub-chief",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=23",
+    "email": "arnold@sapo.da",
+    "phoneNumber": 12491241255,
+    "description": "He'll be back... for your next check-up.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Willy Stethoscope",
+    "age": 27,
+    "yearsExperience": 4,
+    "role": "Student",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=24",
+    "email": "willy@sapo.da",
+    "phoneNumber": 12491241256,
+    "description": "Hear the whispers of the candy-hearted rhythms.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Sam Scalpel",
+    "age": 45,
+    "yearsExperience": 20,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=25",
+    "email": "sam@sapo.da",
+    "phoneNumber": 12491241257,
+    "description": "With the precision of a surgeon and the heart of a hero.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Oscar Operation",
+    "age": 48,
+    "yearsExperience": 22,
+    "role": "Teacher",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=26",
+    "email": "oscar@sapo.da",
+    "phoneNumber": 12491241258,
+    "description": "Lights, scalpel, action! Oscar is ready for the show.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Lara Lungs",
+    "age": 33,
+    "yearsExperience": 10,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=27",
+    "email": "lara@sapo.da",
+    "phoneNumber": 12491241259,
+    "description": "Breathing life into adventures, one patient at a time.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Mike Microscope",
+    "age": 38,
+    "yearsExperience": 15,
+    "role": "Sub-chief",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=28",
+    "email": "mike@sapo.da",
+    "phoneNumber": 12491241260,
+    "description": "Zooming into the microscopic world to bring clarity to your health.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Alice Antibody",
+    "age": 29,
+    "yearsExperience": 6,
+    "role": "Student",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=29",
+    "email": "alice@sapo.da",
+    "phoneNumber": 12491241261,
+    "description": "Navigating through wonderlands of health and immunity.",
+    "workSchedule": []
+  },
+  {
+    "name": "Woody Wounds",
+    "age": 35,
+    "yearsExperience": 12,
+    "role": "Student",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=32",
+    "email": "woody@sapo.da",
+    "phoneNumber": 12491241264,
+    "description": "There's a bandage in my boot!",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Tony Tourniquet",
+    "age": 46,
+    "yearsExperience": 20,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=33",
+    "email": "tony@sapo.da",
+    "phoneNumber": 12491241265,
+    "description": "He's not just a billionaire, but a pressure-balancer too!",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Frodo Fractures",
+    "age": 28,
+    "yearsExperience": 5,
+    "role": "Sub-chief",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=34",
+    "email": "frodo@sapo.da",
+    "phoneNumber": 12491241266,
+    "description": "One cast to heal them all.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Darth Ventilator",
+    "age": 55,
+    "yearsExperience": 32,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=35",
+    "email": "darth@sapo.da",
+    "phoneNumber": 12491241267,
+    "description": "I am your respirator!",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Leeloo Multipass",
+    "age": 24,
+    "yearsExperience": 3,
+    "role": "Teacher",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=36",
+    "email": "leeloo@sapo.da",
+    "phoneNumber": 12491241268,
+    "description": "For multidimensional care in this element.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Rocky Recovery",
+    "age": 40,
+    "yearsExperience": 17,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=37",
+    "email": "rocky@sapo.da",
+    "phoneNumber": 12491241269,
+    "description": "Fighting for your health, round after round.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Walter White-BloodCell",
+    "age": 50,
+    "yearsExperience": 27,
+    "role": "Sub-chief",
+    "hoursPerWeek": 0,
+    "specialist": true,
+    "image": "https://i.pravatar.cc/150?img=38",
+    "email": "walter@sapo.da",
+    "phoneNumber": 12491241270,
+    "description": "Defending against invaders, one cell at a time.",
+    "workSchedule": []
+  },
+
+  {
+    "name": "Jack Sparrow Sutures",
+    "age": 37,
+    "yearsExperience": 14,
+    "role": "Nurse",
+    "hoursPerWeek": 0,
+    "specialist": false,
+    "image": "https://i.pravatar.cc/150?img=39",
+    "email": "jack@sapo.da",
+    "phoneNumber": 12491241271,
+    "description": "Why is the antiseptic always gone?",
+    "workSchedule": []
+  }
+]
