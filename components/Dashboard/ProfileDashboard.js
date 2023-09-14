@@ -7,7 +7,9 @@ import {
 import SearchIcon from "@/utilities/Icons/SearchIcon";
 import nurseLeader from "../../public/icons/nurseLeader.png";
 
-export default function Profile() {
+export default function Profile({ session, signOut }) {
+  console.log("Profile", session);
+
   return (
     <ProfileContainer>
       <ProfileImage
@@ -18,9 +20,9 @@ export default function Profile() {
       />
       <div>
         <Welcome>Welcome</Welcome>
-        <ProfileName>Thomas Bauer</ProfileName>
+        <ProfileName></ProfileName>
       </div>
-      <SearchIcon />
+      <button onClick={() => signOut()}>Log out</button>
     </ProfileContainer>
   );
 }
