@@ -14,7 +14,7 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, request) {
-        dbConnect().catch((error) => {
+        await dbConnect().catch((error) => {
           error: "Connection Failed!";
         });
 
