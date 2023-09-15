@@ -61,5 +61,9 @@ export async function getServerSideProps({ req }) {
 
   return {
     props: { session },
+    redirect: {
+      destination: "/dashboard",
+      permanent: false,
+    },
   };
 }
