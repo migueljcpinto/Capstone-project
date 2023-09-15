@@ -40,7 +40,10 @@ export default function LoginPage() {
 
   //GitHub Login
   async function handleGithubLogin() {
-    signIn("github", { callbackUrl: "http://localhost:3000" });
+    signIn("github", {
+      callbackUrl:
+        "https://capstone-project-myteam-1gqlwjgt4-mikethebite.vercel.app/",
+    });
   }
   return (
     <AuthContainer>
