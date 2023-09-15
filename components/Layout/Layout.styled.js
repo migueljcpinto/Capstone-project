@@ -121,3 +121,9 @@ export const SVGSeach = styled.svg`
   height: 18.667px;
   cursor: pointer;
 `;
+
+export const LogOutButton = styled.button`
+  border: none;
+  background: white;
+  cursor: pointer;
+`;

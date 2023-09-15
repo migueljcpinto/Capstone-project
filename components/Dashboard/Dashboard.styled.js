@@ -26,7 +26,7 @@ export const OverviewItem = styled.div`
   justify-content: center;
   margin: 2px;
   border-radius: 12px;
-  background: var(--grayscale-100-white, #fff);
+  background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 

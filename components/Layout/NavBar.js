@@ -12,7 +12,7 @@ import {
   NavBurger,
 } from "./Layout.styled";
 
-export default function NavBar({ session }) {
+export default function NavBar() {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [open, setOpen] = useState(false);
 

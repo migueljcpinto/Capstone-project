@@ -7,6 +7,7 @@ import {
   AuthSec,
   AuthText,
   EnjoyText,
+  ErrorMessage,
 } from "./SignUp&Login.styled";
 
 export default function LoginForm({ onGithubLogin, onSubmit, errorMessage }) {
@@ -25,27 +26,24 @@ export default function LoginForm({ onGithubLogin, onSubmit, errorMessage }) {
       <form onSubmit={handleFormSubmit}>
         <AuthInput
           type="text"
-          placeholder="name"
+          placeholder=" Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <AuthInput
           type="email"
-          placeholder="Email"
+          placeholder=" Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <AuthInput
           type="password"
-          placeholder="Password"
+          placeholder=" Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {errorMessage && (
-          <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>
-            {errorMessage}
-          </p>
-        )}
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
         <AuthButton type="submit">Log in</AuthButton>
       </form>
 

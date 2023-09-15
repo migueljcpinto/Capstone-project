@@ -3,9 +3,11 @@ import {
   Welcome,
   ProfileName,
   ProfileImage,
+  LogOutButton,
 } from "@/components/Layout/Layout.styled.js";
 import nurseLeader from "../../public/icons/nurseLeader.png";
 import { signOut } from "next-auth/react";
+import LogOutIcon from "@/utilities/Icons/LogoutIcon";
 
 export default function Profile({ session }) {
   return (
@@ -20,9 +22,9 @@ export default function Profile({ session }) {
         <Welcome>Welcome</Welcome>
         <ProfileName>{session.user.name}</ProfileName>
       </div>
-      <button onClick={() => signOut({ callbackUrl: "/login" })}>
-        Log out
-      </button>
+      <LogOutButton onClick={() => signOut({ callbackUrl: "/login" })}>
+        <LogOutIcon />
+      </LogOutButton>
     </ProfileContainer>
   );
 }

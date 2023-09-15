@@ -76,3 +76,9 @@ export const SuccessOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 999;
 `;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: "14px", 
+  text-align: "center"
+`;

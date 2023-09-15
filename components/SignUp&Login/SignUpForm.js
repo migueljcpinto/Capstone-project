@@ -7,6 +7,7 @@ import {
   AuthText,
   SuccessModal,
   SuccessOverlay,
+  ErrorMessage,
 } from "./SignUp&Login.styled";
 import { useRouter } from "next/router";
 
@@ -32,48 +33,44 @@ export default function SignUpForm({
         <AuthInput
           type="text"
           id="name"
-          placeholder="name"
+          placeholder=" Name"
           value={formData.name}
           onChange={handleChange}
           $hasError={!!errors.name}
         />
-        {errors.name && <small style={{ color: "red" }}>{errors.name}</small>}
-
+        {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
         <label htmlFor="email"></label>
         <AuthInput
           id="email"
           type="text"
-          placeholder="email"
+          placeholder=" Email"
           value={formData.email}
           onChange={handleChange}
           $hasError={!!errors.email}
         />
-        {errors.email && <small style={{ color: "red" }}>{errors.email}</small>}
-
+        {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
         <label htmlFor="password"></label>
         <AuthInput
           id="password"
           type="password"
-          placeholder="password"
+          placeholder=" Password"
           value={formData.password}
           onChange={handleChange}
           $hasError={!!errors.password}
         />
-        {errors.password && (
-          <small style={{ color: "red" }}>{errors.password}</small>
-        )}
+        {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
 
         <label htmlFor="confirmPassword"></label>
         <AuthInput
           id="confirmPassword"
           type="password"
-          placeholder="confirm password"
+          placeholder=" Confirm the password"
           value={formData.confirmPassword}
           onChange={handleChange}
           $hasError={!!errors.confirmPassword}
         />
         {errors.confirmPassword && (
-          <small style={{ color: "red" }}>{errors.confirmPassword}</small>
+          <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
         )}
 
         <AuthButton type="submit">Create Account</AuthButton>

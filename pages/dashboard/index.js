@@ -9,7 +9,7 @@ import HorizontalCalendar from "@/components/HorizontalCalendar/HorizontalCalend
 import TeamStats from "@/components/Dashboard/TeamStats";
 import ShiftDetails from "@/components/Dashboard/ShiftsDetails";
 
-export default function DashboardPage({ session }) {
+export default function DashboardPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [shifts, setShifts] = useState({
     morningShift: [],

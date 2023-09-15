@@ -9,7 +9,6 @@ export default function Layout({ children }) {
       {session && <Profile session={session} />}
       {children}
       {session && <NavBar session={session} />}
-      {/* Você pode adicionar um Footer ou outros componentes globais aqui */}
     </div>
   );
 }
