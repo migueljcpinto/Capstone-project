@@ -6,11 +6,10 @@ import {
   CalendarContainer,
 } from "@/components/Dashboard/Dashboard.styled";
 import HorizontalCalendar from "@/components/HorizontalCalendar/HorizontalCalendar";
-import Profile from "@/components/Dashboard/ProfileDashboard";
 import TeamStats from "@/components/Dashboard/TeamStats";
 import ShiftDetails from "@/components/Dashboard/ShiftsDetails";
 
-export default function DashboardPage({ session, signOut }) {
+export default function DashboardPage({ session }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [shifts, setShifts] = useState({
     morningShift: [],
@@ -165,13 +164,11 @@ export default function DashboardPage({ session, signOut }) {
         console.error("Error removing nurse:", error);
       });
   }
-  console.log("dashboard", session);
 
   return (
     <DashboardContainer>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <TeamStats stats={teamStats} />
-      <Profile session={session} signOut={signOut} />
       <CalendarContainer>
         <HorizontalCalendar
           selectedDate={selectedDate}

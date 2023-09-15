@@ -4,25 +4,27 @@ import {
   ProfileName,
   ProfileImage,
 } from "@/components/Dashboard/Dashboard.styled";
-import SearchIcon from "@/utilities/Icons/SearchIcon";
 import nurseLeader from "../../public/icons/nurseLeader.png";
+import { signOut } from "next-auth/react";
 
-export default function Profile({ session, signOut }) {
+export default function Profile({ session }) {
   console.log("Profile", session);
 
   return (
     <ProfileContainer>
       <ProfileImage
-        width={76.8}
-        height={76.8}
+        width={56.8}
+        height={56.8}
         src={nurseLeader}
         alt="Nurse Photo"
       />
       <div>
         <Welcome>Welcome</Welcome>
-        <ProfileName></ProfileName>
+        <ProfileName>{session.user.name}</ProfileName>
       </div>
-      <button onClick={() => signOut()}>Log out</button>
+      <button onClick={() => signOut({ callbackUrl: "/login" })}>
+        Log out
+      </button>
     </ProfileContainer>
   );
 }

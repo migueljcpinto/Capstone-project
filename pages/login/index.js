@@ -1,15 +1,55 @@
 import LoginForm from "@/components/SignUp&Login/LoginForm";
 import { AuthContainer } from "@/components/SignUp&Login/SignUp&Login.styled";
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function LoginPage() {
-  async function handleGithubLogin() {
-    signIn();
+  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // This function handles the form submission for user login
+  async function onSubmit(values) {
+    const { name, email, password } = values;
+
+    // Check if email or password is empty
+    if (!email.trim() || !password.trim()) {
+      setErrorMessage("Both email and password are required.");
+      return;
+    }
+
+    const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    if (!email.trim().match(emailRegex)) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+
+    const response = await signIn("credentials", {
+      redirect: false,
+      name: name,
+      email: email,
+      password: password,
+    });
+
+    if (response.error) {
+      setErrorMessage(response.error);
+    } else {
+      router.push("/");
+    }
+    console.log("response no login", response);
   }
 
+  //GitHub Login
+  async function handleGithubLogin() {
+    signIn("github", { callbackUrl: "http://localhost:3000" });
+  }
   return (
     <AuthContainer>
-      <LoginForm signIn={signIn} onGithubLogin={handleGithubLogin} />
+      <LoginForm
+        onSubmit={onSubmit}
+        onGithubLogin={handleGithubLogin}
+        errorMessage={errorMessage}
+      />
     </AuthContainer>
   );
 }
