@@ -1,6 +1,7 @@
 import SignUpForm from "@/components/SignUp&Login/SignUpForm";
 import { AuthContainer } from "@/components/SignUp&Login/SignUp&Login.styled";
 import { useState } from "react";
+import getRandomImageURL from "@/utilities/getRandomImageURL";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -28,6 +29,8 @@ export default function Signup() {
     event.preventDefault();
     let validationErrors = {};
 
+    formData.image = getRandomImageURL();
+
     // Validations
     if (formData.name.length < 3) {
       validationErrors.name = "Username should be at least 3 characters long.";
@@ -44,6 +47,14 @@ export default function Signup() {
 
     if (formData.password !== formData.confirmPassword) {
       validationErrors.confirmPassword = "Passwords do not match.";
+    }
+
+    if (!formData.name || !formData.email || !formData.password) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        form: "Required fields are missing!",
+      }));
+      return;
     }
 
     if (Object.keys(validationErrors).length > 0) {

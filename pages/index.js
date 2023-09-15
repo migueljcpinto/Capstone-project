@@ -49,7 +49,7 @@ function AuthenticatedUser({ session }) {
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
-
+  console.log("Session", session);
   if (!session) {
     return {
       redirect: {
@@ -61,9 +61,5 @@ export async function getServerSideProps({ req }) {
 
   return {
     props: { session },
-    redirect: {
-      destination: "/dashboard",
-      permanent: false,
-    },
   };
 }

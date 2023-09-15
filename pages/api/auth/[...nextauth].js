@@ -14,12 +14,18 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, request) {
+        console.log("Connecting to DB...");
+
         await dbConnect().catch((error) => {
-          error: "Connection Failed!";
+          throw new Error("Connection Failed!");
         });
+        console.log("Connected to DB.");
 
         //check user existance
+        console.log("Fetching user...");
         const result = await User.findOne({ email: credentials.email });
+        console.log("User fetched:", result);
+
         if (!result) {
           throw new Error("No User found with Email. Please Sign Up!");
         }
@@ -36,6 +42,7 @@ export const authOptions = {
         return {
           name: result.name,
           email: result.email,
+          image: result.image,
         };
       },
     }),

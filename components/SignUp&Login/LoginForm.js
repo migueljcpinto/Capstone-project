@@ -10,14 +10,25 @@ import {
   ErrorMessage,
 } from "./SignUp&Login.styled";
 
-export default function LoginForm({ onGithubLogin, onSubmit, errorMessage }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function LoginForm({
+  onGithubLogin,
+  onFormSubmit,
+  errorMessage,
+}) {
+  //Storing Form Values
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  }
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    onSubmit({ name, email, password });
+    onFormSubmit(formValues);
   }
 
   return (
@@ -25,22 +36,18 @@ export default function LoginForm({ onGithubLogin, onSubmit, errorMessage }) {
       <AuthText>Log in</AuthText>
       <form onSubmit={handleFormSubmit}>
         <AuthInput
-          type="text"
-          placeholder=" Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <AuthInput
           type="email"
+          name="email"
           placeholder=" Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formValues.email}
+          onChange={handleChange}
         />
         <AuthInput
           type="password"
+          name="password"
           placeholder=" Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formValues.password}
+          onChange={handleChange}
         />
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 

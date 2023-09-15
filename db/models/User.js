@@ -22,6 +22,10 @@ const userSchema = new Schema({
     required: [true, "Please provide a password"],
     minlength: [6, "Password should be at least 6 characters long."],
   },
+  image: {
+    type: String,
+    default: "",
+  },
 });
 
 const User = mongoose.models.users || mongoose.model("users", userSchema);

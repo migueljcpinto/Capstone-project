@@ -3,18 +3,16 @@ import User from "@/db/models/User";
 import { hash } from "bcryptjs";
 
 export default async function handler(request, response) {
-  try {
-    await dbConnect();
-  } catch (error) {
-    return response.status(500).json({ error: "Connection Failed!" });
-  }
+  await dbConnect().catch((error) => {
+    throw new Error("Connection Failed!");
+  });
 
   if (request.method === "POST") {
     if (!request.body) {
       return response.status(400).json({ error: "Don't have form data!" });
     }
 
-    const { name, email, password } = request.body;
+    const { name, email, password, image } = request.body;
 
     //check duplicate users
     const checkExistingUsers = await User.findOne({ email });
@@ -28,9 +26,11 @@ export default async function handler(request, response) {
         name,
         email,
         password: hashedPassword,
+        image,
       });
       return response.status(201).json({ status: true, user });
     } catch (err) {
+      console.error("Error during user creation:", err);
       return response.status(500).json({ error: err.message });
     }
   } else {

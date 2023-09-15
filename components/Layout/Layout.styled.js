@@ -99,7 +99,7 @@ export const NavLinkText = styled.span`
 export const ProfileImage = styled(Image)`
   border-radius: 99.5px;
   margin-right: 10px;
-  border: 2px solid grey;
+  border: 2px solid white;
 `;
 export const ProfileContainer = styled.div`
   display: flex;
@@ -123,7 +123,17 @@ export const SVGSeach = styled.svg`
 `;
 
 export const LogOutButton = styled.button`
+  background-color: #fafafc;
+  color: #000;
+  padding: 0.8rem 1.2rem;
+  margin: 5px 15px 5px 30px;
+  width: 80px;
   border: none;
-  background: white;
+  border-radius: 5px;
   cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
 `;
