@@ -36,7 +36,6 @@ export default function LoginPage() {
     } else {
       router.push("/");
     }
-    console.log("response no login", response);
   }
 
   //GitHub Login

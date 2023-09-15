@@ -3,13 +3,11 @@ import {
   Welcome,
   ProfileName,
   ProfileImage,
-} from "@/components/Dashboard/Dashboard.styled";
+} from "@/components/Layout/Layout.styled.js";
 import nurseLeader from "../../public/icons/nurseLeader.png";
 import { signOut } from "next-auth/react";
 
 export default function Profile({ session }) {
-  console.log("Profile", session);
-
   return (
     <ProfileContainer>
       <ProfileImage

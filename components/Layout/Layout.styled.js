@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import Image from "next/image";
 
 const slideIn = keyframes`
   from {
@@ -93,4 +94,30 @@ export const NavLinkText = styled.span`
   text-align: center;
   margin-left:auto;
   text-decoration-line: none;  
+`;
+
+export const ProfileImage = styled(Image)`
+  border-radius: 99.5px;
+  margin-right: 10px;
+  border: 2px solid grey;
+`;
+export const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+export const Welcome = styled.p`
+  color: #838aa3;
+  margin-left: 5px;
+`;
+
+export const ProfileName = styled.p`
+  color: #414247;
+`;
+export const SVGSeach = styled.svg`
+  width: 18.735px;
+  height: 18.667px;
+  cursor: pointer;
 `;
