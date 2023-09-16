@@ -29,7 +29,7 @@ export const AuthButton = styled.button`
   border: 1px solid 212b27;
   background: #84c7ae;
   margin: 15px auto;
-  width: 255px;
+  width: 270px;
   height: 59px;
   color: #fff;
   font-size: 13px;

@@ -1,4 +1,3 @@
-import LogoGithub from "@/utilities/Icons/LogoGithub";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -10,11 +9,7 @@ import {
   ErrorMessage,
 } from "./SignUp&Login.styled";
 
-export default function LoginForm({
-  onGithubLogin,
-  onFormSubmit,
-  errorMessage,
-}) {
+export default function LoginForm({ onFormSubmit, errorMessage }) {
   //Storing Form Values
   const [formValues, setFormValues] = useState({
     email: "",
@@ -54,12 +49,6 @@ export default function LoginForm({
         <AuthButton type="submit">Log in</AuthButton>
       </form>
 
-      <hr />
-      <AuthButton onClick={onGithubLogin}>
-        <LogoGithub />
-        <br />
-        Log in with GitHub
-      </AuthButton>
       <br />
       <EnjoyText>
         Do you want to create an account? <Link href="/signup">Sign Up</Link>

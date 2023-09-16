@@ -37,20 +37,9 @@ export default function LoginPage() {
     }
   }
 
-  //GitHub Login
-  async function handleGithubLogin() {
-    signIn("github", {
-      callbackUrl: "https://capstone-project-myteam.vercel.app/dashboard",
-    });
-  }
-
   return (
     <AuthContainer>
-      <LoginForm
-        onFormSubmit={handleSubmit}
-        onGithubLogin={handleGithubLogin}
-        errorMessage={errorMessage}
-      />
+      <LoginForm onFormSubmit={handleSubmit} errorMessage={errorMessage} />
     </AuthContainer>
   );
 }
