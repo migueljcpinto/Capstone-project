@@ -9,7 +9,12 @@ import {
   ErrorMessage,
 } from "./SignUp&Login.styled";
 
-export default function LoginForm({ onFormSubmit, errorMessage }) {
+export default function LoginForm({
+  onGithubLogin,
+  onFormSubmit,
+  errorMessage,
+  isLoading,
+}) {
   //Storing Form Values
   const [formValues, setFormValues] = useState({
     email: "",
@@ -36,6 +41,7 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
           placeholder=" Email"
           value={formValues.email}
           onChange={handleChange}
+          disabled={isLoading}
         />
         <AuthInput
           type="password"
@@ -43,12 +49,19 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
           placeholder=" Password"
           value={formValues.password}
           onChange={handleChange}
+          disabled={isLoading}
         />
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-        <AuthButton type="submit">Log in</AuthButton>
+        <AuthButton type="submit" disabled={isLoading}>
+          {isLoading ? "Logging in..." : "Log in"}{" "}
+        </AuthButton>
       </form>
 
+      <hr />
+      <AuthButton onClick={onGithubLogin} disabled={isLoading}>
+        {isLoading ? "Please wait..." : "Log in with GitHub"}
+      </AuthButton>
       <br />
       <EnjoyText>
         Do you want to create an account? <Link href="/signup">Sign Up</Link>

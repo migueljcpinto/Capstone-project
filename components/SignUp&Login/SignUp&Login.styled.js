@@ -35,6 +35,16 @@ export const AuthButton = styled.button`
   font-size: 13px;
   font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  &:disabled {
+    background-color: #ccc;
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  &:focus {
+    border-color: #0077cc;
+    box-shadow: 0 0 5px rgba(0, 119, 204, 0.5);
+  }
 `;
 
 export const AuthText = styled.h2`
