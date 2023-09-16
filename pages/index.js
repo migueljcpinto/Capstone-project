@@ -49,7 +49,6 @@ function AuthenticatedUser({ session }) {
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
-  console.log("Session from ServerSide", session);
   if (!session) {
     return {
       redirect: {

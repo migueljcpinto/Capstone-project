@@ -10,7 +10,6 @@ import { signOut } from "next-auth/react";
 import LogOutIcon from "@/utilities/Icons/LogoutIcon";
 
 export default function Profile({ session }) {
-  console.log("Session", session);
   return (
     <ProfileContainer>
       <ProfileImage

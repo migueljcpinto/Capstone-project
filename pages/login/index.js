@@ -19,7 +19,6 @@ export default function LoginPage() {
       email,
       password,
     });
-    console.log("SignIn Response:", response);
 
     if (!email || !password) {
       setErrorMessage("Both email and password are required.");
