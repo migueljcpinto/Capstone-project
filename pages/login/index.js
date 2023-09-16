@@ -40,7 +40,7 @@ export default function LoginPage() {
   //GitHub Login
   async function handleGithubLogin() {
     signIn("github", {
-      callbackUrl: "https://capstone-project-myteam.vercel.app/",
+      callbackUrl: "https://capstone-project-myteam.vercel.app/dashboard",
     });
   }
 

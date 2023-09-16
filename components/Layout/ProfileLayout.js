@@ -7,7 +7,6 @@ import {
 } from "@/components/Layout/Layout.styled.js";
 import nurseLeader from "../../public/icons/nurseLeader.png";
 import { signOut } from "next-auth/react";
-import LogOutIcon from "@/utilities/Icons/LogoutIcon";
 
 export default function Profile({ session }) {
   return (
