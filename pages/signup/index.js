@@ -2,6 +2,7 @@ import SignUpForm from "@/components/SignUp&Login/SignUpForm";
 import { AuthContainer } from "@/components/SignUp&Login/SignUp&Login.styled";
 import { useState } from "react";
 import getRandomImageURL from "@/utilities/getRandomImageURL";
+import { getSession } from "next-auth/react";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -83,6 +84,7 @@ export default function Signup() {
       console.error("There was an error:", error);
     }
   }
+
   return (
     <AuthContainer>
       <SignUpForm
@@ -95,4 +97,20 @@ export default function Signup() {
       />
     </AuthContainer>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (session) {
+    return {
+      redirect: {
+        destination: "/dashboard", // Redirecionar para o dashboard se o usuário já estiver logado
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 }

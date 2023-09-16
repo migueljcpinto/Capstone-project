@@ -3,7 +3,7 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "@/db/connect";
 import User from "@/db/models/User";
-import { compare } from "bcryptjs";
+import bcrypt from "bcryptjs";
 
 export const authOptions = {
   providers: [
@@ -13,41 +13,34 @@ export const authOptions = {
     }),
     CredentialsProvider({
       name: "Credentials",
-      async authorize(credentials, request) {
-        console.log("Connecting to DB...");
+      credentials: {},
+      async authorize(credentials) {
+        const { email, password } = credentials;
 
-        await dbConnect().catch((error) => {
-          throw new Error("Connection Failed!");
-        });
-        console.log("Connected to DB.");
+        await dbConnect();
 
-        //check user existance
-        console.log("Fetching user...");
-        const result = await User.findOne({ email: credentials.email });
-        console.log("User fetched:", result);
-
-        if (!result) {
-          throw new Error("No User found with Email. Please Sign Up!");
+        const user = await User.findOne({ email });
+        if (!user) {
+          return null;
         }
-
-        const checkPassword = await compare(
-          credentials.password,
-          result.password
-        );
-
-        if (!checkPassword || result.email !== credentials.email) {
-          throw new Error("Username or Password does not match!");
+        const passwordsMatch = await bcrypt.compare(password, user.password);
+        if (!passwordsMatch) {
+          return null;
         }
 
         return {
-          name: result.name,
-          email: result.email,
-          image: result.image,
+          name: user.name,
+          email: user.email,
+          image: user.image,
         };
       },
     }),
   ],
+
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/",
+  },
 };
 
 export default NextAuth(authOptions);

@@ -78,7 +78,10 @@ export const SuccessOverlay = styled.div`
 `;
 
 export const ErrorMessage = styled.p`
-  color: red;
-  font-size: "14px", 
-  text-align: "center"
+  color: #fff;
+  background: #ff5b4f;
+  border-radius: 5px;
+  font-size: small;
+  text-align: center;
+  padding: 4px;
 `;

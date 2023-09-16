@@ -14,6 +14,13 @@ export default function LoginPage() {
 
   // This function handles the form submission for user login
   async function handleSubmit({ email, password }) {
+    const response = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
+    console.log("SignIn Response:", response);
+
     if (!email || !password) {
       setErrorMessage("Both email and password are required.");
       return;
@@ -24,25 +31,17 @@ export default function LoginPage() {
       return;
     }
 
-    const response = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
-    console.log("SignIn Response:", response);
-
     if (response.error) {
       setErrorMessage(response.error);
     } else {
-      router.push("/");
+      router.push("/dashboard");
     }
   }
 
   //GitHub Login
   async function handleGithubLogin() {
     signIn("github", {
-      callbackUrl:
-        "https://capstone-project-myteam-1gqlwjgt4-mikethebite.vercel.app/",
+      callbackUrl: "https://capstone-project-myteam.vercel.app/",
     });
   }
 
@@ -55,4 +54,20 @@ export default function LoginPage() {
       />
     </AuthContainer>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (session) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 }
