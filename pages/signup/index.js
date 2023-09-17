@@ -104,7 +104,7 @@ export async function getServerSideProps({ req }) {
   if (session) {
     return {
       redirect: {
-        destination: "/dashboard", // Redirecionar para o dashboard se o usuário já estiver logado
+        destination: "/dashboard",
         permanent: false,
       },
     };
