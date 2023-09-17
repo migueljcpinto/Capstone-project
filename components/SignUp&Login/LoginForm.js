@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
+import EyeClosedIcon from "@/utilities/Icons/EyeClosedIcon";
+import EyeOpenIcon from "@/utilities/Icons/EyeOpenIcon";
 import {
   AuthButton,
   AuthInput,
@@ -7,6 +9,7 @@ import {
   AuthText,
   EnjoyText,
   ErrorMessage,
+  Inputs,
 } from "./SignUp&Login.styled";
 
 export default function LoginForm({ onFormSubmit, errorMessage, isLoading }) {
@@ -15,6 +18,7 @@ export default function LoginForm({ onFormSubmit, errorMessage, isLoading }) {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -30,22 +34,31 @@ export default function LoginForm({ onFormSubmit, errorMessage, isLoading }) {
     <AuthSec>
       <AuthText>Log in</AuthText>
       <form onSubmit={handleFormSubmit}>
-        <AuthInput
-          type="email"
-          name="email"
-          placeholder=" Email"
-          value={formValues.email}
-          onChange={handleChange}
-          disabled={isLoading}
-        />
-        <AuthInput
-          type="password"
-          name="password"
-          placeholder=" Password"
-          value={formValues.password}
-          onChange={handleChange}
-          disabled={isLoading}
-        />
+        <Inputs>
+          <label htmlFor="email" />
+          <AuthInput
+            id="email"
+            type="email"
+            name="email"
+            placeholder=" Email"
+            value={formValues.email}
+            onChange={handleChange}
+            disabled={isLoading}
+          />
+          <label htmlFor="password" />
+          <AuthInput
+            id="password"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder=" Password"
+            value={formValues.password}
+            onChange={handleChange}
+            disabled={isLoading}
+          />
+          <span onClick={() => setShowPassword((prev) => !prev)}>
+            {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
+          </span>
+        </Inputs>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
         <AuthButton type="submit" disabled={isLoading}>

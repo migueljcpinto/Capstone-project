@@ -5,11 +5,13 @@ import {
   AuthInput,
   AuthSec,
   AuthText,
-  SuccessModal,
-  SuccessOverlay,
   ErrorMessage,
+  Inputs,
 } from "./SignUp&Login.styled";
-import { useRouter } from "next/router";
+import Success from "./Success";
+import { useState } from "react";
+import EyeOpenIcon from "@/utilities/Icons/EyeOpenIcon";
+import EyeClosedIcon from "@/utilities/Icons/EyeClosedIcon";
 
 export default function SignUpForm({
   handleSubmit,
@@ -19,7 +21,7 @@ export default function SignUpForm({
   showModal,
   setShowModal,
 }) {
-  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <AuthSec>
@@ -49,50 +51,44 @@ export default function SignUpForm({
           $hasError={!!errors.email}
         />
         {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
-        <label htmlFor="password"></label>
-        <AuthInput
-          id="password"
-          type="password"
-          placeholder=" Password"
-          value={formData.password}
-          onChange={handleChange}
-          $hasError={!!errors.password}
-        />
-        {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
+        <Inputs>
+          <label htmlFor="password"></label>
+          <AuthInput
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder=" Password"
+            value={formData.password}
+            onChange={handleChange}
+            $hasError={!!errors.password}
+          />
+          <span onClick={() => setShowPassword((prev) => !prev)}>
+            {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
+          </span>
 
-        <label htmlFor="confirmPassword"></label>
-        <AuthInput
-          id="confirmPassword"
-          type="password"
-          placeholder=" Confirm the password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          $hasError={!!errors.confirmPassword}
-        />
-        {errors.confirmPassword && (
-          <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
-        )}
+          {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
 
+          <label htmlFor="confirmPassword"></label>
+          <AuthInput
+            id="confirmPassword"
+            type={showPassword ? "text" : "password"}
+            placeholder=" Confirm the password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            $hasError={!!errors.confirmPassword}
+          />
+          <span onClick={() => setShowPassword((prev) => !prev)}>
+            {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
+          </span>
+
+          {errors.confirmPassword && (
+            <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
+          )}
+        </Inputs>
         <AuthButton type="submit">Create Account</AuthButton>
         <EnjoyText>
           Already Have An Account? <Link href={"/login"}>Log In</Link>
         </EnjoyText>
-        {showModal && (
-          <>
-            <SuccessOverlay></SuccessOverlay>
-            <SuccessModal>
-              User created successfully! You can now log in.
-              <button
-                onClick={() => {
-                  setShowModal(false);
-                  router.push("/login");
-                }}
-              >
-                Close
-              </button>{" "}
-            </SuccessModal>
-          </>
-        )}
+        {showModal && <Success setShowModal={setShowModal} />}
       </form>
     </AuthSec>
   );

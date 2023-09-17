@@ -14,6 +14,10 @@ export default async function handler(request, response) {
 
     const { name, email, password, image } = request.body;
 
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailRegex.test(email)) {
+      return response.status(422).json({ message: "Email format is invalid!" });
+    }
     //check duplicate users
     const checkExistingUsers = await User.findOne({ email });
     if (checkExistingUsers)

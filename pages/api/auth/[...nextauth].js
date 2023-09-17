@@ -9,6 +9,7 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {},
+
       async authorize(credentials) {
         const { email, password } = credentials;
 
@@ -16,11 +17,11 @@ export const authOptions = {
 
         const user = await User.findOne({ email });
         if (!user) {
-          return null;
+          throw new Error("Invalid credentials.");
         }
         const passwordsMatch = await bcrypt.compare(password, user.password);
         if (!passwordsMatch) {
-          return null;
+          throw new Error("Invalid credentials.");
         }
 
         return {

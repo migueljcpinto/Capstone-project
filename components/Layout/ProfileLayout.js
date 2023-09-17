@@ -5,7 +5,6 @@ import {
   ProfileImage,
   LogOutButton,
 } from "@/components/Layout/Layout.styled.js";
-import nurseLeader from "../../public/icons/nurseLeader.png";
 import { signOut } from "next-auth/react";
 
 export default function Profile({ session }) {
@@ -14,7 +13,7 @@ export default function Profile({ session }) {
       <ProfileImage
         width={56.8}
         height={56.8}
-        src={session.user.image || nurseLeader}
+        src={session.user.image}
         alt="Nurse Photo"
       />
       <div>
