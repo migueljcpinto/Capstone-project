@@ -40,27 +40,20 @@ export default function LoginPage() {
     }
   }
 
-  //GitHub Login
-  async function handleGithubLogin() {
-    setIsLoading(true);
-    signIn("github", {
-      callbackUrl: "https://capstone-project-myteam.vercel.app/dashboard",
-    });
-  }
-
   return (
-    <AuthContainer>
+    <>
       {isLoading ? (
         <AmbulanceLoader />
       ) : (
-        <LoginForm
-          onFormSubmit={handleSubmit}
-          onGithubLogin={handleGithubLogin}
-          errorMessage={errorMessage}
-          isLoading={isLoading}
-        />
+        <AuthContainer>
+          <LoginForm
+            onFormSubmit={handleSubmit}
+            errorMessage={errorMessage}
+            isLoading={isLoading}
+          />
+        </AuthContainer>
       )}
-    </AuthContainer>
+    </>
   );
 }
 

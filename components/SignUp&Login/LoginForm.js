@@ -9,12 +9,7 @@ import {
   ErrorMessage,
 } from "./SignUp&Login.styled";
 
-export default function LoginForm({
-  onGithubLogin,
-  onFormSubmit,
-  errorMessage,
-  isLoading,
-}) {
+export default function LoginForm({ onFormSubmit, errorMessage, isLoading }) {
   //Storing Form Values
   const [formValues, setFormValues] = useState({
     email: "",
@@ -58,10 +53,6 @@ export default function LoginForm({
         </AuthButton>
       </form>
 
-      <hr />
-      <AuthButton onClick={onGithubLogin} disabled={isLoading}>
-        {isLoading ? "Please wait..." : "Log in with GitHub"}
-      </AuthButton>
       <br />
       <EnjoyText>
         Do you want to create an account? <Link href="/signup">Sign Up</Link>
