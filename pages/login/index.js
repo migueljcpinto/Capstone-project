@@ -18,12 +18,7 @@ export default function LoginPage() {
 
   // This function handles the form submission for user login
   async function handleSubmit({ email, password }) {
-    if (!email) {
-      setErrorMessage("The email field is empty.");
-      return;
-    }
-
-    if (!isValidEmail(email)) {
+    if (!email || !isValidEmail(email)) {
       setErrorMessage("Please enter a valid email address.");
       return;
     }
@@ -38,11 +33,13 @@ export default function LoginPage() {
       redirect: false,
       email,
       password,
+      callbackUrl: "http://localhost:3000/dashboard",
     });
     setIsLoading(false);
 
-    if (response.error) {
-      setErrorMessage(response.error); //Coming from backend
+    if (!response.error) {
+      console.error("Error during signIn:", response);
+      setErrorMessage("Invalid credentials or an unexpected error occurred.");
     } else {
       setShowSuccessMessage(true);
 

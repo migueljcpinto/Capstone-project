@@ -8,14 +8,18 @@ export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
-      credentials: {},
 
       async authorize(credentials) {
         const { email, password } = credentials;
+        console.log("Credentials:", credentials);
 
         await dbConnect();
+        if (!dbConnect) {
+          throw new Error("Failed to connect to the database.");
+        }
 
         const user = await User.findOne({ email });
+        console.log("User from DB:", user);
         if (!user) {
           throw new Error("Invalid credentials.");
         }
@@ -24,15 +28,30 @@ export const authOptions = {
           throw new Error("Invalid credentials.");
         }
 
-        return {
+        const sessionUser = {
           name: user.name,
           email: user.email,
           image: user.image,
         };
+        console.log("Session User:", sessionUser);
+
+        return sessionUser;
       },
     }),
   ],
-
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      user && (token.user = user);
+      return token;
+    },
+    session: async ({ session, token }) => {
+      session.user = token.user;
+      return session;
+    },
+  },
+  session: {
+    strategy: "jwt",
+  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/",
