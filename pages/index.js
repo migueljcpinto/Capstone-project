@@ -2,7 +2,7 @@ import Head from "next/head";
 import React from "react";
 import { Inter } from "next/font/google";
 import Dashboard from "./dashboard";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import Link from "next/link";
 import LoginPage from "./login";
 
@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { data: session } = useSession();
-
+  console.log("index", session);
   if (session) {
     return (
       <>
@@ -30,6 +30,21 @@ export default function Home() {
   );
 }
 
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
 /* //I'm thinking of adding several access levels: Admin, user and guest.
 //In the future, or possibly, Team Leader (Admin): Has full access to create, modify, delete and view all data. You can also add or remove team members.
 //Team Member (User): Can view data relevant to their tasks, but cannot modify high-level structures or add/remove other members.
@@ -53,21 +68,5 @@ function AuthenticatedUser({ session }) {
       <Dashboard session={session} />
     </main>
   );
-}
-
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
 }
  */

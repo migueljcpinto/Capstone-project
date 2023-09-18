@@ -12,11 +12,7 @@ import {
   Inputs,
 } from "./SignUp&Login.styled";
 
-export default function LoginForm({
-  onFormSubmit,
-  errorMessage,
-  onGithubLogin,
-}) {
+export default function LoginForm({ onFormSubmit, errorMessage }) {
   //Storing Form Values
   const [formValues, setFormValues] = useState({
     email: "",
@@ -65,11 +61,7 @@ export default function LoginForm({
 
         <AuthButton type="submit">Log in</AuthButton>
       </form>
-      <hr />
-      <AuthButton onClick={onGithubLogin}>
-        <br />
-        Log in with GitHub
-      </AuthButton>
+
       <br />
       <EnjoyText>
         Do you want to create an account? <Link href="/signup">Sign Up</Link>
