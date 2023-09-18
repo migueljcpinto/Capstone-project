@@ -2,27 +2,35 @@ import Head from "next/head";
 import React from "react";
 import { Inter } from "next/font/google";
 import Dashboard from "./dashboard";
-import { getSession, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import LoginPage from "./login";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { data: session } = useSession();
 
+  if (session) {
+    return (
+      <>
+        <Head>
+          <title>Team Master</title>
+          <meta name="description" content="Penguin Capstone Project" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <Dashboard session={session} />
+      </>
+    );
+  }
   return (
     <>
-      <Head>
-        <title>Team Master</title>
-        <meta name="description" content="Penguin Capstone Project" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      {session ? <AuthenticatedUser session={session} /> : <Guest />}
+      <LoginPage />
     </>
   );
 }
 
-//I'm thinking of adding several access levels: Admin, user and guest.
+/* //I'm thinking of adding several access levels: Admin, user and guest.
 //In the future, or possibly, Team Leader (Admin): Has full access to create, modify, delete and view all data. You can also add or remove team members.
 //Team Member (User): Can view data relevant to their tasks, but cannot modify high-level structures or add/remove other members.
 //Guest: Can only view public information, without the ability to make changes or view sensitive data.
@@ -62,3 +70,4 @@ export async function getServerSideProps({ req }) {
     props: { session },
   };
 }
+ */

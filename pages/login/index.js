@@ -4,74 +4,51 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { getSession } from "next-auth/react";
-import { AmbulanceLoader } from "@/components/LoaderSpinner/AmbulanceLoading.styled";
-import Success from "@/components/SignUp&Login/Success";
-
 export default function LoginPage() {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-
   const isValidEmail = (email) =>
     /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email);
-
   // This function handles the form submission for user login
   async function handleSubmit({ email, password }) {
-    if (!email || !isValidEmail(email)) {
-      setErrorMessage("Please enter a valid email address.");
-      return;
-    }
-
-    if (!password) {
-      setErrorMessage("The password field is empty.");
-      return;
-    }
-
-    setIsLoading(true);
     const response = await signIn("credentials", {
       redirect: false,
       email,
       password,
-      callbackUrl: "/dashboard",
     });
-    setIsLoading(false);
-
-    if (!response.error) {
-      console.error("Error during signIn:", response);
-      setErrorMessage("Invalid credentials or an unexpected error occurred.");
+    if (!email || !password) {
+      setErrorMessage("Both email and password are required.");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+    if (response.error) {
+      setErrorMessage(response.error);
     } else {
-      setShowSuccessMessage(true);
-
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 2000);
+      router.push("/dashboard");
     }
   }
 
+  //GitHub Login
+  async function handleGithubLogin() {
+    signIn("github", {
+      callbackUrl: "https://capstone-project-myteam.vercel.app/dashboard",
+    });
+  }
+
   return (
-    <>
-      {isLoading ? (
-        <AmbulanceLoader />
-      ) : showSuccessMessage ? (
-        <Success
-          setShowModal={setShowSuccessMessage}
-          message="Successful login! Redirecting..."
-          showButton={false}
-        />
-      ) : (
-        <AuthContainer>
-          <LoginForm
-            onFormSubmit={handleSubmit}
-            errorMessage={errorMessage}
-            isLoading={isLoading}
-          />
-        </AuthContainer>
-      )}
-    </>
+    <AuthContainer>
+      <LoginForm
+        onFormSubmit={handleSubmit}
+        onGithubLogin={handleGithubLogin}
+        errorMessage={errorMessage}
+      />
+      <LoginForm onFormSubmit={handleSubmit} errorMessage={errorMessage} />
+    </AuthContainer>
   );
 }
-
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
   if (session) {
@@ -82,8 +59,7 @@ export async function getServerSideProps({ req }) {
       },
     };
   }
-
   return {
-    props: { session },
+    props: {},
   };
 }

@@ -12,7 +12,11 @@ import {
   Inputs,
 } from "./SignUp&Login.styled";
 
-export default function LoginForm({ onFormSubmit, errorMessage, isLoading }) {
+export default function LoginForm({
+  onFormSubmit,
+  errorMessage,
+  onGithubLogin,
+}) {
   //Storing Form Values
   const [formValues, setFormValues] = useState({
     email: "",
@@ -43,7 +47,6 @@ export default function LoginForm({ onFormSubmit, errorMessage, isLoading }) {
             placeholder=" Email"
             value={formValues.email}
             onChange={handleChange}
-            disabled={isLoading}
           />
           <label htmlFor="password" />
           <AuthInput
@@ -53,7 +56,6 @@ export default function LoginForm({ onFormSubmit, errorMessage, isLoading }) {
             placeholder=" Password"
             value={formValues.password}
             onChange={handleChange}
-            disabled={isLoading}
           />
           <span onClick={() => setShowPassword((prev) => !prev)}>
             {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
@@ -61,11 +63,13 @@ export default function LoginForm({ onFormSubmit, errorMessage, isLoading }) {
         </Inputs>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-        <AuthButton type="submit" disabled={isLoading}>
-          {isLoading ? "Logging in..." : "Log in"}{" "}
-        </AuthButton>
+        <AuthButton type="submit">Log in</AuthButton>
       </form>
-
+      <hr />
+      <AuthButton onClick={onGithubLogin}>
+        <br />
+        Log in with GitHub
+      </AuthButton>
       <br />
       <EnjoyText>
         Do you want to create an account? <Link href="/signup">Sign Up</Link>
