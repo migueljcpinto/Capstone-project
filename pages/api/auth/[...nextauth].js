@@ -9,9 +9,15 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {},
+
       async authorize(credentials) {
         const { email, password } = credentials;
+
         await dbConnect();
+        if (!dbConnect) {
+          throw new Error("Failed to connect to the database.");
+        }
+
         const user = await User.findOne({ email });
         if (!user) {
           return null;

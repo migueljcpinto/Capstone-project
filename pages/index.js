@@ -40,33 +40,7 @@ export async function getServerSideProps({ req }) {
       },
     };
   }
-
   return {
     props: { session },
   };
 }
-/* //I'm thinking of adding several access levels: Admin, user and guest.
-//In the future, or possibly, Team Leader (Admin): Has full access to create, modify, delete and view all data. You can also add or remove team members.
-//Team Member (User): Can view data relevant to their tasks, but cannot modify high-level structures or add/remove other members.
-//Guest: Can only view public information, without the ability to make changes or view sensitive data.
-
-//For Guests
-function Guest() {
-  return (
-    <main className={inter.className}>
-      <h3>You should Log or Sign in to have access!</h3>
-      <Link href={"/login"}>Login</Link>
-    </main>
-  );
-}
-
-//For Auth User
-
-function AuthenticatedUser({ session }) {
-  return (
-    <main className={inter.className}>
-      <Dashboard session={session} />
-    </main>
-  );
-}
- */

@@ -15,12 +15,13 @@ export default function LoginPage() {
 
   // This function handles the form submission for user login
   async function handleSubmit({ email, password }) {
-    if (!email || !password) {
-      setErrorMessage("Both email and password are required.");
+    if (!email || !isValidEmail(email)) {
+      setErrorMessage("Please enter a valid email address.");
       return;
     }
-    if (!isValidEmail(email)) {
-      setErrorMessage("Please enter a valid email address.");
+
+    if (!password) {
+      setErrorMessage("The password field is empty.");
       return;
     }
 
@@ -30,8 +31,14 @@ export default function LoginPage() {
       password,
     });
 
+    console.log("SignIn Response:", response);
+    console.log("Response Error:", response?.error);
+    console.log("Response Status:", response?.status);
+    console.log("Response URL:", response?.url);
+
     if (response.error) {
-      setErrorMessage(response.error);
+      console.error("Error during signIn:", response);
+      setErrorMessage("Invalid credentials or an unexpected error occurred.");
     } else {
       setShowSuccessMessage(true);
 
