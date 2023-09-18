@@ -33,7 +33,7 @@ export default function LoginPage() {
       redirect: false,
       email,
       password,
-      callbackUrl: "http://localhost:3000/dashboard",
+      callbackUrl: "/dashboard",
     });
     setIsLoading(false);
 
@@ -84,6 +84,6 @@ export async function getServerSideProps({ req }) {
   }
 
   return {
-    props: {},
+    props: { session },
   };
 }
