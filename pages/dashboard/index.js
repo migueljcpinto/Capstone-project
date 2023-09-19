@@ -8,6 +8,7 @@ import {
 import HorizontalCalendar from "@/components/HorizontalCalendar/HorizontalCalendar";
 import TeamStats from "@/components/Dashboard/TeamStats";
 import ShiftDetails from "@/components/Dashboard/ShiftsDetails";
+import { useSession } from "next-auth/react";
 
 export default function DashboardPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -24,7 +25,8 @@ export default function DashboardPage() {
   });
   const [error, setError] = useState(null);
 
-  const router = useRouter();
+  const { data: session } = useSession();
+  console.log("dashboard", session);
 
   //The idea is to initiate all three API calls at the same time and, once they have all been completed, process the data.
   useEffect(() => {

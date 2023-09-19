@@ -3,35 +3,31 @@ import React from "react";
 import { Inter } from "next/font/google";
 import Dashboard from "./dashboard";
 import { useSession, getSession } from "next-auth/react";
-import Link from "next/link";
 import LoginPage from "./login";
+import { authOptions } from "pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { data: session } = useSession();
   console.log("index", session);
-  if (session) {
-    return (
-      <>
-        <Head>
-          <title>Team Master</title>
-          <meta name="description" content="Penguin Capstone Project" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
-        <Dashboard session={session} />
-      </>
-    );
-  }
+
   return (
     <>
-      <LoginPage />
+      <Head>
+        <title>Team Master</title>
+        <meta name="description" content="Penguin Capstone Project" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      {session ? <Dashboard session={session} /> : <LoginPage />}
     </>
   );
 }
 
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
   if (!session) {
     return {
       redirect: {
@@ -40,7 +36,10 @@ export async function getServerSideProps({ req }) {
       },
     };
   }
+
   return {
-    props: { session },
+    props: {
+      session,
+    },
   };
 }

@@ -2,8 +2,8 @@ import SignUpForm from "@/components/SignUp&Login/SignUpForm";
 import { AuthContainer } from "@/components/SignUp&Login/SignUp&Login.styled";
 import { useState } from "react";
 import getRandomImageURL from "@/utilities/getRandomImageURL";
-import { getSession } from "next-auth/react";
-
+import { authOptions } from "pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth/next";
 export default function Signup() {
   const [formData, setFormData] = useState({
     name: "",
@@ -99,8 +99,9 @@ export default function Signup() {
   );
 }
 
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
   if (session) {
     return {
       redirect: {
@@ -111,6 +112,8 @@ export async function getServerSideProps({ req }) {
   }
 
   return {
-    props: {},
+    props: {
+      session,
+    },
   };
 }

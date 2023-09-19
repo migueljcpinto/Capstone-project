@@ -9,6 +9,8 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
+  console.log("app", session);
+
   return (
     <>
       <SWRConfig value={{ fetcher }}>

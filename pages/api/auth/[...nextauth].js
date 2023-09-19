@@ -8,7 +8,6 @@ export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
-      credentials: {},
 
       async authorize(credentials) {
         const { email, password } = credentials;
@@ -19,13 +18,15 @@ export const authOptions = {
         }
 
         const user = await User.findOne({ email });
+        console.log("User from DB:", user);
         if (!user) {
-          return null;
+          throw new Error("Invalid credentials.");
         }
         const passwordsMatch = await bcrypt.compare(password, user.password);
         if (!passwordsMatch) {
-          return null;
+          throw new Error("Invalid credentials.");
         }
+
         return {
           name: user.name,
           email: user.email,
@@ -34,6 +35,9 @@ export const authOptions = {
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/",

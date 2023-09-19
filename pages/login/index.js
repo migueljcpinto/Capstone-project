@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { getSession } from "next-auth/react";
 import Success from "@/components/SignUp&Login/Success";
+import { authOptions } from "pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth/next";
 export default function LoginPage() {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
@@ -31,11 +33,6 @@ export default function LoginPage() {
       password,
     });
 
-    console.log("SignIn Response:", response);
-    console.log("Response Error:", response?.error);
-    console.log("Response Status:", response?.status);
-    console.log("Response URL:", response?.url);
-
     if (response.error) {
       console.error("Error during signIn:", response);
       setErrorMessage("Invalid credentials or an unexpected error occurred.");
@@ -61,13 +58,12 @@ export default function LoginPage() {
           <LoginForm onFormSubmit={handleSubmit} errorMessage={errorMessage} />
         </AuthContainer>
       )}
-      ;
     </>
   );
 }
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
-  console.log("login", session);
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
   if (session) {
     return {
       redirect: {
@@ -76,7 +72,10 @@ export async function getServerSideProps({ req }) {
       },
     };
   }
+
   return {
-    props: {},
+    props: {
+      session,
+    },
   };
 }
