@@ -10,7 +10,7 @@ import {
   NavLinkText,
   Burger,
   NavBurger,
-} from "./NavBar.styled";
+} from "./Layout.styled";
 
 export default function NavBar() {
   const [activeIndex, setActiveIndex] = useState(-1);

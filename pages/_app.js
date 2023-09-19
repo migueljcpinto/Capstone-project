@@ -2,9 +2,15 @@ import GlobalStyle from "@/styles";
 import Head from "next/head";
 import { SWRConfig } from "swr";
 import fetcher from "@/utilities/fetcher";
-import NavBar from "@/components/NavBar/NavBar";
+import { SessionProvider } from "next-auth/react";
+import Layout from "@/components/Layout/Layout";
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
+  console.log("app", session);
+
   return (
     <>
       <SWRConfig value={{ fetcher }}>
@@ -12,8 +18,11 @@ export default function App({ Component, pageProps }) {
         <Head>
           <title>Team Master</title>
         </Head>
-        <Component {...pageProps} />
-        <NavBar />
+        <SessionProvider session={session}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </SessionProvider>
       </SWRConfig>
     </>
   );

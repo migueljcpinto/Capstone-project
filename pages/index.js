@@ -1,11 +1,18 @@
 import Head from "next/head";
+import React from "react";
 import { Inter } from "next/font/google";
 import Dashboard from "./dashboard";
-import NavBurger from "@/components/NavBar/NavBar";
+import { useSession, getSession } from "next-auth/react";
+import LoginPage from "./login";
+import { authOptions } from "pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { data: session } = useSession();
+  console.log("index", session);
+
   return (
     <>
       <Head>
@@ -13,9 +20,26 @@ export default function Home() {
         <meta name="description" content="Penguin Capstone Project" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main className={inter.className}>
-        <Dashboard />
-      </main>
+      {session ? <Dashboard session={session} /> : <LoginPage />}
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
 }

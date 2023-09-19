@@ -1,41 +1,12 @@
 import styled from "styled-components";
-import Image from "next/image";
 import Accordion from "../Accordion/Accordion";
+import Image from "next/image";
 
 export const DashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 16px 0px 0px;
-`;
-
-export const ProfileContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-export const Welcome = styled.p`
-  color: #838aa3;
-  margin-left: 5px;
-`;
-
-export const ProfileName = styled.p`
-  color: #414247;
-`;
-
-export const ProfileImage = styled(Image)`
-  border-radius: 99.5px;
-  margin-right: 10px;
-  border: 2px solid grey;
-`;
-
-export const SVGSeach = styled.svg`
-  width: 18.735px;
-  height: 18.667px;
-  cursor: pointer;
 `;
 
 export const TeamOverview = styled.section`
@@ -55,7 +26,7 @@ export const OverviewItem = styled.div`
   justify-content: center;
   margin: 2px;
   border-radius: 12px;
-  background: var(--grayscale-100-white, #fff);
+  background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
