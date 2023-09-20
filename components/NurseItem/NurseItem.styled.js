@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export const StyledListItem = styled.li`
   display: grid;
@@ -12,10 +13,19 @@ export const StyledListItem = styled.li`
 
   &:hover {
     background-color: #fff4e6;
+    cursor: pointer;
   }
 
   img {
     border-radius: 50%;
     width: 100%;
+  }
+`;
+export const NurseLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;

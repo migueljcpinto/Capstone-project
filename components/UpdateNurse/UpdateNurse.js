@@ -8,11 +8,28 @@ import {
   AddButtonStyled,
   HeaderStyled,
 } from "@/components/FormAddNurse/FormAddNurse.styled";
+import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
+import Modal from "../Modals/Modal";
+import { useState } from "react";
+import WarningIcon from "@/utilities/Icons/WarningIcon";
 
 export default function UpdateNurse({ nurseData, onSubmit }) {
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await onSubmit(event);
+      setShowSuccessModal(true);
+    } catch (error) {
+      setShowErrorModal(true);
+    }
+  };
   return (
     <StyledDiv>
-      <FormContainer onSubmit={onSubmit}>
+      <FormContainer onSubmit={handleSubmit}>
         <HeaderStyled>Update the information about this Nurse</HeaderStyled>
         <InputGroup>
           <Label htmlFor="name">Enter the name</Label>
@@ -98,6 +115,28 @@ export default function UpdateNurse({ nurseData, onSubmit }) {
 
           <AddButtonStyled type="submit">Update</AddButtonStyled>
         </InputGroup>
+        {showSuccessModal && (
+          <Modal
+            setShowModal={setShowModal}
+            title="Success!"
+            IconComponent={GreenCheckIcon}
+            message="Nurse updated successfully!"
+            buttonText="Ok"
+            buttonAction={() => {
+              setShowModal(false);
+            }}
+          />
+        )}
+        {showErrorModal && (
+          <Modal
+            setShowModal={setShowErrorModal}
+            title="Error!"
+            IconComponent={WarningIcon}
+            message="There was an error updating the nurse. Please try again."
+            buttonText="Try Again"
+            type="error"
+          />
+        )}
       </FormContainer>
     </StyledDiv>
   );

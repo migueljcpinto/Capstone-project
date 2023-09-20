@@ -18,7 +18,6 @@ export default function Signup() {
     password: "",
     confirmPassword: "",
   });
-  const [showModal, setShowModal] = useState(false);
 
   function handleChange(event) {
     const { id, value } = event.target;
@@ -92,8 +91,6 @@ export default function Signup() {
         handleChange={handleChange}
         formData={formData}
         errors={errors}
-        showModal={showModal}
-        setShowModal={setShowModal}
       />
     </AuthContainer>
   );

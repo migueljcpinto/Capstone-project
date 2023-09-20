@@ -11,9 +11,15 @@ import {
   ButtonsContainer,
 } from "./FormAddNurse.styled";
 import getRandomImageURL from "@/utilities/getRandomImageURL";
+import { useState } from "react";
+import Modal from "../Modals/Modal";
+import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
+import WarningIcon from "@/utilities/Icons/WarningIcon";
 
 export default function FormAddNurse({ onSubmitNurse }) {
   const router = useRouter();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault(); //preventing new loading
@@ -34,7 +40,10 @@ export default function FormAddNurse({ onSubmitNurse }) {
 
     try {
       await onSubmitNurse(nurseData);
-    } catch (error) {}
+      setShowSuccessModal(true);
+    } catch (error) {
+      setShowErrorModal(true);
+    }
 
     event.target.reset();
     event.target.elements[0].focus();
@@ -58,6 +67,7 @@ export default function FormAddNurse({ onSubmitNurse }) {
           pattern="[A-Za-z\s]+"
           placeholder="Enter the name of the nurse"
           required
+          autoFocus
         />
 
         <Label htmlFor="age">Enter the age</Label>
@@ -130,6 +140,32 @@ export default function FormAddNurse({ onSubmitNurse }) {
           </CancelButtonStyled>
         </ButtonsContainer>
       </InputGroup>
+      {showSuccessModal && (
+        <Modal
+          setShowModal={setShowSuccessModal}
+          title="Success!"
+          IconComponent={GreenCheckIcon}
+          message="Nurse added successfully!"
+          buttonText="Ok"
+          buttonAction={() => {
+            setShowModal(false);
+            router.push("/nurseteam");
+          }}
+        />
+      )}
+      {showErrorModal && (
+        <Modal
+          setShowModal={setShowErrorModal}
+          title="Error!"
+          IconComponent={WarningIcon}
+          message="There was an error adding a new nurse."
+          buttonText="Try Again"
+          type="error"
+          buttonAction={() => {
+            setShowErrorModal(false);
+          }}
+        />
+      )}
     </FormContainer>
   );
 }

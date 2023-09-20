@@ -83,7 +83,7 @@ export const MorningShiftAccordion = styled(Accordion)`
   border-radius: 12px;
   gap: 20px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  span {
+  & span {
     display: block;
     font-size: 14px;
     color: darkgray;
@@ -101,7 +101,7 @@ export const AfternoonShiftAccordion = styled(Accordion)`
   border-radius: 12px;
   gap: 20px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  span {
+  & span {
     display: block;
     font-size: 14px;
     color: darkgray;
@@ -119,7 +119,7 @@ export const NightShiftAccordion = styled(Accordion)`
   border-radius: 12px;
   gap: 20px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  span {
+  & span {
     display: block;
     font-size: 14px;
     color: darkgray;

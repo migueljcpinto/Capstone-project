@@ -43,6 +43,7 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
             placeholder=" Email"
             value={formValues.email}
             onChange={handleChange}
+            autoFocus
           />
           <label htmlFor="password" />
           <AuthInput
@@ -53,7 +54,10 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
             value={formValues.password}
             onChange={handleChange}
           />
-          <span onClick={() => setShowPassword((prev) => !prev)}>
+          <span
+            onClick={() => setShowPassword((prev) => !prev)}
+            data-testid="visibility-icon"
+          >
             {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
           </span>
         </Inputs>

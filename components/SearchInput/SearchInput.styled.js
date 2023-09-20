@@ -20,3 +20,10 @@ export const SearchInputStyled = styled.input`
     }
   }
 `;
+export const FilterSelect = styled.select`
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 4px;
+`;

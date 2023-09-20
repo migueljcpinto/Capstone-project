@@ -26,7 +26,6 @@ export default function DashboardPage() {
   const [error, setError] = useState(null);
 
   const { data: session } = useSession();
-  console.log("dashboard", session);
 
   //The idea is to initiate all three API calls at the same time and, once they have all been completed, process the data.
   useEffect(() => {

@@ -1,5 +1,9 @@
-import { AmbulanceLoader } from "./AmbulanceLoading.styled";
+import { AmbulanceLoader, LoadingContainer } from "./AmbulanceLoading.styled";
 
 export default function LoaderSpinner() {
-  return <AmbulanceLoader>🚑 Loading</AmbulanceLoader>;
+  return (
+    <LoadingContainer>
+      <AmbulanceLoader src="/ambulance.gif" alt="Loading Ambulance" />
+    </LoadingContainer>
+  );
 }

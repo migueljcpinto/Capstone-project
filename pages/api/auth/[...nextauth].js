@@ -18,7 +18,6 @@ export const authOptions = {
         }
 
         const user = await User.findOne({ email });
-        console.log("User from DB:", user);
         if (!user) {
           throw new Error("Invalid credentials.");
         }
