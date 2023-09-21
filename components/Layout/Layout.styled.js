@@ -146,7 +146,7 @@ export const NurseNavbarContainer = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-export const NurseImage = styled.img`
+export const NurseImage = styled(Image)`
   width: 40px;
   height: 40px;
   border-radius: 50%;
