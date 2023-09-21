@@ -95,16 +95,12 @@ export const NavLinkText = styled.span`
   text-decoration-line: none;  
 `;
 export const ProfileContainer = styled.div`
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
   margin-bottom: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: #fff;
   z-index: 1000;
 `;
 

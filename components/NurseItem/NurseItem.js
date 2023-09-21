@@ -2,7 +2,6 @@ import Image from "next/image";
 import { StyledListItem, NurseLink } from "../NurseItem/NurseItem.styled";
 
 export default function NurseItem({ nurse }) {
-  console.log(nurse);
   return (
     <StyledListItem>
       <Image
