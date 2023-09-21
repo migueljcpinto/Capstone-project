@@ -55,7 +55,7 @@ export default function FormAddNurse({ onSubmitNurse }) {
 
   return (
     <FormContainer onSubmit={handleSubmit}>
-      <HeaderStyled>Add a new Nurse in your Team</HeaderStyled>
+      <HeaderStyled>Add a new Nurse.</HeaderStyled>
       <InputGroup>
         <Label htmlFor="name">Enter the name</Label>
         <Input

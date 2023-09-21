@@ -1,7 +1,6 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { ReturnButton } from "@/components/WorkScheduleForm/WorkScheduleForm.styled";
 import ScheduleTabs from "@/components/ScheduleTabs/ScheduleTabs";
 import Modal from "@/components/Modals/Modal";
 import WarningIcon from "@/utilities/Icons/WarningIcon";
@@ -186,7 +185,6 @@ export default function SchedulePage() {
         onAbsenceRemove={handleRemoveAbsence}
         onAvailabilityRemove={handleRemoveAvailability}
       />
-      <ReturnButton onClick={() => router.back()}>Return</ReturnButton>
     </>
   );
 }

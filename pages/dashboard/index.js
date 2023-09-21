@@ -13,6 +13,7 @@ import Modal from "@/components/Modals/Modal";
 import WarningIcon from "@/utilities/Icons/WarningIcon";
 import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
 import NavBar from "@/components/NavBar/NavBar";
+import Profile from "@/components/Layout/ProfileLayout";
 
 export default function DashboardPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -205,6 +206,7 @@ export default function DashboardPage() {
                 buttonAction={() => setShowSuccessModal(false)}
               />
             )}
+            <Profile />
             <TeamStats stats={teamStats} />
             <CalendarContainer>
               <HorizontalCalendar

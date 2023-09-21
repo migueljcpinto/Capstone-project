@@ -11,7 +11,7 @@ export default createGlobalStyle`
     margin: auto;
     font-family: system-ui;
     place-items: center;
-    min-height: 100vh;
+    min-height: 110vh;
     max-width: 50rem;
   }
 `;

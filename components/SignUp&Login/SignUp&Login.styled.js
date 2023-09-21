@@ -19,6 +19,7 @@ export const Title = styled.h1`
   background-repeat: no-repeat;
   background-position: 100% 0%;
   animation: ${TitleAnime} 2.2s infinite alternate;
+  animation-delay: 2s;
 `;
 
 export const AuthContainer = styled.div`

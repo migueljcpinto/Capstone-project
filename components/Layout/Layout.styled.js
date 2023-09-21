@@ -72,7 +72,7 @@ export const NavContainer = styled.div`
   flex-direction: row;
   width: 315px;
   height: 50px;
-  padding: 1px;
+  padding: 10px;
   align-items: center;
   z-index: 1000;
   animation: ${slideIn} 0.3s ease-in-out forwards;
@@ -97,7 +97,6 @@ export const NavLinkText = styled.span`
 
 export const ProfileImage = styled(Image)`
   border-radius: 99.5px;
-  margin-right: 10px;
   border: 2px solid white;
 `;
 export const ProfileContainer = styled.div`
@@ -105,7 +104,13 @@ export const ProfileContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+`;
+
+export const WelcomeName = styled.div`
+  display: flex;
+  gap: 5px;
+  align-items: center;
 `;
 export const Welcome = styled.p`
   color: #838aa3;
@@ -123,18 +128,9 @@ export const SVGSeach = styled.svg`
 
 export const LogOutButton = styled.button`
   background-color: #fafafc;
-  color: #000;
-  padding: 0.8rem 1.2rem;
-  margin: 5px 15px 5px 30px;
-  width: 80px;
-  border: none;
-  border-radius: 5px;
+  border: 1px solid #f0f0f0;
+  border-radius: 100%;
   cursor: pointer;
-  transition: 0.3s;
-  text-decoration: none;
-  font-size: 12px;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const NurseNavbarContainer = styled.div`

@@ -5,7 +5,7 @@ export const ScheduleFormContainer = styled.form`
   flex-direction: column;
   align-items: center;
   background-color: #fafafc;
-  max-width: 400px;
+  max-width: 300px;
   gap: 1.2rem;
   padding: 3.2rem 4rem;
   border-radius: 7px;
@@ -22,25 +22,6 @@ export const Button = styled.button`
   transition: 0.3s;
   &:hover {
     color: black;
-  }
-`;
-
-export const ReturnButton = styled.button`
-  background-color: #fafafc;
-  color: #000;
-  padding: 0.6rem 1.2rem;
-  margin: 5px 15px 5px 30px;
-  width: 100px;
-  border: none;
-  text-decoration: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
-  align-items: center;
-  justify-content: center;
-  &:hover {
-    background-color: #6fc6ff;
   }
 `;
 
