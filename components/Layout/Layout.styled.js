@@ -26,8 +26,8 @@ export const Burger = styled.button`
   position: fixed;
   bottom: 10px;
   left: 2%;
-  width: 4rem;
-  height: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
   z-index: 1001;
   align-items: center;
   background-color: #70d2a9;
@@ -62,7 +62,7 @@ export const Burger = styled.button`
 
 export const NavContainer = styled.div`
   position: fixed;
-  bottom: 10px;
+  bottom: 12px;
   left: ${({ open }) => (open ? "20px" : "-300px")};
   background-color: #70d2a9;
   border-radius: 18px;
@@ -71,7 +71,8 @@ export const NavContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 315px;
-  padding: 7px;
+  height: 50px;
+  padding: 1px;
   align-items: center;
   z-index: 1000;
   animation: ${slideIn} 0.3s ease-in-out forwards;
@@ -81,7 +82,7 @@ export const NavContainer = styled.div`
 export const NavItem = styled.div`
   display: flex;
   color: white;
-  margin-left: auto;
+  margin-left: 20px;
   width: 50px;
 `;
 
@@ -90,16 +91,8 @@ export const NavLinkText = styled.span`
   color: white;
   font-size: 12px;
   background: rgba(250, 255, 0, 0.29)
-  border-radius: 15px;
   text-align: center;
-  margin-left:auto;
   text-decoration-line: none;  
-`;
-
-export const ProfileImage = styled(Image)`
-  border-radius: 99.5px;
-  margin-right: 10px;
-  border: 2px solid white;
 `;
 export const ProfileContainer = styled.div`
   display: flex;
@@ -107,7 +100,20 @@ export const ProfileContainer = styled.div`
   justify-content: space-around;
   width: 100%;
   margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 1000;
 `;
+
+export const ProfileImage = styled(Image)`
+  border-radius: 99.5px;
+  margin-right: 10px;
+  border: 2px solid white;
+`;
+
 export const Welcome = styled.p`
   color: #838aa3;
   margin-left: 5px;

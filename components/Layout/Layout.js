@@ -1,4 +1,4 @@
-import NavBar from "./NavBar";
+import NavBar from "../NavBar/NavBar";
 import { useSession } from "next-auth/react";
 import Profile from "./ProfileLayout";
 

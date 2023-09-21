@@ -8,11 +8,11 @@ import {
 import HorizontalCalendar from "@/components/HorizontalCalendar/HorizontalCalendar";
 import TeamStats from "@/components/Dashboard/TeamStats";
 import ShiftDetails from "@/components/Dashboard/ShiftsDetails";
-import { useSession } from "next-auth/react";
 import LoaderSpinner from "@/components/LoaderSpinner/AmbulanceLoading";
 import Modal from "@/components/Modals/Modal";
 import WarningIcon from "@/utilities/Icons/WarningIcon";
 import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
+import NavBar from "@/components/NavBar/NavBar";
 
 export default function DashboardPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -30,7 +30,6 @@ export default function DashboardPage() {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { data: session } = useSession();
 
   //The idea is to initiate all three API calls at the same time and, once they have all been completed, process the data.
   useEffect(() => {
@@ -179,46 +178,48 @@ export default function DashboardPage() {
   }
 
   return (
-    <DashboardContainer>
-      {isLoading ? (
-        <LoaderSpinner />
-      ) : (
-        <>
-          {showErrorModal && (
-            <Modal
-              setShowModal={setShowErrorModal}
-              IconComponent={WarningIcon}
-              message={error}
-              buttonText="Try Again"
-              type="error"
-              buttonAction={() => setShowErrorModal(false)}
+    <>
+      <DashboardContainer>
+        {isLoading ? (
+          <LoaderSpinner />
+        ) : (
+          <>
+            {showErrorModal && (
+              <Modal
+                setShowModal={setShowErrorModal}
+                IconComponent={WarningIcon}
+                message={error}
+                buttonText="Try Again"
+                type="error"
+                buttonAction={() => setShowErrorModal(false)}
+              />
+            )}
+            {showSuccessModal && (
+              <Modal
+                title="Yes!!"
+                message={"Nurse successfully added! He/She is ready to work!"}
+                setShowModal={setShowSuccessModal}
+                IconComponent={GreenCheckIcon}
+                buttonText="Add another one!"
+                type="success"
+                buttonAction={() => setShowSuccessModal(false)}
+              />
+            )}
+            <TeamStats stats={teamStats} />
+            <CalendarContainer>
+              <HorizontalCalendar
+                selectedDate={selectedDate}
+                onDateChange={setSelectedDate}
+              />
+            </CalendarContainer>
+            <ShiftDetails
+              shifts={shifts}
+              onAddNurse={handleAddNurse}
+              onRemoveNurse={handleRemoveNurse}
             />
-          )}
-          {showSuccessModal && (
-            <Modal
-              title="Yes!!"
-              message={"Nurse successfully added! He/She is ready to work!"}
-              setShowModal={setShowSuccessModal}
-              IconComponent={GreenCheckIcon}
-              buttonText="Add another one!"
-              type="success"
-              buttonAction={() => setShowSuccessModal(false)}
-            />
-          )}
-          <TeamStats stats={teamStats} />
-          <CalendarContainer>
-            <HorizontalCalendar
-              selectedDate={selectedDate}
-              onDateChange={setSelectedDate}
-            />
-          </CalendarContainer>
-          <ShiftDetails
-            shifts={shifts}
-            onAddNurse={handleAddNurse}
-            onRemoveNurse={handleRemoveNurse}
-          />
-        </>
-      )}
-    </DashboardContainer>
+          </>
+        )}
+      </DashboardContainer>
+    </>
   );
 }

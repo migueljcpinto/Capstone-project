@@ -15,7 +15,7 @@ import VacationDatesDisplay from "../WorkDatesDisplay/VacationDatesDisplay";
 import DaysOffDatesDisplay from "../WorkDatesDisplay/DaysOffDatesDisplay";
 import AvailabilityDatesDisplay from "../WorkDatesDisplay/AvailabilityDatesDisplay";
 import Accordion from "../Accordion/Accordion";
-import NurseNavBar from "../Layout/NurseNavBar";
+import NurseNavBar from "../NavBar/NurseNavBar";
 
 export default function ScheduleTabs({
   onVacationSubmit,

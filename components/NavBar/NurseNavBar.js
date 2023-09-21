@@ -1,5 +1,9 @@
 import LoaderSpinner from "../LoaderSpinner/AmbulanceLoading";
-import { NurseImage, NurseName, NurseNavbarContainer } from "./Layout.styled";
+import {
+  NurseImage,
+  NurseName,
+  NurseNavbarContainer,
+} from "../Layout/Layout.styled";
 
 export default function NurseNavBar({ nurseData }) {
   if (!nurseData) {
