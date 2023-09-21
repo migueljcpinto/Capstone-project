@@ -4,7 +4,12 @@ export default function NurseNavBar({ nurseData }) {
   console.log(nurseData);
   return (
     <NurseNavbarContainer>
-      <NurseImage src={nurseData.image} alt={nurseData.name} />
+      <NurseImage
+        width={40}
+        height={40}
+        src={nurseData.image}
+        alt={nurseData.name}
+      />
       <NurseName>{nurseData.name}</NurseName>
     </NurseNavbarContainer>
   );
