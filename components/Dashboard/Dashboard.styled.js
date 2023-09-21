@@ -127,7 +127,7 @@ export const NightShiftAccordion = styled(Accordion)`
   }
 `;
 
-export const Slot = styled.div`
+export const Slot = styled.li`
   display: flex;
   flex-direction: rown;
   width: 330px;
