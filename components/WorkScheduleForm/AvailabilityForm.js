@@ -13,7 +13,7 @@ export default function AvailabilityForm({
 
   async function handleAvailabilitySubmit(event) {
     event.preventDefault();
-    if (!selectedShift) {
+    if (!selectedShift || !selectedAvailabilityDate) {
       alert("Please select a shift before submitting.");
       return;
     }
@@ -51,8 +51,12 @@ export default function AvailabilityForm({
     <ScheduleFormContainer>
       <AvailabilityDatePicker
         excludeDates={excludeDates}
-        onDateChange={(date) => setSelectedAvailabilityDate(date)}
-        onShiftChange={(shift) => setSelectedShift(shift)}
+        onDateChange={(date) => {
+          setSelectedAvailabilityDate(date);
+        }}
+        onShiftChange={(shift) => {
+          setSelectedShift(shift);
+        }}
       />
       <Button onClick={handleAvailabilitySubmit} disabled={!selectedShift}>
         Request Availability

@@ -1,33 +1,53 @@
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
 
-export const StyledNurseProfile = styled.div`
-  display: grid;
-  grid-template-columns: 4.8rem 1fr auto;
+export const NurseProfileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  column-gap: 1.6rem;
-  padding: 1.2rem;
-  border-radius: 7px;
   background-color: #fafafc;
-  transition: 0.5s;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+`;
 
-  &:hover {
-    background-color: #fff4e6;
-  }
+export const NurseProfileHeader = styled.div`
+  text-align: center;
+`;
 
-  img {
-    border-radius: 50%;
-    width: 100%;
+export const NurseImage = styled(Image)`
+  border-radius: 50%;
+  margin-bottom: 1rem;
+`;
+
+export const ContactsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-top: 1rem;
+  & a {
+    margin: 0.5rem 0;
   }
+`;
+
+export const ActionButtons = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-flow: row wrap;
 `;
 
 export const DeleteButtonStyled = styled.button`
   background-color: #fafafc;
   color: #000;
-  padding: 0.8rem 1.2rem;
+  padding: 0.5rem 1rem;
   margin: 5px 15px 5px 30px;
   width: 100px;
-  border: none;
+  border: 1px solid black;
   border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
@@ -43,12 +63,12 @@ export const DeleteButtonStyled = styled.button`
 export const GoBackButton = styled.button`
   background-color: #fafafc;
   color: #000;
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   margin: 5px 15px 5px 30px;
   width: 100px;
-  border: none;
   text-decoration: none;
   border-radius: 5px;
+  border: 1px solid black;
   cursor: pointer;
   font-size: 16px;
   transition: 0.3s;
@@ -62,11 +82,11 @@ export const GoBackButton = styled.button`
 export const UpdateButtonStyled = styled.button`
   background-color: #fafafc;
   color: #000;
-  padding: 0.8rem 1.2rem;
+  padding: 0.5rem 1rem;
   margin: 5px 15px 5px 30px;
   width: 100px;
-  border: none;
   border-radius: 5px;
+  border: 1px solid black;
   cursor: pointer;
   transition: 0.3s;
   text-decoration: none;
@@ -78,36 +98,13 @@ export const UpdateButtonStyled = styled.button`
   }
 `;
 
-export const ContactsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fcfafb;
-  max-width: 500px;
-  padding: 50px 70px;
-  border-radius: 15px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-
-  h2,
-  h3 {
-    margin-bottom: 20px;
-  }
-
-  p {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 15px;
-    line-height: 1.5;
-  }
-`;
-
 export const WorkScheduleLink = styled(Link)`
   background-color: #fafafc;
   color: #000;
-  padding: 0.8rem 1.2rem;
+  padding: 0.5rem 1rem;
   margin: 5px 15px 5px 30px;
   width: 100px;
-  border: none;
+  border: 1px solid black;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;

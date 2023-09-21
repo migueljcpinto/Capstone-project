@@ -5,10 +5,13 @@ export const TabContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #fcfafb;
+  background-color: #fafafc;
   width: 500px;
-  padding: 40px 60px;
+  padding: 2rem;
   border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
 `;
 
 export const BlocTabs = styled.div`
@@ -47,4 +50,5 @@ export const Paragraph = styled.p`
   font-size: 14px;
   color: #483d8b;
   margin-top: 5px;
+  text-align: center;
 `;

@@ -8,40 +8,41 @@ export const DatesDisplay = styled.article`
   gap: 2.5rem;
   width: 100%;
   align-items: center;
-  background-color: white;
+  background-color: #fafafc;
   width: 300px;
   padding: 0.5rem 0.5rem;
   border-radius: 7px;
 `;
 
 export const Dates = styled.ul`
-  padding: 1rem;
-  background-color: white;
-  border-radius: 7px;
-  margin: 5px 5px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
   list-style-type: none;
 `;
 
 export const DatesItem = styled.li`
-  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
   background-color: #fff4e6;
-  border: solid 1px white;
+  border: 1px solid #e0e0e0;
   border-radius: 7px;
-  margin: 5px 5px;
-  list-style-type: none;
+  margin-bottom: 0.5rem;
 `;
 
 export const DeleteButton = styled.button`
-  background-color: #fafafc;
-  color: black;
-  padding: 0.8rem 1.2rem;
+  background-color: transparent;
+  color: #ef8059;
+  padding: 0.5rem;
   border: none;
   border-radius: 7px;
-  margin: 10px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
   &:hover {
     background-color: #ef8059;
+    color: white;
   }
 `;

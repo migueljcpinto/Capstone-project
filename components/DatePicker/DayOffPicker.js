@@ -39,6 +39,7 @@ export default function DayOffPicker({ daysOff, onDateChange, excludeDates }) {
   return (
     <>
       <DatePicker
+        withPortal
         selected={null}
         onChange={handleDateChange}
         highlightDates={selectedDates.map((d) => new Date(d))}

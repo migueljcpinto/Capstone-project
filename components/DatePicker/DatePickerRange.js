@@ -2,6 +2,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { eachDayOfInterval, isValid } from "date-fns";
+import { StyledDatePicker } from "../WorkScheduleForm/WorkScheduleForm.styled";
 
 export default function DatePickerRange({
   startDate,
@@ -47,6 +48,7 @@ export default function DatePickerRange({
   return (
     <>
       <DatePicker
+        withPortal
         selectsRange={true}
         dateFormat="dd/MM/yyyy"
         startDate={dateRange[0]}

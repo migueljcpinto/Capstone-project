@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const ScheduleFormContainer = styled.form`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  background-color: #fff4e6;
+  background-color: #fafafc;
   max-width: 400px;
   gap: 1.2rem;
   padding: 3.2rem 4rem;
@@ -11,8 +12,8 @@ export const ScheduleFormContainer = styled.form`
 `;
 
 export const Button = styled.button`
-  background-color: #ffa94d;
-  color: black;
+  background-color: #84c7ae;
+  color: white;
   padding: 0.8rem 1.2rem;
   border: none;
   border-radius: 7px;
@@ -20,7 +21,7 @@ export const Button = styled.button`
   cursor: pointer;
   transition: 0.3s;
   &:hover {
-    background-color: #ff922b;
+    color: black;
   }
 `;
 
@@ -40,5 +41,26 @@ export const ReturnButton = styled.button`
   justify-content: center;
   &:hover {
     background-color: #6fc6ff;
+  }
+`;
+
+export const ShiftSelect = styled.div`
+  display: flex;
+`;
+
+export const ShiftOption = styled.button`
+  width: 100px;
+  height: 45px;
+  flex-shrink: 0;
+  padding: 8px 10px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 13px;
+  border: none;
+  background-color: ${(props) => (props.isActive ? "#f2c28f" : "#fff")};
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #ff922b;
   }
 `;

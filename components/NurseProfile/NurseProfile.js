@@ -1,14 +1,19 @@
 import { useRouter } from "next/router";
-import Image from "next/image";
 import {
+  NurseProfileContainer,
   DeleteButtonStyled,
   GoBackButton,
-  StyledNurseProfile,
+  NurseProfileHeader,
+  ActionButtons,
   UpdateButtonStyled,
   ContactsContainer,
   WorkScheduleLink,
+  NurseImage,
+  Button,
 } from "./NurseProfile.styled";
 import UpdateNurse from "../UpdateNurse/UpdateNurse";
+import EmailIcon from "@/utilities/Icons/EmailIcon";
+import PhoneIcon from "@/utilities/Icons/PhoneIcon";
 
 export default function NurseProfile({
   isEdit,
@@ -26,44 +31,53 @@ export default function NurseProfile({
 
   return (
     <>
-      <StyledNurseProfile>
-        <Image
-          width={76.8}
-          height={76.8}
-          src={nurseData.image}
-          alt={`${nurseData.name} Nurse Photo`}
-        />
-        <h2>{nurseData.name} </h2>
-        <h3>{nurseData.role}</h3>
-      </StyledNurseProfile>
-      <ContactsContainer>
-        <p>Notes: {nurseData.description}</p>
-        <p>Email: {nurseData.email}</p>
-        <p>Phone Number: {nurseData.phoneNumber}</p>
-      </ContactsContainer>
-      <nav>
-        <GoBackButton onClick={handleGoBack}>Return</GoBackButton>
-        <DeleteButtonStyled onClick={onDeleteNurse} type="button">
-          Delete
-        </DeleteButtonStyled>
-        {!isEdit && (
-          <UpdateButtonStyled
-            onClick={() => {
-              setIsEdit(!isEdit);
-            }}
-            type="button"
+      <NurseProfileContainer>
+        <NurseProfileHeader>
+          <NurseImage
+            width={76.8}
+            height={76.8}
+            src={nurseData.image}
+            alt={`${nurseData.name} Nurse Photo`}
+          />
+          <h2>{nurseData.name} </h2>
+          <h3>{nurseData.role}</h3>
+          <br />
+          <h4>Quote:</h4>
+          <p> {nurseData.description}</p>
+        </NurseProfileHeader>
+        <ContactsContainer>
+          <a href={`mailto:${nurseData.email}`}>
+            <EmailIcon />
+          </a>
+          <a href={`tel:${nurseData.phoneNumber}`}>
+            <PhoneIcon />
+          </a>{" "}
+        </ContactsContainer>
+        <hr />
+        <ActionButtons>
+          <GoBackButton onClick={handleGoBack}>Return</GoBackButton>
+          <DeleteButtonStyled onClick={onDeleteNurse} type="button">
+            Delete
+          </DeleteButtonStyled>
+          {!isEdit && (
+            <UpdateButtonStyled
+              onClick={() => {
+                setIsEdit(!isEdit);
+              }}
+              type="button"
+            >
+              Update
+            </UpdateButtonStyled>
+          )}
+          {isEdit && <UpdateNurse nurseData={nurseData} onSubmit={onSubmit} />}
+          <WorkScheduleLink
+            href={`/nurses/${nurseData._id}/schedule`}
+            handleScheduleSubmit={handleScheduleSubmit}
           >
-            Update
-          </UpdateButtonStyled>
-        )}
-        {isEdit && <UpdateNurse nurseData={nurseData} onSubmit={onSubmit} />}
-        <WorkScheduleLink
-          href={`/nurses/${nurseData._id}/schedule`}
-          handleScheduleSubmit={handleScheduleSubmit}
-        >
-          Work Schedule
-        </WorkScheduleLink>
-      </nav>
+            Work Schedule
+          </WorkScheduleLink>
+        </ActionButtons>
+      </NurseProfileContainer>
     </>
   );
 }

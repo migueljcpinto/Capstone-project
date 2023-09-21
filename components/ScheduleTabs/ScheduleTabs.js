@@ -15,14 +15,14 @@ import VacationDatesDisplay from "../WorkDatesDisplay/VacationDatesDisplay";
 import DaysOffDatesDisplay from "../WorkDatesDisplay/DaysOffDatesDisplay";
 import AvailabilityDatesDisplay from "../WorkDatesDisplay/AvailabilityDatesDisplay";
 import Accordion from "../Accordion/Accordion";
+import NurseNavBar from "../Layout/NurseNavBar";
 
 export default function ScheduleTabs({
   onVacationSubmit,
   onDaysOffSubmit,
   onAvailabilitySubmit,
-  nurseData,
   nurseId,
-  absenceDates,
+  nurseData,
   availabilityDates,
   daysOff,
   setDaysOff,
@@ -33,18 +33,14 @@ export default function ScheduleTabs({
   onAvailabilityRemove,
 }) {
   const [activeTab, setActiveTab] = useState(1);
-  const [isOpen, setIsOpen] = useState(false);
 
   function handleTabActive(index) {
-    if (activeTab === index) {
-      setActiveTab(null); //From each Tab Index, close the tab if clicked twice
-    } else {
-      setActiveTab(index);
-    }
+    setActiveTab((prevTab) => (prevTab === index ? null : index));
   }
 
   return (
     <>
+      <NurseNavBar nurseData={nurseData} />
       <TabContainer>
         <h3>Work Schedule</h3>
         <BlocTabs>

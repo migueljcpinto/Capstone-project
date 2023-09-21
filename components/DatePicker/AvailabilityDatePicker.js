@@ -3,6 +3,11 @@ import DatePicker from "react-datepicker";
 import { addMonths, endOfMonth } from "date-fns";
 
 import "react-datepicker/dist/react-datepicker.css";
+import {
+  ShiftOption,
+  ShiftSelect,
+  StyledDateContainer,
+} from "../WorkScheduleForm/WorkScheduleForm.styled";
 
 export function AvailabilityDatePicker({
   onDateChange,
@@ -29,35 +34,45 @@ export function AvailabilityDatePicker({
       onDateChange(date);
     }
   }
-  function handleShiftChange(e) {
-    const shift = e.target.value;
+  function handleShiftChange(event, shift) {
+    event.preventDefault();
     setSelectedShift(shift);
     if (onShiftChange) {
       onShiftChange(shift);
     }
   }
-
   return (
     <>
-      <div>
-        <DatePicker
-          selected={selectedDate}
-          onChange={handleDateChange}
-          dateFormat="dd/MM/yyyy"
-          minDate={minDate}
-          maxDate={maxDate}
-          excludeDates={excludeDates}
-        ></DatePicker>
+      <DatePicker
+        withPortal
+        selected={selectedDate}
+        onChange={handleDateChange}
+        dateFormat="dd/MM/yyyy"
+        minDate={minDate}
+        maxDate={maxDate}
+        excludeDates={excludeDates}
+      ></DatePicker>
 
-        <select value={selectedShift} onChange={handleShiftChange}>
-          <option value="" disabled>
-            Select a shift
-          </option>
-          <option value="morning">Morning</option>
-          <option value="afternoon">Afternoon</option>
-          <option value="night">Night</option>
-        </select>
-      </div>
+      <ShiftSelect>
+        <ShiftOption
+          isActive={selectedShift === "morning"}
+          onClick={(e) => handleShiftChange(e, "morning")}
+        >
+          Morning
+        </ShiftOption>
+        <ShiftOption
+          isActive={selectedShift === "afternoon"}
+          onClick={(e) => handleShiftChange(e, "afternoon")}
+        >
+          Afternoon
+        </ShiftOption>
+        <ShiftOption
+          isActive={selectedShift === "night"}
+          onClick={(e) => handleShiftChange(e, "night")}
+        >
+          Night
+        </ShiftOption>
+      </ShiftSelect>
     </>
   );
 }

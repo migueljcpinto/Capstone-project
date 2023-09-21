@@ -6,6 +6,7 @@ import {
   DeleteButton,
 } from "./WorkDatesDisplay.styled";
 import { format } from "date-fns";
+import RemoveSVGIcon from "@/utilities/Icons/RemoveNurseSlotIcon";
 
 export default function DaysOffDatesDisplay({ absencesData, onAbsenceRemove }) {
   const daysOff =
@@ -20,7 +21,7 @@ export default function DaysOffDatesDisplay({ absencesData, onAbsenceRemove }) {
               <DatesItem key={date}>
                 {format(new Date(date), "dd/MM/yyyy")}
                 <DeleteButton onClick={() => onAbsenceRemove(day._id, date)}>
-                  Remove
+                  <RemoveSVGIcon />
                 </DeleteButton>
               </DatesItem>
             ))}

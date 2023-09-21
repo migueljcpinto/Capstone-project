@@ -1,17 +1,15 @@
 import styled from "styled-components";
 
 export const AccordionItemContainer = styled.div`
-  padding: 10px;
+  padding: 15px;
   cursor: pointer;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  border-top: 1px solid #e0e0e0;
-  background: white;
   transition: background-color 0.3s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
   &:hover {
     background-color: #fcfafb;
     transform: scale(1.02);
@@ -27,8 +25,8 @@ export const AccordionTitle = styled.p`
 `;
 
 export const AccordionContent = styled.div`
-  border-top: 1px solid #e0e0e0;
   overflow: hidden;
+  padding: 10px 25px;
 `;
 
 export const Arrow = styled.div`

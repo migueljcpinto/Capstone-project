@@ -137,3 +137,23 @@ export const LogOutButton = styled.button`
   align-items: center;
   justify-content: center;
 `;
+
+export const NurseNavbarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f7f7f7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+export const NurseImage = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+`;
+
+export const NurseName = styled.span`
+  font-size: 16px;
+  font-weight: bold;
+`;

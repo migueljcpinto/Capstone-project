@@ -31,7 +31,7 @@ export default function VacationForm({
           onChange={handleDateChange}
           excludeDates={excludeDates}
         />
-        <Button onClick={handleVacationSubmit}>Request Vacation Dates</Button>
+        <Button onClick={handleVacationSubmit}>Add Vacation Dates</Button>
       </ScheduleFormContainer>
     </>
   );
