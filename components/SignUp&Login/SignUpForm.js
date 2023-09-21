@@ -7,6 +7,7 @@ import {
   AuthText,
   ErrorMessage,
   Inputs,
+  Title,
 } from "./SignUp&Login.styled";
 import Modal from "../Modals/Modal";
 import { useState } from "react";
@@ -24,16 +25,17 @@ export default function SignUpForm({
 }) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const router = useRouter();
 
   return (
     <AuthSec>
+      <Title>Team´Up</Title>
       <form onSubmit={handleSubmit}>
-        <AuthText>Create An Account</AuthText>
         <EnjoyText>
           Create an account to enjoy managing your dream team!
         </EnjoyText>
-
         <label htmlFor="name"></label>
         <AuthInput
           type="text"

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styled from "styled-components";
 
 export const TeamUpContainer = styled.div`
@@ -14,5 +13,3 @@ export const TeamUpContainer = styled.div`
   background-color: #fff;
   z-index: 9999;
 `;
-
-export const TeamUp = styled(Image)``;

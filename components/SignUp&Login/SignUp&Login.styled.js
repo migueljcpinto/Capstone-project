@@ -1,15 +1,39 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const TitleAnime = keyframes`
+0%, 100% {
+    background-size: 100% 10px;
+    background-position: 100% 0%;
+  }
+  50% {
+    background-size: 100% 100%;
+    background-position: 0% 100%;
+  }
+`;
+
+export const Title = styled.h1`
+  font-size: 3em;
+  text-align: center;
+  background-image: linear-gradient(#70d2a9, #70d2a9);
+  background-size: 100% 10px;
+  background-repeat: no-repeat;
+  background-position: 100% 0%;
+  animation: ${TitleAnime} 2.2s infinite alternate;
+`;
 
 export const AuthContainer = styled.div`
+  position: relative;
   background-color: #f6fbf9;
   border-radius: 32px;
-  height: 550px;
+  height: 660px;
+
   width: 350px;
-  position: relative;
 `;
 
 export const AuthSec = styled.div`
   position: absolute;
+  display: flex;
+  flex-direction: column;
   margin: 40px;
   align-content: center;
 `;
@@ -40,11 +64,7 @@ export const AuthButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, opacity 0.3s ease;
-  &:disabled {
-    background-color: #ccc;
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
+
   &:focus {
     border-color: #0077cc;
     box-shadow: 0 0 5px rgba(0, 119, 204, 0.5);
@@ -66,7 +86,6 @@ export const EnjoyText = styled.h4`
   text-align: center;
   font-style: normal;
   font-weight: 400;
-  line-height: 19.5px;
 `;
 
 export const ErrorMessage = styled.p`

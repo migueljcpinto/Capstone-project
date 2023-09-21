@@ -14,7 +14,7 @@ export default function App({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 9000);
+    setTimeout(() => setLoading(false), 3000);
   }, []);
   return (
     <>
@@ -22,7 +22,7 @@ export default function App({
       <SWRConfig value={{ fetcher }}>
         <GlobalStyle />
         <Head>
-          <title>Team Master</title>
+          <title>Team´Up</title>
         </Head>
         <SessionProvider session={session}>
           <Layout>

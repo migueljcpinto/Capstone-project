@@ -10,6 +10,7 @@ import {
   EnjoyText,
   ErrorMessage,
   Inputs,
+  Title,
 } from "./SignUp&Login.styled";
 
 export default function LoginForm({ onFormSubmit, errorMessage }) {
@@ -32,6 +33,8 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
 
   return (
     <AuthSec>
+      <Title>Team´Up</Title>
+
       <AuthText>Log in</AuthText>
       <form onSubmit={handleFormSubmit}>
         <Inputs>

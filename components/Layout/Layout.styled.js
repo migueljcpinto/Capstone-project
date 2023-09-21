@@ -94,22 +94,19 @@ export const NavLinkText = styled.span`
   text-align: center;
   text-decoration-line: none;  
 `;
-export const ProfileContainer = styled.div`
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  margin-bottom: 20px;
-  z-index: 1000;
-`;
 
 export const ProfileImage = styled(Image)`
   border-radius: 99.5px;
   margin-right: 10px;
   border: 2px solid white;
 `;
-
+export const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 20px;
+`;
 export const Welcome = styled.p`
   color: #838aa3;
   margin-left: 5px;

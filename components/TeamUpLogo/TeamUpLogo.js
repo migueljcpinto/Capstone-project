@@ -1,11 +1,11 @@
-import { TeamUp, TeamUpContainer } from "./TeamUpLogo.styled";
+import Image from "next/image";
+import { TeamUpContainer } from "./TeamUpLogo.styled";
 
 export default function TeamUpLogo() {
   return (
     <TeamUpContainer>
-      <TeamUp src="/TeamUp.gif" alt="TeamUp App" width={200} height={200} />
+      <Image src="/TeamUp.gif" alt="TeamUp App" width={180} height={180} />
       <br />
-      <h1>TeamUp</h1>
     </TeamUpContainer>
   );
 }
