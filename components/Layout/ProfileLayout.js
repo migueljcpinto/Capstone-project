@@ -19,12 +19,14 @@ export default function Profile({ session }) {
       <ProfileImage
         width={56.8}
         height={56.8}
-        src={session.user.image}
+        src={session && session.user ? session.user.image : "wait"}
         alt="Nurse Photo"
       />
       <WelcomeName>
         <Welcome>Welcome</Welcome>
-        <ProfileName>{session.user.name}</ProfileName>
+        <ProfileName>
+          {session && session.user ? session.user.name : ""}
+        </ProfileName>
       </WelcomeName>
       <LogOutButton onClick={() => signOut({ callbackUrl: "/login" })}>
         <LogOutIcon />
