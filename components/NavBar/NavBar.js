@@ -42,7 +42,7 @@ export default function NavBar() {
               )}{" "}
             </NavItem>
           </Link>
-          <Link href="/schedule">
+          <Link href="/teamschedule">
             <NavItem
               isActive={activeIndex === 1}
               onClick={() => handleLinkClick(1)}
