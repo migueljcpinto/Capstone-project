@@ -62,8 +62,8 @@ export default function LoginPage() {
           setShowModal={setShowSuccessModal}
           title="WELCOME ABOARD!"
           IconComponent={GreenCheckIcon}
-          message="Successful login! Redirecting..."
-          buttonText="Let´Go!"
+          message="Successful login!"
+          buttonText="Redirecting..."
           type="success"
         />
       )}

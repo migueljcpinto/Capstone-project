@@ -4,8 +4,8 @@ import { SWRConfig } from "swr";
 import fetcher from "@/utilities/fetcher";
 import { SessionProvider } from "next-auth/react";
 import Layout from "@/components/Layout/Layout";
-import TeamUpLogo from "@/components/TeamUpLogo/TeamUpLogo";
 import { useEffect, useState } from "react";
+import LottieAnimation from "@/components/TeamUpLogo/TeamUpLottie";
 
 export default function App({
   Component,
@@ -16,9 +16,10 @@ export default function App({
   useEffect(() => {
     setTimeout(() => setLoading(false), 3000);
   }, []);
+
   return (
     <>
-      {loading && <TeamUpLogo />}
+      {loading && <LottieAnimation />}
       <SWRConfig value={{ fetcher }}>
         <GlobalStyle />
         <Head>

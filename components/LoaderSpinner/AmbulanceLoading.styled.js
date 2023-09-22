@@ -17,7 +17,7 @@ export const LoadingContainer = styled.div`
   display: flex;
   overflow: hidden;
   min-height: 100vh;
-  max-width: 50rem;
+  max-width: 45rem;
 `;
 
 export const AmbulanceLoader = styled.img`

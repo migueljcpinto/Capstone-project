@@ -100,6 +100,9 @@ export const ProfileImage = styled(Image)`
   border: 2px solid white;
 `;
 export const ProfileContainer = styled.div`
+  position: fixed;
+  top: 10px;
+  left: 10px;
   display: flex;
   align-items: center;
   justify-content: space-around;

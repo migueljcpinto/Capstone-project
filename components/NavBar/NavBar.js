@@ -18,6 +18,7 @@ export default function NavBar() {
 
   function handleLinkClick(index) {
     setActiveIndex(index === activeIndex ? -1 : index);
+    setOpen(false);
   }
 
   return (
