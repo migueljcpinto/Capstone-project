@@ -10,7 +10,6 @@ import ShiftDetails from "@/components/Dashboard/ShiftsDetails";
 import Modal from "@/components/Modals/Modal";
 import WarningIcon from "@/utilities/Icons/WarningIcon";
 import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
-import Layout from "@/components/Layout/Layout";
 
 export default function DashboardPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -170,42 +169,40 @@ export default function DashboardPage() {
   }
 
   return (
-    <Layout>
-      <DashboardContainer>
-        {showErrorModal && (
-          <Modal
-            setShowModal={setShowErrorModal}
-            IconComponent={WarningIcon}
-            message={error}
-            buttonText="Try Again"
-            type="error"
-            buttonAction={() => setShowErrorModal(false)}
-          />
-        )}
-        {showSuccessModal && (
-          <Modal
-            title="Yes!!"
-            message={"Nurse successfully added! He/She is ready to work!"}
-            setShowModal={setShowSuccessModal}
-            IconComponent={GreenCheckIcon}
-            buttonText="Add another one!"
-            type="success"
-            buttonAction={() => setShowSuccessModal(false)}
-          />
-        )}
-        <TeamStats stats={teamStats} />
-        <CalendarContainer>
-          <HorizontalCalendar
-            selectedDate={selectedDate}
-            onDateChange={setSelectedDate}
-          />
-        </CalendarContainer>
-        <ShiftDetails
-          shifts={shifts}
-          onAddNurse={handleAddNurse}
-          onRemoveNurse={handleRemoveNurse}
+    <DashboardContainer>
+      {showErrorModal && (
+        <Modal
+          setShowModal={setShowErrorModal}
+          IconComponent={WarningIcon}
+          message={error}
+          buttonText="Try Again"
+          type="error"
+          buttonAction={() => setShowErrorModal(false)}
         />
-      </DashboardContainer>
-    </Layout>
+      )}
+      {showSuccessModal && (
+        <Modal
+          title="Yes!!"
+          message={"Nurse successfully added! He/She is ready to work!"}
+          setShowModal={setShowSuccessModal}
+          IconComponent={GreenCheckIcon}
+          buttonText="Add another one!"
+          type="success"
+          buttonAction={() => setShowSuccessModal(false)}
+        />
+      )}
+      <TeamStats stats={teamStats} />
+      <CalendarContainer>
+        <HorizontalCalendar
+          selectedDate={selectedDate}
+          onDateChange={setSelectedDate}
+        />
+      </CalendarContainer>
+      <ShiftDetails
+        shifts={shifts}
+        onAddNurse={handleAddNurse}
+        onRemoveNurse={handleRemoveNurse}
+      />
+    </DashboardContainer>
   );
 }

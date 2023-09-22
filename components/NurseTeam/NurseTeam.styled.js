@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
+export const TeamHeader = styled.div`
+  left: 30px;
+`;
+
 export const TeamContainer = styled.div`
   position: relative;
-  padding-top: 50px;
+  padding-top: 20px;
 `;
 
 export const StyledHeading = styled.h2`

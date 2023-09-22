@@ -3,9 +3,9 @@ import Head from "next/head";
 import { SWRConfig } from "swr";
 import fetcher from "@/utilities/fetcher";
 import { SessionProvider } from "next-auth/react";
+import Layout from "@/components/Layout/Layout";
 import { useEffect, useState } from "react";
 import LottieAnimation from "@/components/TeamUpLogo/TeamUpLottie";
-import NavBar from "@/components/NavBar/NavBar";
 
 export default function App({
   Component,
@@ -26,8 +26,9 @@ export default function App({
           <title>Team´Up</title>
         </Head>
         <SessionProvider session={session}>
-          <Component {...pageProps} />
-          <NavBar />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </SessionProvider>
       </SWRConfig>
     </>

@@ -8,7 +8,7 @@ export const NurseProfileContainer = styled.div`
   align-items: center;
   background-color: #fafafc;
   padding: 2rem;
-  padding-top: 50px;
+  padding-top: 20px;
   max-width: 500px;
   height: 600px;
   margin: 0 auto;

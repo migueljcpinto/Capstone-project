@@ -4,6 +4,7 @@ import {
   StyledList,
   StyledListContainer,
   TeamContainer,
+  TeamHeader,
 } from "./NurseTeam.styled";
 import { useMemo, useState } from "react";
 import SearchInput from "../SearchInput/SearchInput";
@@ -11,6 +12,7 @@ import NurseItem from "../NurseItem/NurseItem";
 import LoaderSpinner from "../LoaderSpinner/AmbulanceLoading";
 import Modal from "../Modals/Modal";
 import WarningIcon from "@/utilities/Icons/WarningIcon";
+import BackButton from "../BackButton/BackButton";
 
 export default function NurseTeam({ handleScheduleSubmit }) {
   const { data, isLoading } = useSWR("/api/nurses");
@@ -55,7 +57,10 @@ export default function NurseTeam({ handleScheduleSubmit }) {
 
   return (
     <TeamContainer>
-      <StyledHeading>Available Nurses</StyledHeading>
+      <TeamHeader>
+        <BackButton />
+        <StyledHeading>Available Nurses</StyledHeading>
+      </TeamHeader>
       <SearchInput
         onSearchChange={setSearch}
         onFilterChange={setRoleFilter}

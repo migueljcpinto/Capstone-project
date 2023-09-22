@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ScheduleContainer = styled.div`
-  padding-top: 10px;
   max-width: 500px;
 `;
 
