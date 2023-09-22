@@ -12,6 +12,7 @@ import {
   Inputs,
   Title,
 } from "./SignUp&Login.styled";
+import ButtonSpinner from "../LoaderSpinner/ButtonSpinner";
 
 export default function LoginForm({ onFormSubmit, errorMessage }) {
   //Storing Form Values
@@ -20,6 +21,7 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -28,6 +30,7 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
 
   function handleFormSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
     onFormSubmit(formValues);
   }
 
@@ -66,7 +69,9 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
         </Inputs>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-        <AuthButton type="submit">Log in</AuthButton>
+        <AuthButton type="submit">
+          {isLoading ? <ButtonSpinner /> : "Log in"}
+        </AuthButton>
       </form>
 
       <br />

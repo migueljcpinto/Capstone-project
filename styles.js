@@ -13,5 +13,7 @@ export default createGlobalStyle`
     place-items: center;
     min-height: 110vh;
     max-width: 50rem;
+    background-color: #fafafc;
+
   }
 `;

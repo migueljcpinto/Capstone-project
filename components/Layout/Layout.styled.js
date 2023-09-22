@@ -135,10 +135,12 @@ export const LogOutButton = styled.button`
 
 export const NurseNavbarContainer = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f7f7f7;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fafafc;
+  border: 3px solid white;
 `;
 
 export const NurseImage = styled(Image)`

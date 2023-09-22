@@ -4,20 +4,26 @@ import {
   NurseName,
   NurseNavbarContainer,
 } from "../Layout/Layout.styled";
+import { useRouter } from "next/router";
+
+import BackButton from "../BackButton/BackButton";
 
 export default function NurseNavBar({ nurseData }) {
+  const router = useRouter();
+
   if (!nurseData) {
     return <LoaderSpinner />;
   }
   return (
     <NurseNavbarContainer>
+      {router.pathname !== `/nurses/` && <BackButton />}{" "}
+      <NurseName>{nurseData.name}</NurseName>
       <NurseImage
         width={40}
         height={40}
         src={nurseData.image}
         alt={nurseData.name}
       />
-      <NurseName>{nurseData.name}</NurseName>
     </NurseNavbarContainer>
   );
 }

@@ -5,7 +5,7 @@ import { StyledBackButton } from "./BackButton.styled";
 export default function BackButton() {
   const router = useRouter();
   function handleGoBack() {
-    router.push("/");
+    router.back();
   }
   return (
     <StyledBackButton onClick={handleGoBack}>

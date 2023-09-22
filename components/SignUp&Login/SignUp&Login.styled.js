@@ -54,6 +54,9 @@ export const AuthInput = styled.input`
 `;
 
 export const AuthButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 15px;
   border: 1px solid 212b27;
   background: #84c7ae;
