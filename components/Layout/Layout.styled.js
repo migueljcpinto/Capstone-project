@@ -106,7 +106,7 @@ export const ProfileContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  height: 66px;
+  height: 55px;
   background: #fafafc;
   z-index: 1000;
 `;

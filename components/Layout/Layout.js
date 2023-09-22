@@ -8,7 +8,6 @@ export default function Layout({ children }) {
     <div>
       {session && <Profile session={session} />}
       {children}
-      {session && <NavBar session={session} />}
     </div>
   );
 }

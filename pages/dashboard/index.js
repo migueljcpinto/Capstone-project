@@ -10,6 +10,7 @@ import ShiftDetails from "@/components/Dashboard/ShiftsDetails";
 import Modal from "@/components/Modals/Modal";
 import WarningIcon from "@/utilities/Icons/WarningIcon";
 import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
+import Layout from "@/components/Layout/Layout";
 
 export default function DashboardPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -169,7 +170,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <>
+    <Layout>
       <DashboardContainer>
         {showErrorModal && (
           <Modal
@@ -205,6 +206,6 @@ export default function DashboardPage() {
           onRemoveNurse={handleRemoveNurse}
         />
       </DashboardContainer>
-    </>
+    </Layout>
   );
 }
