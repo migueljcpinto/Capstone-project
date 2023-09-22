@@ -1,4 +1,8 @@
-import { SearchInputStyled, FilterSelect } from "./SearchInput.styled";
+import {
+  SearchInputStyled,
+  FilterSelect,
+  SearchComponent,
+} from "./SearchInput.styled";
 
 export default function SearchInput({
   onSearchChange,
@@ -6,12 +10,12 @@ export default function SearchInput({
   filterValue,
 }) {
   return (
-    <>
+    <SearchComponent>
       <SearchInputStyled
         type="search"
         placeholder="Search a nurse"
         onChange={(event) => onSearchChange(event.target.value.toLowerCase())}
-      />
+      ></SearchInputStyled>
       <FilterSelect
         value={filterValue}
         onChange={(e) => onFilterChange(e.target.value)}
@@ -23,6 +27,6 @@ export default function SearchInput({
         <option value="teacher">Teacher</option>
         <option value="student">Student</option>
       </FilterSelect>
-    </>
+    </SearchComponent>
   );
 }

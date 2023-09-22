@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  ScheduleContainer,
   TabContainer,
   BlocTabs,
   Tabs,
@@ -39,7 +40,7 @@ export default function ScheduleTabs({
   }
 
   return (
-    <>
+    <ScheduleContainer>
       <NurseNavBar nurseData={nurseData} />
       <TabContainer>
         <h3>Work Schedule</h3>
@@ -130,6 +131,6 @@ export default function ScheduleTabs({
           </Content>
         </ContentTabs>
       </TabContainer>
-    </>
+    </ScheduleContainer>
   );
 }

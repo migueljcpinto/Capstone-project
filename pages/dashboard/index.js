@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { mutate } from "swr";
 import {
   DashboardContainer,
@@ -11,7 +10,6 @@ import ShiftDetails from "@/components/Dashboard/ShiftsDetails";
 import Modal from "@/components/Modals/Modal";
 import WarningIcon from "@/utilities/Icons/WarningIcon";
 import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
-import Profile from "@/components/Layout/ProfileLayout";
 
 export default function DashboardPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());

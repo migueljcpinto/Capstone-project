@@ -8,16 +8,16 @@ export const StyledDiv = styled.div`
   z-index: 1000;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   max-height: 80vh;
   width: 80%;
   max-width: 600px;
   overflow-y: auto;
+  border-radius: 5px;
 `;
 
 export const XButton = styled.button`
   position: absolute;
-  top: 50px;
+  top: 10px;
   right: 10px;
   border: none;
   background: #e0e0e0;
@@ -32,11 +32,10 @@ export const XButton = styled.button`
 export const UpdateFormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   background-color: #fcfafb;
   max-height: 80vh;
   overflow-y: auto;
-  padding: 20px 40px;
+  padding: 10px 30px;
   width: 100%;
 `;
 

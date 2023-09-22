@@ -20,8 +20,6 @@ import BackButton from "../BackButton/BackButton";
 import { useState } from "react";
 
 export default function NurseProfile({
-  isEdit,
-  setIsEdit,
   nurseData,
   onDeleteNurse,
   onSubmit,

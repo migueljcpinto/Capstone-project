@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const ScheduleContainer = styled.div`
+  padding-top: 50px;
+  max-width: 500px;
+`;
+
 export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -7,7 +12,6 @@ export const TabContainer = styled.div`
   justify-content: center;
   background-color: #fafafc;
   padding: 1rem;
-  max-width: 500px;
 `;
 
 export const BlocTabs = styled.div`

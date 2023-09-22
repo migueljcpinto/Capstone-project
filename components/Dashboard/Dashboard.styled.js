@@ -6,7 +6,7 @@ export const DashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 0px 0px;
+  padding-top: 50px;
 `;
 
 export const TeamOverview = styled.section`

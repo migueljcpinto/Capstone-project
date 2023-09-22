@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const TeamContainer = styled.div`
+  position: relative;
+  padding-top: 50px;
+`;
+
 export const StyledHeading = styled.h2`
   display: grid;
   position: relative;
