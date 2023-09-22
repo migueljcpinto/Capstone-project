@@ -10,13 +10,14 @@ import BackButton from "../BackButton/BackButton";
 
 export default function NurseNavBar({ nurseData }) {
   const router = useRouter();
-
+  console.log(nurseData);
   if (!nurseData) {
     return <LoaderSpinner />;
   }
   return (
     <NurseNavbarContainer>
-      {router.pathname !== `/nurses/` && <BackButton />}{" "}
+      <BackButton />
+
       <NurseName>{nurseData.name}</NurseName>
       <NurseImage
         width={40}

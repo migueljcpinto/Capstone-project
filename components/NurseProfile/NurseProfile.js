@@ -11,10 +11,13 @@ import {
   ActionsContainer,
   InfoContainer,
   InfoActionsContainer,
+  ReturnContainer,
 } from "./NurseProfile.styled";
 import UpdateNurse from "../UpdateNurse/UpdateNurse";
 import EmailIcon from "@/utilities/Icons/EmailIcon";
 import PhoneIcon from "@/utilities/Icons/PhoneIcon";
+import BackButton from "../BackButton/BackButton";
+import { useState } from "react";
 
 export default function NurseProfile({
   isEdit,
@@ -24,9 +27,18 @@ export default function NurseProfile({
   onSubmit,
   handleScheduleSubmit,
 }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function toggleUpdateNurse() {
+    setIsModalOpen(!isModalOpen);
+  }
+
   return (
     <>
       <NurseProfileContainer>
+        <ReturnContainer>
+          <BackButton />
+        </ReturnContainer>
         <NurseProfileHeader>
           <NurseImage
             width={76.8}
@@ -59,18 +71,16 @@ export default function NurseProfile({
               <DeleteButtonStyled onClick={onDeleteNurse} type="button">
                 Delete
               </DeleteButtonStyled>
-              {!isEdit && (
-                <UpdateButtonStyled
-                  onClick={() => {
-                    setIsEdit(!isEdit);
-                  }}
-                  type="button"
-                >
-                  Update
-                </UpdateButtonStyled>
-              )}
-              {isEdit && (
-                <UpdateNurse nurseData={nurseData} onSubmit={onSubmit} />
+
+              <UpdateButtonStyled onClick={toggleUpdateNurse} type="button">
+                Update
+              </UpdateButtonStyled>
+              {isModalOpen && (
+                <UpdateNurse
+                  nurseData={nurseData}
+                  onSubmit={onSubmit}
+                  setIsModalOpen={setIsModalOpen}
+                />
               )}
               <WorkScheduleLink
                 href={`/nurses/${nurseData._id}/schedule`}

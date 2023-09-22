@@ -136,7 +136,7 @@ export const LogOutButton = styled.button`
 export const NurseNavbarContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   background-color: #fafafc;

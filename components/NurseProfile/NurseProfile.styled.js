@@ -111,3 +111,8 @@ export const WorkScheduleLink = styled(Link)`
   text-decoration: none;
   font-size: 16px;
 `;
+
+export const ReturnContainer = styled.div`
+  position: absolute;
+  left: 20px;
+`;
