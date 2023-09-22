@@ -11,7 +11,7 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import BackButton from "../BackButton/BackButton";
 
-export default function Profile() {
+export default function Profile({ session }) {
   const router = useRouter();
   return (
     <ProfileContainer>
