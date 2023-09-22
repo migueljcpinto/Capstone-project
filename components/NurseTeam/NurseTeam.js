@@ -13,6 +13,7 @@ import LoaderSpinner from "../LoaderSpinner/AmbulanceLoading";
 import Modal from "../Modals/Modal";
 import WarningIcon from "@/utilities/Icons/WarningIcon";
 import BackButton from "../BackButton/BackButton";
+import { ReturnContainer } from "../NurseProfile/NurseProfile.styled";
 
 export default function NurseTeam({ handleScheduleSubmit }) {
   const { data, isLoading } = useSWR("/api/nurses");
@@ -57,10 +58,10 @@ export default function NurseTeam({ handleScheduleSubmit }) {
 
   return (
     <TeamContainer>
-      <TeamHeader>
+      <ReturnContainer>
         <BackButton />
-        <StyledHeading>Available Nurses</StyledHeading>
-      </TeamHeader>
+      </ReturnContainer>
+      <StyledHeading>Available Nurses</StyledHeading>
       <SearchInput
         onSearchChange={setSearch}
         onFilterChange={setRoleFilter}

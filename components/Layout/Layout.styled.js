@@ -101,6 +101,7 @@ export const ProfileImage = styled(Image)`
 `;
 export const ProfileContainer = styled.div`
   position: fixed;
+  top: 10px;
   left: 5px;
   display: flex;
   align-items: center;
