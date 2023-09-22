@@ -101,13 +101,14 @@ export const ProfileImage = styled(Image)`
 `;
 export const ProfileContainer = styled.div`
   position: fixed;
-  top: 5px;
   left: 5px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
+  height: 66px;
   background: #fafafc;
+  z-index: 1000;
 `;
 
 export const WelcomeName = styled.div`

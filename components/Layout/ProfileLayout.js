@@ -13,8 +13,8 @@ export default function Profile({ session }) {
   return (
     <ProfileContainer>
       <ProfileImage
-        width={56.8}
-        height={56.8}
+        width={55}
+        height={55}
         src={session && session.user ? session.user.image : "wait"}
         alt="Nurse Photo"
       />
