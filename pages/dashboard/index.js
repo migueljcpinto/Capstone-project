@@ -194,7 +194,6 @@ export default function DashboardPage() {
             buttonAction={() => setShowSuccessModal(false)}
           />
         )}
-        <Profile />
         <TeamStats stats={teamStats} />
         <CalendarContainer>
           <HorizontalCalendar
