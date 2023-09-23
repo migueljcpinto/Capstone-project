@@ -1,6 +1,5 @@
 import NavHomeIcon from "@/utilities/Icons/NavHomeIcon";
 import NavProfileIcon from "@/utilities/Icons/NavProfileIcon";
-import NavScheduleIcon from "@/utilities/Icons/NavScheduleIcon";
 import NavTeamIcon from "@/utilities/Icons/NavTeamIcon";
 import Link from "next/link";
 import { useState } from "react";
@@ -50,7 +49,7 @@ export default function NavBar() {
               {activeIndex === 1 ? (
                 <NavLinkText>Add Nurse</NavLinkText>
               ) : (
-                <NavScheduleIcon />
+                <NavProfileIcon />
               )}{" "}
             </NavItem>
           </Link>
