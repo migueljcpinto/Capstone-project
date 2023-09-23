@@ -8,11 +8,15 @@ export const StyledListItem = styled.li`
   column-gap: 1.6rem;
   padding: 1.2rem;
   border-radius: 7px;
-  background-color: #fff4e6;
+  background-color: #fafafc;
   transition: 0.5s;
-  cursor: pointer;
 
-  & img {
+  &:hover {
+    background-color: #fff4e6;
+    cursor: pointer;
+  }
+
+  img {
     border-radius: 50%;
     width: 100%;
   }
