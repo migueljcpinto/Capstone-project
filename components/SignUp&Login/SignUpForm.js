@@ -16,15 +16,19 @@ import EyeClosedIcon from "@/utilities/Icons/EyeClosedIcon";
 import { useRouter } from "next/router";
 import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
 import WarningIcon from "@/utilities/Icons/WarningIcon";
+import ButtonSpinner from "../LoaderSpinner/ButtonSpinner";
 
 export default function SignUpForm({
   handleSubmit,
   handleChange,
   formData,
   errors,
+  showSuccessModal,
+  setShowSuccessModal,
+  showErrorModal,
+  setShowErrorModal,
+  isLoading,
 }) {
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showErrorModal, setShowErrorModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
@@ -90,7 +94,9 @@ export default function SignUpForm({
             <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
           )}
         </Inputs>
-        <AuthButton type="submit">Create Account</AuthButton>
+        <AuthButton type="submit">
+          {isLoading ? <ButtonSpinner /> : "Create Account"}
+        </AuthButton>
         <EnjoyText>
           Already Have An Account? <Link href={"/login"}>Log In</Link>
         </EnjoyText>
