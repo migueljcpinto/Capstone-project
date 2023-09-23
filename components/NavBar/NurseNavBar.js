@@ -10,7 +10,6 @@ import BackButton from "../BackButton/BackButton";
 
 export default function NurseNavBar({ nurseData }) {
   const router = useRouter();
-  console.log(nurseData);
   if (!nurseData) {
     return <LoaderSpinner />;
   }

@@ -29,7 +29,7 @@ export const XButton = styled.button`
   cursor: pointer;
 `;
 
-export const UpdateFormContainer = styled.div`
+export const UpdateFormContainer = styled.form`
   display: flex;
   flex-direction: column;
   background-color: #fcfafb;

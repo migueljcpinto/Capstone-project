@@ -25,12 +25,18 @@ export default function UpdateNurse({ nurseData, onSubmit, setIsModalOpen }) {
     event.preventDefault();
 
     try {
-      await onSubmit(event);
-      setShowSuccessModal(true);
+      const response = await onSubmit(event);
+      if (response.ok) {
+        setShowSuccessModal(true);
+        setIsModalOpen(false);
+      } else {
+        setShowErrorModal(true);
+      }
     } catch (error) {
       setShowErrorModal(true);
     }
   };
+
   return (
     <UpdateModalOverlay>
       <StyledDiv>

@@ -1,38 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Nurse Scheduling Application - TeamUp
 
-## Getting Started
+## Overview
 
-First, run the development server:
+"TeamUp" is a Nurse Scheduling Application conceptualized as a capstone project for a Web Development Bootcamp. While the application aims to offer a comprehensive solution for nursing staff scheduling, it primarily serves as a testament to the skills, methodologies, and technologies learned throughout the Bootcamp. The platform, though not fully functional, is designed with the vision of providing an intuitive interface for managing shifts, tracking nurse availability, and ensuring healthcare facilities are always adequately staffed.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Dynamic Dashboard:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Get an immediate overview of the nursing staff, showcasing the total number of nurses, those currently available, and those on vacation.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+# Interactive Calendar:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Experience the power of an integrated calendar to visualize and manage shifts. With daily view support, it becomes straightforward to discern who is scheduled for which shift.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Shift Management:
 
-## Learn More
+Assign nurses to morning, afternoon, or night shifts with ease. The system is designed to minimize scheduling conflicts, ensuring smooth operations.
 
-To learn more about Next.js, take a look at the following resources:
+# Nurse Profiles:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Dive into individual nurse profiles, each equipped with a photo and essential details, offering a personalized touch to the management process.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# Mobile Responsive:
 
-## Deploy on Vercel
+Crafted with a mobile-first philosophy, the application promises a consistent and seamless experience across a myriad of devices.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- React.js: A JavaScript library for building user interfaces.
+- Next.js: A top-tier React framework that facilitates server-side rendering and the generation of static websites.
+- NextAuth.js: A comprehensive authentication solution for Next.js applications.
+- Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine.
+- Styled Components: A modern library for styling, promoting component-scoped styles that enhance modularity and reusability.
+- MongoDB: A leading NoSQL database, responsible for storing various application data, including nurse profiles, shifts, and availability.
+- etc.
+
+## Bootcamp Reflection
+
+This project encapsulates the culmination of intensive learning, challenges, and hands-on coding experiences encountered during the Bootcamp. While "TeamUp" is not a fully operational product, it embodies the potential and foundation for a real-world application. The journey of conceptualizing and developing this project was invaluable, offering practical insights into the world of web development.
