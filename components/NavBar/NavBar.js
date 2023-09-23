@@ -42,13 +42,13 @@ export default function NavBar() {
               )}{" "}
             </NavItem>
           </Link>
-          <Link href="/teamschedule">
+          <Link href="/nurses/new-nurse">
             <NavItem
               isActive={activeIndex === 1}
               onClick={() => handleLinkClick(1)}
             >
               {activeIndex === 1 ? (
-                <NavLinkText>Schedule</NavLinkText>
+                <NavLinkText>Add Nurse</NavLinkText>
               ) : (
                 <NavScheduleIcon />
               )}{" "}
@@ -63,18 +63,6 @@ export default function NavBar() {
                 <NavLinkText>Team</NavLinkText>
               ) : (
                 <NavTeamIcon />
-              )}{" "}
-            </NavItem>
-          </Link>
-          <Link href="/nurses/new-nurse">
-            <NavItem
-              isActive={activeIndex === 3}
-              onClick={() => handleLinkClick(3)}
-            >
-              {activeIndex === 3 ? (
-                <NavLinkText>Add Nurse</NavLinkText>
-              ) : (
-                <NavProfileIcon />
               )}{" "}
             </NavItem>
           </Link>
