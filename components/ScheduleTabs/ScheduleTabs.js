@@ -60,7 +60,8 @@ export default function ScheduleTabs({
           <Content active={activeTab === 1 ? "true" : undefined}>
             <Separator />
             <Paragraph>
-              Add or remove vacation dates for team members here.
+              Add Vacations, at least more than two days in a row. For just one
+              day, choose a day off!
             </Paragraph>
             <Accordion title="Set your Vacation">
               <VacationForm
