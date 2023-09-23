@@ -1,4 +1,4 @@
-### Nurse Scheduling Application - TeamUp
+# Nurse Scheduling Application - TeamUp
 
 ## Overview
 
@@ -6,27 +6,27 @@
 
 ## Features
 
-# Dynamic Dashboard:
+### Dynamic Dashboard:
 
 Get an immediate overview of the nursing staff, showcasing the total number of nurses, those currently available, and those on vacation.
 
-# Interactive Calendar:
+### Interactive Calendar:
 
 Experience the power of an integrated calendar to visualize and manage shifts. With daily view support, it becomes straightforward to discern who is scheduled for which shift.
 
-# Shift Management:
+### Shift Management:
 
 Assign nurses to morning, afternoon, or night shifts with ease. The system is designed to minimize scheduling conflicts, ensuring smooth operations.
 
-# Nurse Profiles:
+### Nurse Profiles:
 
 Dive into individual nurse profiles, each equipped with a photo and essential details, offering a personalized touch to the management process.
 
-# Mobile Responsive:
+### Mobile Responsive:
 
 Crafted with a mobile-first philosophy, the application promises a consistent and seamless experience across a myriad of devices.
 
-# Tech Stack
+## Tech Stack
 
 - React.js: A JavaScript library for building user interfaces.
 - Next.js: A top-tier React framework that facilitates server-side rendering and the generation of static websites.
