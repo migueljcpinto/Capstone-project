@@ -1,15 +1,40 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const TitleAnime = keyframes`
+0%, 100% {
+    background-size: 100% 10px;
+    background-position: 100% 0%;
+  }
+  50% {
+    background-size: 100% 100%;
+    background-position: 0% 100%;
+  }
+`;
+
+export const Title = styled.h1`
+  font-size: 3em;
+  text-align: center;
+  background-image: linear-gradient(#70d2a9, #70d2a9);
+  background-size: 100% 10px;
+  background-repeat: no-repeat;
+  background-position: 100% 0%;
+  animation: ${TitleAnime} 2.2s infinite alternate;
+  animation-delay: 2s;
+`;
 
 export const AuthContainer = styled.div`
+  position: relative;
   background-color: #f6fbf9;
   border-radius: 32px;
-  height: 550px;
+  height: 660px;
+
   width: 350px;
-  position: relative;
 `;
 
 export const AuthSec = styled.div`
   position: absolute;
+  display: flex;
+  flex-direction: column;
   margin: 40px;
   align-content: center;
 `;
@@ -29,6 +54,9 @@ export const AuthInput = styled.input`
 `;
 
 export const AuthButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 15px;
   border: 1px solid 212b27;
   background: #84c7ae;
@@ -40,11 +68,7 @@ export const AuthButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, opacity 0.3s ease;
-  &:disabled {
-    background-color: #ccc;
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
+
   &:focus {
     border-color: #0077cc;
     box-shadow: 0 0 5px rgba(0, 119, 204, 0.5);
@@ -66,60 +90,6 @@ export const EnjoyText = styled.h4`
   text-align: center;
   font-style: normal;
   font-weight: 400;
-  line-height: 19.5px;
-`;
-
-export const SuccessModal = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #e1ffe0;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 1rem 2rem 2rem 2rem;
-  background-color: #fff;
-  width: 300px;
-  z-index: 1000;
-  border-radius: 8px;
-  position: absolute;
-  z-index: 1;
-  text-align: center;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
-  & h4 {
-    text-transform: uppercase;
-  }
-
-  & button {
-    border: 1px solid #59b660;
-    border-radius: 1.5rem;
-    background-color: #59b660;
-    font-size: 1rem;
-    line-height: 1.2;
-    white-space: nowrap;
-    text-decoration: none;
-    padding: 0.5rem 1.5rem;
-    margin: 0.25rem;
-    cursor: pointer;
-    color: white;
-    text-transform: uppercase;
-    &:hover {
-      color: #59b660;
-      background-color: white;
-    }
-  }
-`;
-
-export const SuccessOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 999;
 `;
 
 export const ErrorMessage = styled.p`

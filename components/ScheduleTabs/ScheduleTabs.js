@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  ScheduleContainer,
   TabContainer,
   BlocTabs,
   Tabs,
@@ -15,14 +16,14 @@ import VacationDatesDisplay from "../WorkDatesDisplay/VacationDatesDisplay";
 import DaysOffDatesDisplay from "../WorkDatesDisplay/DaysOffDatesDisplay";
 import AvailabilityDatesDisplay from "../WorkDatesDisplay/AvailabilityDatesDisplay";
 import Accordion from "../Accordion/Accordion";
+import NurseNavBar from "../NavBar/NurseNavBar";
 
 export default function ScheduleTabs({
   onVacationSubmit,
   onDaysOffSubmit,
   onAvailabilitySubmit,
-  nurseData,
   nurseId,
-  absenceDates,
+  nurseData,
   availabilityDates,
   daysOff,
   setDaysOff,
@@ -33,18 +34,14 @@ export default function ScheduleTabs({
   onAvailabilityRemove,
 }) {
   const [activeTab, setActiveTab] = useState(1);
-  const [isOpen, setIsOpen] = useState(false);
 
   function handleTabActive(index) {
-    if (activeTab === index) {
-      setActiveTab(null); //From each Tab Index, close the tab if clicked twice
-    } else {
-      setActiveTab(index);
-    }
+    setActiveTab((prevTab) => (prevTab === index ? null : index));
   }
 
   return (
-    <>
+    <ScheduleContainer>
+      <NurseNavBar nurseData={nurseData} />
       <TabContainer>
         <h3>Work Schedule</h3>
         <BlocTabs>
@@ -63,7 +60,8 @@ export default function ScheduleTabs({
           <Content active={activeTab === 1 ? "true" : undefined}>
             <Separator />
             <Paragraph>
-              Add or remove vacation dates for team members here.
+              Add Vacations, at least two days in a row. For just one day,
+              choose a day off!{" "}
             </Paragraph>
             <Accordion title="Set your Vacation">
               <VacationForm
@@ -134,6 +132,6 @@ export default function ScheduleTabs({
           </Content>
         </ContentTabs>
       </TabContainer>
-    </>
+    </ScheduleContainer>
   );
 }

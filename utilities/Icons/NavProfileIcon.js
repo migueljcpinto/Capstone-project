@@ -1,8 +1,6 @@
 import styled from "styled-components";
 export default function NavProfileIcon() {
   const StyledProfileIcon = styled.svg`
-    width: 76px;
-    height: 50px;
     padding: 10px;
     justify-content: center;
     align-items: center;
@@ -12,26 +10,17 @@ export default function NavProfileIcon() {
   `;
   return (
     <StyledProfileIcon
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      width="54"
+      height="54"
+      fill="#fcfcfc"
+      viewBox="0 0 256 256"
     >
-      <g id="Nav Icons">
-        <path
-          id="Vector"
-          d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-          stroke="white"
-          strokeWidth="1.5"
-        />
-        <path
-          id="Vector_2"
-          d="M12 14C9.17215 14 6.73597 15.6768 5.63147 18.0903C4.94201 19.5969 6.34311 21 7.99997 21H16C17.6568 21 19.0579 19.5969 18.3685 18.0903C17.264 15.6768 14.8278 14 12 14Z"
-          stroke="white"
-          strokeWidth="1.5"
-        />
-      </g>
+      <path
+        d="M168,100a60,60,0,1,1-60-60A60,60,0,0,1,168,100Z"
+        opacity="0.2"
+      ></path>
+      <path d="M256,136a8,8,0,0,1-8,8H232v16a8,8,0,0,1-16,0V144H200a8,8,0,0,1,0-16h16V112a8,8,0,0,1,16,0v16h16A8,8,0,0,1,256,136Zm-57.87,58.85a8,8,0,0,1-12.26,10.3C165.75,181.19,138.09,168,108,168s-57.75,13.19-77.87,37.15a8,8,0,0,1-12.25-10.3c14.94-17.78,33.52-30.41,54.17-37.17a68,68,0,1,1,71.9,0C164.6,164.44,183.18,177.07,198.13,194.85ZM108,152a52,52,0,1,0-52-52A52.06,52.06,0,0,0,108,152Z"></path>{" "}
     </StyledProfileIcon>
   );
 }

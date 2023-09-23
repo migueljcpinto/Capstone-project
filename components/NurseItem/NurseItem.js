@@ -1,10 +1,7 @@
-import Link from "next/link";
 import Image from "next/image";
-import { StyledListItem } from "../NurseItem/NurseItem.styled";
+import { StyledListItem, NurseLink } from "../NurseItem/NurseItem.styled";
 
 export default function NurseItem({ nurse }) {
-
-  
   return (
     <StyledListItem>
       <Image
@@ -13,12 +10,9 @@ export default function NurseItem({ nurse }) {
         src={nurse.image}
         alt="Random Nurse Photo"
       />
-      <Link
-        style={{ color: "black", textDecoration: "none" }}
-        href={`/nurses/${nurse._id}`}
-      >
+      <NurseLink href={`/nurses/${nurse._id}`} nurse={nurse}>
         {nurse.name} <br /> {nurse.role}
-      </Link>
+      </NurseLink>
     </StyledListItem>
   );
 }

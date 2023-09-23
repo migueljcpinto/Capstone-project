@@ -11,14 +11,15 @@ export default function Signup() {
     password: "",
     confirmPassword: "",
   });
-
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [showModal, setShowModal] = useState(false);
 
   function handleChange(event) {
     const { id, value } = event.target;
@@ -28,6 +29,7 @@ export default function Signup() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
     let validationErrors = {};
 
     formData.image = getRandomImageURL();
@@ -76,7 +78,7 @@ export default function Signup() {
       const data = await response.json();
 
       if (response.status === 201) {
-        setShowModal(true);
+        setShowSuccessModal(true);
       } else {
         console.error("Error creating user:", data.message);
       }
@@ -88,12 +90,15 @@ export default function Signup() {
   return (
     <AuthContainer>
       <SignUpForm
+        isLoading={isLoading}
+        showSuccessModal={showSuccessModal}
+        setShowSuccessModal={setShowSuccessModal}
+        showErrorModal={showErrorModal}
+        setShowErrorModal={setShowErrorModal}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         formData={formData}
         errors={errors}
-        showModal={showModal}
-        setShowModal={setShowModal}
       />
     </AuthContainer>
   );

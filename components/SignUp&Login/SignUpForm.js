@@ -7,30 +7,39 @@ import {
   AuthText,
   ErrorMessage,
   Inputs,
+  Title,
 } from "./SignUp&Login.styled";
-import Success from "./Success";
+import Modal from "../Modals/Modal";
 import { useState } from "react";
 import EyeOpenIcon from "@/utilities/Icons/EyeOpenIcon";
 import EyeClosedIcon from "@/utilities/Icons/EyeClosedIcon";
+import { useRouter } from "next/router";
+import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
+import WarningIcon from "@/utilities/Icons/WarningIcon";
+import ButtonSpinner from "../LoaderSpinner/ButtonSpinner";
 
 export default function SignUpForm({
   handleSubmit,
   handleChange,
   formData,
   errors,
-  showModal,
-  setShowModal,
+  showSuccessModal,
+  setShowSuccessModal,
+  showErrorModal,
+  setShowErrorModal,
+  isLoading,
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
+  const router = useRouter();
+
   return (
     <AuthSec>
+      <Title>Team´Up</Title>
       <form onSubmit={handleSubmit}>
-        <AuthText>Create An Account</AuthText>
         <EnjoyText>
           Create an account to enjoy managing your dream team!
         </EnjoyText>
-
         <label htmlFor="name"></label>
         <AuthInput
           type="text"
@@ -39,6 +48,7 @@ export default function SignUpForm({
           value={formData.name}
           onChange={handleChange}
           $hasError={!!errors.name}
+          autoFocus
         />
         {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
         <label htmlFor="email"></label>
@@ -84,11 +94,39 @@ export default function SignUpForm({
             <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
           )}
         </Inputs>
-        <AuthButton type="submit">Create Account</AuthButton>
+        <AuthButton type="submit">
+          {isLoading ? <ButtonSpinner /> : "Create Account"}
+        </AuthButton>
         <EnjoyText>
           Already Have An Account? <Link href={"/login"}>Log In</Link>
         </EnjoyText>
-        {showModal && <Success setShowModal={setShowModal} />}
+        {showSuccessModal && (
+          <Modal
+            setShowModal={setShowSuccessModal}
+            title="Welcome Aboard!"
+            IconComponent={GreenCheckIcon}
+            message="Your account has been successfully created!"
+            buttonText="Let's Go!"
+            buttonAction={() => {
+              setShowSuccessModal(false);
+              router.push("/login");
+            }}
+          />
+        )}
+        {showErrorModal && (
+          <Modal
+            setShowModal={setShowErrorModal}
+            title="Error!"
+            IconComponent={WarningIcon}
+            message="There was an error with signing up."
+            buttonText="Try Again"
+            type="error"
+            buttonAction={() => {
+              setShowErrorModal(false);
+              router.push("/signup");
+            }}
+          />
+        )}
       </form>
     </AuthSec>
   );

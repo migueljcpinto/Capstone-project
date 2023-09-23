@@ -1,9 +1,10 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { ReturnButton } from "@/components/WorkScheduleForm/WorkScheduleForm.styled";
-import Notification from "@/components/Notifications/Notification";
 import ScheduleTabs from "@/components/ScheduleTabs/ScheduleTabs";
+import Modal from "@/components/Modals/Modal";
+import WarningIcon from "@/utilities/Icons/WarningIcon";
+import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
 
 export default function SchedulePage() {
   const router = useRouter();
@@ -16,7 +17,9 @@ export default function SchedulePage() {
     nurseId ? `/api/availability/${nurseId}` : null
   );
 
-  const [notification, setNotification] = useState(null);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
   const [daysOff, setDaysOff] = useState([]);
 
   const { data: absencesFromDB, error: absenceError } = useSWR(
@@ -45,14 +48,11 @@ export default function SchedulePage() {
   ].map((dateStr) => new Date(dateStr));
 
   useEffect(() => {
-    if (notification) {
-      const timer = setTimeout(() => {
-        setNotification(null);
-      }, 5000);
-
-      return () => clearTimeout(timer);
+    if (absenceError || availabilityError) {
+      setShowErrorModal(true);
     }
-  }, [notification]);
+  }, [absenceError, availabilityError]);
+
   async function handleRemoveAbsence(absenceId) {
     const response = await fetch(`/api/absences/${nurseId}`, {
       method: "DELETE",
@@ -61,7 +61,7 @@ export default function SchedulePage() {
     });
 
     if (response.ok) {
-      setNotification({ message: "Date deleted!", type: "remove" });
+      setShowSuccessModal({ message: "Date deleted!", type: "remove" });
       mutateAbsencesData();
     }
   }
@@ -74,7 +74,7 @@ export default function SchedulePage() {
     });
 
     if (response.ok) {
-      setNotification({ message: "Availability deleted!", type: "remove" });
+      setShowSuccessModal({ message: "Availability deleted!", type: "remove" });
       mutateAvailabilityData();
     }
   }
@@ -92,11 +92,11 @@ export default function SchedulePage() {
     });
 
     if (response.ok) {
-      setNotification({ message: "Vacation Dates added!", type: "add" });
+      setShowSuccessModal({ message: "Vacation Dates added!", type: "add" });
       mutateAbsencesData();
     } else {
       const errorData = await response.json();
-      setNotification({
+      setShowErrorModal({
         message: errorData.error || "An error occurred!",
         type: "error",
       });
@@ -116,7 +116,7 @@ export default function SchedulePage() {
     });
 
     if (response.ok) {
-      setNotification({ message: "Days Off added!", type: "add" });
+      setShowSuccessModal({ message: "Days Off added!", type: "add" });
       mutateAbsencesData();
     }
   }
@@ -135,7 +135,7 @@ export default function SchedulePage() {
     });
 
     if (response.ok) {
-      setNotification({ message: "Availability added!", type: "add" });
+      setShowSuccessModal({ message: "Availability added!", type: "add" });
       mutateAvailabilityData();
     }
     return response;
@@ -143,8 +143,31 @@ export default function SchedulePage() {
 
   return (
     <>
-      {notification && (
-        <Notification message={notification.message} type={notification.type} />
+      {showErrorModal && (
+        <Modal
+          setShowModal={setShowErrorModal}
+          title="Error"
+          message="Something went wrong!"
+          type="error"
+          IconComponent={WarningIcon}
+          buttonAction={() => {
+            setShowErrorModal(false);
+          }}
+          buttonText="Ok!"
+        />
+      )}
+      {showSuccessModal && (
+        <Modal
+          setShowModal={setShowSuccessModal}
+          IconComponent={GreenCheckIcon}
+          title="Done!"
+          message={showSuccessModal.message}
+          type={showSuccessModal.type}
+          buttonAction={() => {
+            setShowSuccessModal(false);
+          }}
+          buttonText="Ok!"
+        />
       )}
       <ScheduleTabs
         onVacationSubmit={handleVacationSubmit}
@@ -162,8 +185,6 @@ export default function SchedulePage() {
         onAbsenceRemove={handleRemoveAbsence}
         onAvailabilityRemove={handleRemoveAvailability}
       />
-
-      <ReturnButton onClick={() => router.back()}>Return</ReturnButton>
     </>
   );
 }

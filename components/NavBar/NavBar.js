@@ -1,6 +1,5 @@
 import NavHomeIcon from "@/utilities/Icons/NavHomeIcon";
 import NavProfileIcon from "@/utilities/Icons/NavProfileIcon";
-import NavScheduleIcon from "@/utilities/Icons/NavScheduleIcon";
 import NavTeamIcon from "@/utilities/Icons/NavTeamIcon";
 import Link from "next/link";
 import { useState } from "react";
@@ -10,7 +9,7 @@ import {
   NavLinkText,
   Burger,
   NavBurger,
-} from "./Layout.styled";
+} from "../Layout/Layout.styled";
 
 export default function NavBar() {
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -18,6 +17,7 @@ export default function NavBar() {
 
   function handleLinkClick(index) {
     setActiveIndex(index === activeIndex ? -1 : index);
+    setOpen(false);
   }
 
   return (
@@ -41,15 +41,15 @@ export default function NavBar() {
               )}{" "}
             </NavItem>
           </Link>
-          <Link href="/schedule">
+          <Link href="/nurses/new-nurse">
             <NavItem
               isActive={activeIndex === 1}
               onClick={() => handleLinkClick(1)}
             >
               {activeIndex === 1 ? (
-                <NavLinkText>Schedule</NavLinkText>
+                <NavLinkText>Add Nurse</NavLinkText>
               ) : (
-                <NavScheduleIcon />
+                <NavProfileIcon />
               )}{" "}
             </NavItem>
           </Link>
@@ -62,18 +62,6 @@ export default function NavBar() {
                 <NavLinkText>Team</NavLinkText>
               ) : (
                 <NavTeamIcon />
-              )}{" "}
-            </NavItem>
-          </Link>
-          <Link href="/nurses/new-nurse">
-            <NavItem
-              isActive={activeIndex === 3}
-              onClick={() => handleLinkClick(3)}
-            >
-              {activeIndex === 3 ? (
-                <NavLinkText>Add Nurse</NavLinkText>
-              ) : (
-                <NavProfileIcon />
               )}{" "}
             </NavItem>
           </Link>

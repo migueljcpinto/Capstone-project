@@ -10,7 +10,9 @@ import {
   EnjoyText,
   ErrorMessage,
   Inputs,
+  Title,
 } from "./SignUp&Login.styled";
+import ButtonSpinner from "../LoaderSpinner/ButtonSpinner";
 
 export default function LoginForm({ onFormSubmit, errorMessage }) {
   //Storing Form Values
@@ -19,6 +21,7 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -27,11 +30,14 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
 
   function handleFormSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
     onFormSubmit(formValues);
   }
 
   return (
     <AuthSec>
+      <Title>Team´Up</Title>
+
       <AuthText>Log in</AuthText>
       <form onSubmit={handleFormSubmit}>
         <Inputs>
@@ -43,6 +49,7 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
             placeholder=" Email"
             value={formValues.email}
             onChange={handleChange}
+            autoFocus
           />
           <label htmlFor="password" />
           <AuthInput
@@ -53,13 +60,18 @@ export default function LoginForm({ onFormSubmit, errorMessage }) {
             value={formValues.password}
             onChange={handleChange}
           />
-          <span onClick={() => setShowPassword((prev) => !prev)}>
+          <span
+            onClick={() => setShowPassword((prev) => !prev)}
+            data-testid="visibility-icon"
+          >
             {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
           </span>
         </Inputs>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-        <AuthButton type="submit">Log in</AuthButton>
+        <AuthButton type="submit">
+          {isLoading ? <ButtonSpinner /> : "Log in"}
+        </AuthButton>
       </form>
 
       <br />

@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const SearchComponent = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const SearchInputStyled = styled.input`
   margin: 0 auto;
   width: 100%;
@@ -19,4 +24,9 @@ export const SearchInputStyled = styled.input`
       opacity: 0;
     }
   }
+`;
+export const FilterSelect = styled.select`
+  width: 30%;
+  border: 1px solid #d0cfce;
+  border-radius: 5px;
 `;

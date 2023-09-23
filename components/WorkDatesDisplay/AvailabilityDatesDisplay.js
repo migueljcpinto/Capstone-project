@@ -6,6 +6,7 @@ import {
   DeleteButton,
 } from "./WorkDatesDisplay.styled";
 import { format } from "date-fns";
+import RemoveSVGIcon from "@/utilities/Icons/RemoveNurseSlotIcon";
 
 export default function AvailabilityDatesDisplay({
   availabilityData,
@@ -17,14 +18,14 @@ export default function AvailabilityDatesDisplay({
         {availabilityData?.map((availability) => (
           <Fragment key={availability._id}>
             <DatesItem key={availability.date}>
-              {format(new Date(availability.date), "dd/MM/yyyy")} - Shift:{" "}
-              {availability.shift}
+              {format(new Date(availability.date), "dd/MM/yyyy")} <br />
+              {availability.shift} shift
+              <DeleteButton
+                onClick={() => onAvailabilityRemove(availability._id)}
+              >
+                <RemoveSVGIcon />
+              </DeleteButton>
             </DatesItem>
-            <DeleteButton
-              onClick={() => onAvailabilityRemove(availability._id)}
-            >
-              Remove
-            </DeleteButton>
           </Fragment>
         ))}
       </Dates>

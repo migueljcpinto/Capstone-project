@@ -26,8 +26,8 @@ export const Burger = styled.button`
   position: fixed;
   bottom: 10px;
   left: 2%;
-  width: 4rem;
-  height: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
   z-index: 1001;
   align-items: center;
   background-color: #70d2a9;
@@ -62,7 +62,7 @@ export const Burger = styled.button`
 
 export const NavContainer = styled.div`
   position: fixed;
-  bottom: 10px;
+  bottom: 12px;
   left: ${({ open }) => (open ? "20px" : "-300px")};
   background-color: #70d2a9;
   border-radius: 18px;
@@ -71,7 +71,8 @@ export const NavContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 315px;
-  padding: 7px;
+  height: 50px;
+  padding: 10px;
   align-items: center;
   z-index: 1000;
   animation: ${slideIn} 0.3s ease-in-out forwards;
@@ -81,7 +82,7 @@ export const NavContainer = styled.div`
 export const NavItem = styled.div`
   display: flex;
   color: white;
-  margin-left: auto;
+  margin-left: 20px;
   width: 50px;
 `;
 
@@ -90,23 +91,31 @@ export const NavLinkText = styled.span`
   color: white;
   font-size: 12px;
   background: rgba(250, 255, 0, 0.29)
-  border-radius: 15px;
   text-align: center;
-  margin-left:auto;
   text-decoration-line: none;  
 `;
 
 export const ProfileImage = styled(Image)`
   border-radius: 99.5px;
-  margin-right: 10px;
   border: 2px solid white;
 `;
 export const ProfileContainer = styled.div`
+  position: fixed;
+  top: 10px;
+  left: 5px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  margin-bottom: 20px;
+  height: 55px;
+  background: #fafafc;
+  z-index: 1000;
+`;
+
+export const WelcomeName = styled.div`
+  display: flex;
+  gap: 5px;
+  align-items: center;
 `;
 export const Welcome = styled.p`
   color: #838aa3;
@@ -124,16 +133,27 @@ export const SVGSeach = styled.svg`
 
 export const LogOutButton = styled.button`
   background-color: #fafafc;
-  color: #000;
-  padding: 0.8rem 1.2rem;
-  margin: 5px 15px 5px 30px;
-  width: 80px;
-  border: none;
-  border-radius: 5px;
+  border: 1px solid #f0f0f0;
+  border-radius: 100%;
   cursor: pointer;
-  transition: 0.3s;
-  text-decoration: none;
-  font-size: 12px;
+`;
+
+export const NurseNavbarContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  padding: 10px 20px;
+  background-color: #fafafc;
+  border: 3px solid white;
+`;
+
+export const NurseImage = styled(Image)`
+  border-radius: 50%;
+  margin-right: 10px;
+`;
+
+export const NurseName = styled.span`
+  font-size: 16px;
+  font-weight: bold;
 `;

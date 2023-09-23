@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
+export const ScheduleContainer = styled.div`
+  max-width: 500px;
+`;
+
 export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #fcfafb;
-  width: 500px;
-  padding: 40px 60px;
-  border-radius: 10px;
+  background-color: #fafafc;
+  padding: 1rem;
 `;
 
 export const BlocTabs = styled.div`
@@ -47,4 +49,5 @@ export const Paragraph = styled.p`
   font-size: 14px;
   color: #483d8b;
   margin-top: 5px;
+  text-align: center;
 `;

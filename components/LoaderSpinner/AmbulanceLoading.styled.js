@@ -1,32 +1,31 @@
 import styled, { keyframes } from "styled-components";
 
 const spin = keyframes`
-  0% {
-    transform: translateX(700%) translateY(0);
-  }
-  25% {
-    transform: translateX(500%) translateY(-5px);
+    0% {
+    transform: translateX(-200%);
   }
   50% {
-    transform: translateX(300%) translateY(0);
-  }
-  75% {
-    transform: translateX(100%) translateY(-5px);
+    transform: translateX(25%);
   }
   100% {
-    transform: translateX(-900%) translateY(0);
+    transform: translateX(100%);
   }
 `;
 
-export const AmbulanceLoader = styled.div`
+export const LoadingContainer = styled.div`
+  place-items: center;
+  display: flex;
+  overflow: hidden;
+  min-height: 100vh;
+  max-width: 45rem;
+`;
+
+export const AmbulanceLoader = styled.img`
   position: absolute;
-  font-size: 17px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
-  border-bottom-color: gainsboro;
+  width: 150px;
+  height: auto;
   animation: ${spin} 4s infinite;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 `;

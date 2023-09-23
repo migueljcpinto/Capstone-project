@@ -6,7 +6,7 @@ export const DashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 0px 0px;
+  padding-top: 50px;
 `;
 
 export const TeamOverview = styled.section`
@@ -83,7 +83,7 @@ export const MorningShiftAccordion = styled(Accordion)`
   border-radius: 12px;
   gap: 20px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  span {
+  & span {
     display: block;
     font-size: 14px;
     color: darkgray;
@@ -101,7 +101,7 @@ export const AfternoonShiftAccordion = styled(Accordion)`
   border-radius: 12px;
   gap: 20px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  span {
+  & span {
     display: block;
     font-size: 14px;
     color: darkgray;
@@ -119,7 +119,7 @@ export const NightShiftAccordion = styled(Accordion)`
   border-radius: 12px;
   gap: 20px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  span {
+  & span {
     display: block;
     font-size: 14px;
     color: darkgray;
@@ -127,7 +127,7 @@ export const NightShiftAccordion = styled(Accordion)`
   }
 `;
 
-export const Slot = styled.div`
+export const Slot = styled.li`
   display: flex;
   flex-direction: rown;
   width: 330px;
