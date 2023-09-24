@@ -16,7 +16,6 @@ export default function NewNursePage() {
         const responseData = await response.json();
         return;
       }
-      alert("Nurse added successfully!");
       router.back();
     } catch (error) {}
   }

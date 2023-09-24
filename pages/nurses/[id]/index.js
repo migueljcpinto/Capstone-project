@@ -3,11 +3,13 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import NurseProfile from "@/components/NurseProfile/NurseProfile";
 import LoaderSpinner from "@/components/LoaderSpinner/AmbulanceLoading";
+import Modal from "@/components/Modals/Modal";
 
 export default function NursePage() {
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, mutate } = useSWR(`/api/nurses/${id}`);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   async function handleEditNurse(event) {
     event.preventDefault();
@@ -36,15 +38,14 @@ export default function NursePage() {
   }
 
   async function handleDelete() {
-    const shouldDelete = window.confirm(
-      `Are you sure you want to fire ${data?.name}?`
-    );
-    if (shouldDelete) {
-      const response = await fetch(`/api/nurses/${id}`, { method: "DELETE" });
-      if (response.ok) {
-        router.push("/");
-      }
+    setShowDeleteModal(true);
+  }
+  async function confirmDelete() {
+    const response = await fetch(`/api/nurses/${id}`, { method: "DELETE" });
+    if (response.ok) {
+      router.push("/");
     }
+    setShowDeleteModal(false);
   }
 
   if (isLoading) {
@@ -56,10 +57,21 @@ export default function NursePage() {
   }
 
   return (
-    <NurseProfile
-      nurseData={data}
-      onDeleteNurse={handleDelete}
-      onSubmit={handleEditNurse}
-    />
+    <>
+      <NurseProfile
+        nurseData={data}
+        onDeleteNurse={handleDelete}
+        onSubmit={handleEditNurse}
+      />
+      {showDeleteModal && (
+        <Modal
+          setShowModal={setShowDeleteModal}
+          title="Confirmation"
+          message={`Are you sure you want to fire ${data?.name}?`}
+          buttonText="Confirm"
+          buttonAction={confirmDelete}
+        />
+      )}
+    </>
   );
 }

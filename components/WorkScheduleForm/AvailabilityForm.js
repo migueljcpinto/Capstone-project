@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AvailabilityDatePicker } from "../DatePicker/AvailabilityDatePicker";
+import Modal from "../Modals/Modal";
 import { ScheduleFormContainer, Button } from "./WorkScheduleForm.styled";
 
 export default function AvailabilityForm({
@@ -10,11 +11,14 @@ export default function AvailabilityForm({
     useState(null);
   const [selectedShift, setSelectedShift] = useState("");
   const [resetAvailability, setResetAvailability] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   async function handleAvailabilitySubmit(event) {
     event.preventDefault();
     if (!selectedShift || !selectedAvailabilityDate) {
-      alert("Please select a shift before submitting.");
+      setModalMessage("Please select a shift before submitting.");
+      setShowModal(true);
       return;
     }
     if (selectedAvailabilityDate && selectedShift) {
@@ -33,7 +37,10 @@ export default function AvailabilityForm({
       } else {
         const errorData = await response.json();
         if (errorData.error === "You can only have 5 availabilities.") {
-          alert("You have already added 5 availabilities. You can't add more.");
+          setModalMessage(
+            "You have already added 5 availabilities. You can't add more."
+          );
+          setShowModal(true);
         } else {
           console.error("Please select a date and a shift for availability.");
         }
@@ -61,6 +68,15 @@ export default function AvailabilityForm({
       <Button onClick={handleAvailabilitySubmit} disabled={!selectedShift}>
         Request Availability
       </Button>
+      {showModal && (
+        <Modal
+          setShowModal={setShowModal}
+          title="Notification"
+          message={modalMessage}
+          buttonText="Ok"
+          buttonAction={() => setShowModal(false)}
+        />
+      )}
     </ScheduleFormContainer>
   );
 }
