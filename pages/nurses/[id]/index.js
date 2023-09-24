@@ -46,7 +46,7 @@ export default function NursePage() {
   async function confirmDelete() {
     const response = await fetch(`/api/nurses/${id}`, { method: "DELETE" });
     if (response.ok) {
-      router.push("/");
+      router.push("/nurseteam");
     }
     setShowDeleteModal(false);
   }
