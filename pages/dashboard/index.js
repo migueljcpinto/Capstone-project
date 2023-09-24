@@ -12,6 +12,7 @@ import WarningIcon from "@/utilities/Icons/WarningIcon";
 import GreenCheckIcon from "@/utilities/Icons/GreenCheckIcon";
 
 export default function DashboardPage() {
+  const [openAccordion, setOpenAccordion] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [shifts, setShifts] = useState({
     morningShift: [],
@@ -26,6 +27,10 @@ export default function DashboardPage() {
   });
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  function handleAccordionToggle(index) {
+    setOpenAccordion((prevIndex) => (prevIndex === index ? null : index));
+  }
 
   //The idea is to initiate all three API calls at the same time and, once they have all been completed, process the data.
   useEffect(() => {
@@ -202,6 +207,8 @@ export default function DashboardPage() {
         shifts={shifts}
         onAddNurse={handleAddNurse}
         onRemoveNurse={handleRemoveNurse}
+        openAccordion={openAccordion}
+        onAccordionToggle={handleAccordionToggle}
       />
     </DashboardContainer>
   );
