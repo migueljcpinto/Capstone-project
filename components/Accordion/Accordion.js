@@ -6,18 +6,18 @@ import {
   Arrow,
 } from "./Accordion.styled";
 
-export default function Accordion({ title, children, className }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function handleToggle() {
-    setIsOpen((isOpen) => !isOpen);
-  }
-
+export default function Accordion({
+  title,
+  children,
+  className,
+  isOpen,
+  onToggle,
+}) {
   return (
     <>
       <AccordionItemContainer
         $isOpen={isOpen}
-        onClick={handleToggle}
+        onClick={onToggle}
         className={className}
       >
         <AccordionTitle $isOpen={isOpen}>{title}</AccordionTitle>

@@ -34,9 +34,14 @@ export default function ScheduleTabs({
   onAvailabilityRemove,
 }) {
   const [activeTab, setActiveTab] = useState(1);
+  const [openAccordion, setOpenAccordion] = useState(null);
 
   function handleTabActive(index) {
     setActiveTab((prevTab) => (prevTab === index ? null : index));
+  }
+
+  function handleAccordionToggle(index) {
+    setOpenAccordion((prevIndex) => (prevIndex === index ? null : index));
   }
 
   return (
@@ -63,7 +68,11 @@ export default function ScheduleTabs({
               Add Vacations, at least two days in a row. For just one day,
               choose a day off!{" "}
             </Paragraph>
-            <Accordion title="Set your Vacation">
+            <Accordion
+              title="Set your Vacation"
+              isOpen={openAccordion === 1}
+              onToggle={() => handleAccordionToggle(1)}
+            >
               <VacationForm
                 onVacationSubmit={onVacationSubmit}
                 nurseId={nurseId}
@@ -75,7 +84,11 @@ export default function ScheduleTabs({
             <Paragraph>
               Overview of upcoming vacations. Check for accuracy.
             </Paragraph>
-            <Accordion title="Your Vacation">
+            <Accordion
+              title="Your Vacation"
+              isOpen={openAccordion === 2}
+              onToggle={() => handleAccordionToggle(2)}
+            >
               <VacationDatesDisplay
                 absencesData={absencesData}
                 onAbsenceRemove={onAbsenceRemove}
@@ -88,7 +101,11 @@ export default function ScheduleTabs({
             <Paragraph>
               Log regular off-days for nurses. Adjust as needed.
             </Paragraph>
-            <Accordion title="Set your Days-Off">
+            <Accordion
+              title="Set your Days-Off"
+              isOpen={openAccordion === 3}
+              onToggle={() => handleAccordionToggle(3)}
+            >
               <DaysOffForm
                 absencesData={absencesData}
                 onDaysOffSubmit={onDaysOffSubmit}
@@ -101,7 +118,11 @@ export default function ScheduleTabs({
             <Paragraph>
               Summary of regular off-days. Update discrepancies.
             </Paragraph>
-            <Accordion title="Your Days-Off">
+            <Accordion
+              title="Your Days-Off"
+              isOpen={openAccordion === 4}
+              onToggle={() => handleAccordionToggle(4)}
+            >
               <DaysOffDatesDisplay
                 absencesData={absencesData}
                 onAbsenceRemove={onAbsenceRemove}
@@ -114,7 +135,11 @@ export default function ScheduleTabs({
             <Paragraph>
               Indicate when each nurse can work, with a limit of 5 days.
             </Paragraph>
-            <Accordion title="Set your Availability">
+            <Accordion
+              title="Set your Availability"
+              isOpen={openAccordion === 5}
+              onToggle={() => handleAccordionToggle(5)}
+            >
               <AvailabilityForm
                 onAvailabilitySubmit={onAvailabilitySubmit}
                 excludeDates={excludeDates}
@@ -122,7 +147,11 @@ export default function ScheduleTabs({
             </Accordion>
             <Separator />
             <Paragraph>Nurses availability. Ensure it is current.</Paragraph>
-            <Accordion title="Your Availability">
+            <Accordion
+              title="Your Availability"
+              isOpen={openAccordion === 6}
+              onToggle={() => handleAccordionToggle(6)}
+            >
               <AvailabilityDatesDisplay
                 availabilityData={availabilityData}
                 availabilityDates={availabilityDates}

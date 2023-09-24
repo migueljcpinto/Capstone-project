@@ -1,4 +1,4 @@
-import { AmbulanceLoader, LoadingContainer } from "./AmbulanceLoading.styled";
+import { LoadingContainer } from "./AmbulanceLoading.styled";
 import React from "react";
 import Lottie from "lottie-react";
 import AmbulanceLoading from "@/utilities/lotties/AmbulanceLoading.json";
