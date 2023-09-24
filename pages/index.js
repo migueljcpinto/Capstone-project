@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Team Master</title>
+        <title>Team´U</title>
         <meta name="description" content="Penguin Capstone Project" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

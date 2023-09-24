@@ -14,10 +14,13 @@ export default function NewNursePage() {
 
       if (!response.ok) {
         const responseData = await response.json();
-        return;
+        throw new Error(responseData.error || "Failed to add nurse");
       }
+
       router.back();
-    } catch (error) {}
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 
   return <FormAddNurse onSubmitNurse={handleSubmitNurse} />;

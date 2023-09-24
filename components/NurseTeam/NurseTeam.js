@@ -15,15 +15,13 @@ import WarningIcon from "@/utilities/Icons/WarningIcon";
 import BackButton from "../BackButton/BackButton";
 import { ReturnContainer } from "../NurseProfile/NurseProfile.styled";
 
-export default function NurseTeam({ handleScheduleSubmit }) {
-  const { data, isLoading } = useSWR("/api/nurses");
+export default function NurseTeam({ nurses, handleScheduleSubmit }) {
   const [search, setSearch] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [roleFilter, setRoleFilter] = useState("");
 
   const filteredNurses = useMemo(() => {
-    if (!data) return [];
-    return data.filter((nurse) => {
+    return nurses.filter((nurse) => {
       const nurseName =
         search.toLowerCase() === "" ||
         nurse.name.toLowerCase().includes(search);
@@ -32,13 +30,9 @@ export default function NurseTeam({ handleScheduleSubmit }) {
         nurse.role.toLowerCase() === roleFilter.toLowerCase();
       return nurseName && nurseRole;
     });
-  }, [data, search, roleFilter]);
+  }, [nurses, search, roleFilter]);
 
-  if (isLoading) {
-    return <LoaderSpinner />;
-  }
-
-  if (!data) {
+  if (!nurses) {
     return (
       <>
         <Modal

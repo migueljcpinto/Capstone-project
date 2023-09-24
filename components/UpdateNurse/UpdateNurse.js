@@ -103,8 +103,7 @@ export default function UpdateNurse({ nurseData, onSubmit, setIsModalOpen }) {
               id="email"
               name="email"
               type="email"
-              pattern="[a-zA-Z0-9._%+ -]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
-            "
+              pattern="[a-zA-Z0-9._%+]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
               defaultValue={nurseData.email}
               required
             />

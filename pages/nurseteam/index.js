@@ -30,5 +30,5 @@ export default function Team() {
       </>
     );
   }
-  return <NurseTeam />;
+  return <NurseTeam nurses={data} />;
 }

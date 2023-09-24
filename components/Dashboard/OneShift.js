@@ -42,6 +42,7 @@ export default function OneShift({
               />
               {selectedSlot === index && (
                 <NurseSelection
+                  shifts={shifts}
                   nursesList={nursesList}
                   selectedRole={selectedRole}
                   showSpecialistsOnly={showSpecialistsOnly}

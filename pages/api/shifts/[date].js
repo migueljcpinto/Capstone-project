@@ -41,6 +41,16 @@ export default async function handler(request, response) {
           shiftForDate = new Shift({ date: new Date(date) });
         }
 
+        if (
+          shiftForDate.morningShift.includes(nurseId) ||
+          shiftForDate.afternoonShift.includes(nurseId) ||
+          shiftForDate.nightShift.includes(nurseId)
+        ) {
+          return response.status(404).json({
+            status: "Nurse already assigned for a shift on this date.",
+          });
+        }
+        
         if (!shiftForDate[shiftKey].includes(nurseId)) {
           shiftForDate[shiftKey].push(nurseId);
         }

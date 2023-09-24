@@ -17,9 +17,18 @@ export default function NurseSelection({
   onAddNurse,
   shiftName,
   setSelectionSlot,
+  shifts,
 }) {
+  const assignedNurseIds = [
+    ...shifts.morningShift,
+    ...shifts.afternoonShift,
+    ...shifts.nightShift,
+  ].map((nurse) => nurse._id);
+
   const filteredNurses = useMemo(() => {
-    let result = [...nursesList];
+    let result = nursesList.filter(
+      (nurse) => !assignedNurseIds.includes(nurse._id)
+    );
     if (selectedRole) {
       result = result.filter(
         (nurse) => nurse.role.toLowerCase() === selectedRole.toLowerCase()
@@ -29,7 +38,7 @@ export default function NurseSelection({
       result = result.filter((nurse) => nurse.specialist);
     }
     return result;
-  }, [nursesList, selectedRole, showSpecialistsOnly]);
+  }, [nursesList, selectedRole, showSpecialistsOnly, assignedNurseIds]);
 
   return (
     <ModalOverlay onClick={() => setSelectionSlot(null)}>

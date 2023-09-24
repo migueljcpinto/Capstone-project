@@ -33,6 +33,9 @@ export default function NursePage() {
 
     if (response.ok) {
       mutate();
+    } else {
+      const responseData = await response.json();
+      console.error(responseData.error || "Failed to update nurse");
     }
     return response;
   }
