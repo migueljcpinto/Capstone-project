@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import Layout from "@/components/Layout/Layout";
 import { useEffect, useState } from "react";
 import LottieAnimation from "@/components/TeamUpLogo/TeamUpLottie";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App({
   Component,
@@ -28,6 +29,7 @@ export default function App({
         <SessionProvider session={session}>
           <Layout>
             <Component {...pageProps} />
+            <Analytics />
           </Layout>
         </SessionProvider>
       </SWRConfig>
