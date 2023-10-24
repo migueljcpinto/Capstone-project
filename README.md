@@ -2,7 +2,7 @@
 
 ## Overview
 
-"TeamUp" is a Nurse Scheduling Application conceptualized as a capstone project for a Web Development Bootcamp. While the application aims to offer a comprehensive solution for nursing staff scheduling, it primarily serves as a testament to the skills, methodologies, and technologies learned throughout the Bootcamp. The platform, though not fully functional, is designed with the vision of providing an intuitive interface for managing shifts, tracking nurse availability, and ensuring healthcare facilities are always adequately staffed.
+"TeamUp" is a Nurse Scheduling Application conceptualized as a capstone project for a Web Development Bootcamp. While the application aims to offer a comprehensive solution for nursing staff scheduling, it primarily serves as a testament to the skills, methodologies, and technologies learned throughout the Bootcamp. The App, though not fully functional, is designed with the vision of providing an intuitive interface for managing shifts, tracking nurse availability, and ensuring healthcare facilities are always adequately staffed.
 
 ## Features
 
@@ -39,3 +39,4 @@ Crafted with a mobile-first philosophy, the application promises a consistent an
 ## Bootcamp Reflection
 
 This project encapsulates the culmination of intensive learning, challenges, and hands-on coding experiences encountered during the Bootcamp. While "TeamUp" is not a fully operational product, it embodies the potential and foundation for a real-world application. The journey of conceptualizing and developing this project was invaluable, offering practical insights into the world of web development.
+I welcome any feedback or suggestions for improvement. I'm excited about the journey ahead and the opportunities to collaborate with other passionate developers.
