@@ -17,8 +17,8 @@ import ButtonSpinner from "../LoaderSpinner/ButtonSpinner";
 export default function LoginForm({ onFormSubmit, errorMessage }) {
   //Storing Form Values
   const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
+    email: "mike@neuefische.de",
+    password: "123456",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
