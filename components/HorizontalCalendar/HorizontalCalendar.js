@@ -1,14 +1,15 @@
 import React from "react";
 import { Datepicker } from "@meinefinsternis/react-horizontal-date-picker";
-import { startOfMonth, endOfMonth, addMonths, subMonths } from "date-fns";
+import { endOfMonth, subDays, addMonths } from "date-fns";
 import { de } from "date-fns/locale";
 
 export default function HorizontalCalendar({ selectedDate, onDateChange }) {
-  const monthsToShow = 2;
-  const currentMonthStart = startOfMonth(new Date());
-  const currentMonthEnd = endOfMonth(new Date());
+  const daysToSubtract = 2;
+  const monthsToShow = 1;
+  const currentDate = new Date();
+  const currentMonthEnd = endOfMonth(currentDate);
 
-  const startDate = subMonths(currentMonthStart, monthsToShow);
+  const startDate = subDays(currentDate, daysToSubtract);
   const endDate = addMonths(currentMonthEnd, monthsToShow);
 
   function handleChange(d) {
@@ -24,6 +25,7 @@ export default function HorizontalCalendar({ selectedDate, onDateChange }) {
       onDateChange(newSelectedDate);
     }
   }
+
   return (
     <Datepicker
       onChange={handleChange}
