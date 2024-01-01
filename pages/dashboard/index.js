@@ -55,9 +55,11 @@ export default function DashboardPage() {
         const vacationAbsences = absenceData.filter(
           (absence) => absence.type === "VACATION"
         );
-        const workingNurses = availabilityData.length;
+        const daysOffAbsences = absenceData.filter(
+          (absence) => absence.type === "DAYOFF"
+        );
         const availableNurses =
-          totalNurses - workingNurses - vacationAbsences.length;
+          totalNurses - daysOffAbsences - vacationAbsences.length;
 
         setTeamStats({
           totalNurses,
